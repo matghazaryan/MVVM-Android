@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+
+        <variable
+            name="viewModel"
+            type="android.mvvm.mg.com.mvvm_android.fragments.login.viewModel.LoginViewModel" />
+
+        <variable
+            name="handler"
+            type="android.mvvm.mg.com.mvvm_android.fragments.login.LoginHandler" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_medium_margin">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_placeholder_email"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"
+                app:setError="@{viewModel.emailError}" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_small_margin"
+                android:hint="@string/login_placeholder_password"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}"
+                app:setError="@{viewModel.passwordError}" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/activity_medium_margin"
+                android:layout_marginBottom="@dimen/activity_small_margin"
+                android:enabled="@{safeUnbox(viewModel.isButtonEnable)}"
+                android:onClick="@{(view) -> handler.onClickLogin(view)}"
+                android:text="@string/login_button_login" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_custom_medium_margin"
+                android:checked="@{safeUnbox(viewModel.isCheckedRemember)}"
+                android:onCheckedChanged="@{(view, checked) -> handler.onCheckedChange(checked)}"
+                android:text="@string/login_checkbox_remember" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{safeUnbox(viewModel.isProgressDialogVisible) ? View.VISIBLE : View.GONE}">
+
+            <include
+                layout="@layout/progress_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

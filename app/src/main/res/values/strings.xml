@@ -1,3 +1,40 @@
 <resources>
+
     <string name="app_name">MVVM-Android</string>
+
+    <!--Dialog-->
+    <string name="dialog_no_internet_connection">No internet connection</string>
+
+    <!-- Error -->
+    <string name="error_field_required">Field required</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_general_error">Something went wrong, Try again later</string>
+
+    <!--Login-->
+    <string name="login_title">Login</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_placeholder_email">Email</string>
+    <string name="login_placeholder_password">Password</string>
+    <string name="login_checkbox_remember">Remember login and password</string>
+
+
+    <!-- Account -->
+    <string name="account_title">Account</string>
+    <string name="account_button_cards">Cards</string>
+    <string name="account_button_payment_history">Payment History</string>
+    <string name="account_button_file_upload">File upload</string>
+    <string name="account_button_logout">Logout</string>
+
+    <!-- Cards -->
+    <string name="cards_title">Cards</string>
+    <string name="cards_valid">Valid:</string>
+    <string name="cards_default">Default card</string>
+    <string name="cards_secondary">Secondary card</string>
+
+    <!-- PaymentHistory -->
+    <string name="payment_history_title">Payment History</string>
+
+    <!-- FileUpload -->
+    <string name="file_upload_title">File Upload</string>
+
 </resources>
