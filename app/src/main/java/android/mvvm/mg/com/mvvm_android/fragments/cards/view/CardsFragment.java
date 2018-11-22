@@ -1,6 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.fragments.cards.view;
 
-import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 import android.arch.lifecycle.ViewModelProviders;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
@@ -14,7 +13,10 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+
+import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 
 public class CardsFragment extends BaseFragment {
 
@@ -41,12 +43,15 @@ public class CardsFragment extends BaseFragment {
         mViewModel = ViewModelProviders.of(this).get(CardsViewModel.class);
         mCardsBinding.setViewModel(mViewModel);
 
-        mViewModel.loadData().observe(mActivity, cardList -> mViewModel.initRecycleViewData(cardList));
-
-        subscribeCardListFromNetworkErrors();
+        subscribeOnCardList();
+        subscribeOnNetworkErrors();
     }
 
-    private void subscribeCardListFromNetworkErrors() {
+    private void subscribeOnCardList() {
+        mViewModel.loadData().observe(mActivity, cardList -> mViewModel.initRecycleViewData(cardList));
+    }
+
+    private void subscribeOnNetworkErrors() {
         final DMLiveDataBag<Card, RequestError> liveDataBug = mViewModel.request();
 
         liveDataBug.getSuccessListT().observe(mActivity, cardSuccessListT -> mViewModel.insertAll(cardSuccessListT));

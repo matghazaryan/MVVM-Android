@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.fragments.account.AccountHandler;
+import android.mvvm.mg.com.mvvm_android.fragments.account.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.account.viewModel.AccountViewModel;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
 
-public class AccountFragment extends BaseFragment implements AccountHandler {
+public class AccountFragment extends BaseFragment implements IAccountHandler {
 
-    private FragmentAccountBinding mAccountBinding;
+    private FragmentAccountBinding mBinding;
     private AccountViewModel mViewModel;
 
     public AccountFragment() {
@@ -26,11 +26,11 @@ public class AccountFragment extends BaseFragment implements AccountHandler {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mAccountBinding = FragmentAccountBinding.inflate(inflater, container, false);
+        mBinding = FragmentAccountBinding.inflate(inflater, container, false);
 
         init();
 
-        return mAccountBinding.getRoot();
+        return mBinding.getRoot();
     }
 
     private void init() {
@@ -38,8 +38,8 @@ public class AccountFragment extends BaseFragment implements AccountHandler {
         setTitle(R.string.account_title);
 
         mViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
-        mAccountBinding.setViewModel(mViewModel);
-        mAccountBinding.setHandler(this);
+        mBinding.setViewModel(mViewModel);
+        mBinding.setHandler(this);
 
         mViewModel.load(getArguments());
     }
@@ -55,7 +55,7 @@ public class AccountFragment extends BaseFragment implements AccountHandler {
     }
 
     @Override
-    public void onFileUploadClick(final View view) {
+    public void onSettingsClick(final View view) {
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_fileUploadFragment);
     }
 

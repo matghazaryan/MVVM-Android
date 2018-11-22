@@ -11,7 +11,7 @@
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.account.AccountHandler" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.account.IAccountHandler" />
 
     </data>
 
@@ -69,8 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_small_margin"
-                    android:onClick="@{(view) -> handler.onFileUploadClick(view)}"
-                    android:text="@string/account_button_file_upload" />
+                    android:onClick="@{(view) -> handler.onSettingsClick(view)}"
+                    android:text="@string/account_button_settings" />
 
                 <Button
                     android:layout_width="wrap_content"

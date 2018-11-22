@@ -9,7 +9,6 @@ public class RequestError {
     private String message;
     private HashMap<String, String> errors;
 
-
     public String getStatus() {
         return status;
     }

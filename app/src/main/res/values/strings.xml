@@ -17,12 +17,11 @@
     <string name="login_placeholder_password">Password</string>
     <string name="login_checkbox_remember">Remember login and password</string>
 
-
     <!-- Account -->
     <string name="account_title">Account</string>
     <string name="account_button_cards">Cards</string>
     <string name="account_button_payment_history">Payment History</string>
-    <string name="account_button_file_upload">File upload</string>
+    <string name="account_button_settings">Settings</string>
     <string name="account_button_logout">Logout</string>
 
     <!-- Cards -->
@@ -35,6 +34,6 @@
     <string name="payment_history_title">Payment History</string>
 
     <!-- FileUpload -->
-    <string name="file_upload_title">File Upload</string>
+    <string name="settings_title">Settings</string>
 
 </resources>

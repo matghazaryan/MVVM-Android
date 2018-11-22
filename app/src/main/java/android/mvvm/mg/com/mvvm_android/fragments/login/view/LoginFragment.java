@@ -5,7 +5,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
 import android.mvvm.mg.com.mvvm_android.fragments.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.fragments.login.LoginHandler;
+import android.mvvm.mg.com.mvvm_android.fragments.login.ILoginHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.login.viewModel.LoginViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
@@ -20,11 +20,11 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 import androidx.navigation.Navigation;
 
-public class LoginFragment extends BaseFragment implements LoginHandler {
+public class LoginFragment extends BaseFragment implements ILoginHandler {
 
     private LoginViewModel mViewModel;
 
-    private FragmentLoginBinding mLoginBinding;
+    private FragmentLoginBinding mBinding;
 
     public LoginFragment() {
     }
@@ -33,11 +33,11 @@ public class LoginFragment extends BaseFragment implements LoginHandler {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mLoginBinding = FragmentLoginBinding.inflate(inflater, container, false);
+        mBinding = FragmentLoginBinding.inflate(inflater, container, false);
 
         init();
 
-        return mLoginBinding.getRoot();
+        return mBinding.getRoot();
     }
 
     private void init() {
@@ -45,8 +45,8 @@ public class LoginFragment extends BaseFragment implements LoginHandler {
         setTitle(R.string.login_title);
 
         mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        mLoginBinding.setViewModel(mViewModel);
-        mLoginBinding.setHandler(this);
+        mBinding.setViewModel(mViewModel);
+        mBinding.setHandler(this);
 
         subscribes();
     }
@@ -62,7 +62,7 @@ public class LoginFragment extends BaseFragment implements LoginHandler {
     }
 
     private void subscribes() {
-        mViewModel.getEmailAndPasswordObservable().observe(this, vLogin -> mViewModel.updateButtonStatus(vLogin));
+        mViewModel.getEmailAndPasswordObservable().observe(this, aBoolean -> mViewModel.updateButtonStatus(aBoolean));
         mViewModel.getOpenNextPage().observe(this, this::openAccount);
     }
 

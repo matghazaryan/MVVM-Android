@@ -14,7 +14,7 @@
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.login.LoginHandler" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.login.ILoginHandler" />
 
     </data>
 
@@ -67,18 +67,13 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <include
+            layout="@layout/progress_dialog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{safeUnbox(viewModel.isProgressDialogVisible) ? View.VISIBLE : View.GONE}">
-
-            <include
-                layout="@layout/progress_dialog"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
-
-        </RelativeLayout>
+            android:layout_centerInParent="true"
+            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
 
     </RelativeLayout>
+
 </layout>

@@ -9,7 +9,6 @@ import android.mvvm.mg.com.mvvm_android.constants.RequestKeys;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
-import android.mvvm.mg.com.mvvm_android.models.validationModels.VLogin;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMValidator;
@@ -36,7 +35,7 @@ public class LoginViewModel extends AndroidViewModel {
     public ObservableField<String> emailError = new ObservableField<>();
     public ObservableField<String> passwordError = new ObservableField<>();
 
-    private MediatorLiveData<VLogin> emailAndPassword = new MediatorLiveData<>();
+    private MediatorLiveData<Boolean> emailAndPasswordValidation = new MediatorLiveData<>();
 
     private Map<String, ObservableField<String>> uiTextFieldsTags;
 
@@ -62,12 +61,16 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     private void makeUniteEmailAndPassword() {
-        emailAndPassword.addSource(email, s -> emailAndPassword.setValue(new VLogin(s, password.getValue())));
-        emailAndPassword.addSource(password, s -> emailAndPassword.setValue(new VLogin(email.getValue(), s)));
+        emailAndPasswordValidation.addSource(email, email -> checkValidation());
+        emailAndPasswordValidation.addSource(password, password -> checkValidation());
     }
 
-    public MediatorLiveData<VLogin> getEmailAndPasswordObservable() {
-        return emailAndPassword;
+    private void checkValidation() {
+        emailAndPasswordValidation.setValue(!(TextUtils.isEmpty(email.getValue()) || TextUtils.isEmpty(password.getValue()) || !MVVMValidator.isValidEmail(email.getValue())));
+    }
+
+    public MediatorLiveData<Boolean> getEmailAndPasswordObservable() {
+        return emailAndPasswordValidation;
     }
 
     public MutableLiveData<User> getOpenNextPage() {
@@ -109,9 +112,7 @@ public class LoginViewModel extends AndroidViewModel {
         return DataRepository.getInstance().login(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
     }
 
-    public void updateButtonStatus(final VLogin vLogin) {
-        if (vLogin != null) {
-            isButtonEnable.set(!(TextUtils.isEmpty(vLogin.getEmail()) || TextUtils.isEmpty(vLogin.getPassword()) || !MVVMValidator.isValidEmail(vLogin.getEmail())));
-        }
+    public void updateButtonStatus(final Boolean isEnable) {
+        isButtonEnable.set(isEnable);
     }
 }

@@ -38,6 +38,7 @@
 
     <dimen name="corner_radius_1">13dp</dimen>
 
-    <dimen name="image_size_1">100dp</dimen>
+    <dimen name="image_size_1">70dp</dimen>
+    <dimen name="image_size_2">100dp</dimen>
 
 </resources>

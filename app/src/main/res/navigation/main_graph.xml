@@ -96,7 +96,7 @@
         tools:layout="@layout/fragment_payment_history" />
     <fragment
         android:id="@+id/fileUploadFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.fileUpload.view.FileUploadFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.fragments.settings.view.SettingsFragment"
         android:label="fragment_file_upload"
-        tools:layout="@layout/fragment_file_upload" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>

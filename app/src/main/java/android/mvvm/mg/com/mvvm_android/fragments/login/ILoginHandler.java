@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.fragments.login;
 
 import android.view.View;
 
-public interface LoginHandler {
+public interface ILoginHandler {
 
     void onClickLogin(View view);
 
