@@ -22,21 +22,29 @@
         android:scrollbars="none"
         tools:context=".fragments.settings.view.SettingsFragment">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="@dimen/image_size_2"
                 android:layout_height="@dimen/image_size_2"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/activity_medium_margin"
+                android:onClick="@{(view)->handler.onImageClick(view)}"
                 android:scaleType="centerCrop"
                 app:setImageUrl="@{viewModel.imagePath}"
                 tools:ignore="ContentDescription" />
 
-        </LinearLayout>
+            <include
+                layout="@layout/horizontal_progress_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}"
+                app:progress="@{safeUnbox(viewModel.progress)}" />
+
+        </RelativeLayout>
 
     </ScrollView>
 

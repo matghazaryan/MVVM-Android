@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <RelativeLayout
+        android:id="@+id/rl_footer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="#50000000">
+
+        <ImageButton
+            android:id="@+id/btn_record"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/camera_record"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/btn_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@id/btn_record"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_check"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/btn_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="40dp"
+            android:layout_toStartOf="@id/btn_record"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_replay"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_footer"
+        android:layout_centerInParent="true"
+        tools:context=".activities.PlayVideoActivity" />
+
+</RelativeLayout>

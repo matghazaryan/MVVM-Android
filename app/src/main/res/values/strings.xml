@@ -9,6 +9,7 @@
     <string name="error_field_required">Field required</string>
     <string name="error_invalid_email">Invalid email</string>
     <string name="error_general_error">Something went wrong, Try again later</string>
+    <string name="error_file_not_found">File not found</string>
 
     <!--Login-->
     <string name="login_title">Login</string>
@@ -33,7 +34,8 @@
     <!-- PaymentHistory -->
     <string name="payment_history_title">Payment History</string>
 
-    <!-- FileUpload -->
+    <!-- Settings -->
     <string name="settings_title">Settings</string>
+    <string name="settings_gallery_title">Gallery</string>
 
 </resources>

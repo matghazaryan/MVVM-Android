@@ -16,13 +16,16 @@ import android.mvvm.mg.com.mvvm_android.room.helpers.IOnInsertAllListener;
 import android.mvvm.mg.com.mvvm_android.room.helpers.card.CardHelper;
 import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMPrefUtils;
+
 import com.dm.dmnetworking.api_client.base.DMBaseRequestConfig;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.parser.DMJsonParser;
 import com.dm.dmnetworking.parser.DMParserConfigs;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +75,19 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
         final DMBaseRequestConfig<Card, RequestError> config = new DMBaseRequestConfig<Card, RequestError>(context)
                 .setUrl(IUrls.Method.CARDS)
                 .setParserConfigs(new DMParserConfigs<>(Card.class, "data", "cards_list"))
+                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+
+        return MVVMNetworking.getInstance().request(config);
+    }
+
+    @Override
+    public DMLiveDataBag<String, RequestError> sendImage(final Context context, final String path) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put(RequestKeys.IMAGE, new File(path));
+
+        final DMBaseRequestConfig<String, RequestError> config = new DMBaseRequestConfig<String, RequestError>(context)
+                .setUrl(IUrls.Method.SAVE_IMAGE)
+                .setParams(params)
                 .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);

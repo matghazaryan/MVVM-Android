@@ -29,4 +29,8 @@ public interface IConstants {
     interface Delay {
         int SPLASH = 1500;
     }
+
+    interface RequestCode {
+        int CAMERA = 1000;
+    }
 }

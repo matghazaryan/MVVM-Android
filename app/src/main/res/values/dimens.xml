@@ -39,6 +39,12 @@
     <dimen name="corner_radius_1">13dp</dimen>
 
     <dimen name="image_size_1">70dp</dimen>
-    <dimen name="image_size_2">100dp</dimen>
+    <dimen name="image_size_2">200dp</dimen>
+
+    <dimen name="card_view_elevation">6dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="card_view_margin_top">10dp</dimen>
+    <dimen name="card_view_margin_start">10dp</dimen>
+    <dimen name="card_view_margin_end">10dp</dimen>
 
 </resources>

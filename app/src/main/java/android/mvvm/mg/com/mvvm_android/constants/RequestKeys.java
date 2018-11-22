@@ -5,4 +5,5 @@ public interface RequestKeys {
     String EMAIL = "email";
     String PASSWORD = "password";
     String SIGNIN = "signin";
+    String IMAGE = "image";
 }

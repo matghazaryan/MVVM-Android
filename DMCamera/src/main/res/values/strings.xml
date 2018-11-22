@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Camera</string>
+
+    <string name="title_activity_video_play">VideoPlayActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

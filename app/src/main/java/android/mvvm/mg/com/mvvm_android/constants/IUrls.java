@@ -11,6 +11,7 @@ public interface IUrls {
 
         String LOGOUT = "5bebd5bd3300009500fbc06b";
         String CARDS = "5bec1fe1330000cd25fbc282";
+        String SAVE_IMAGE = "5bf68e4e32000061005d0f9a";
 
         String TRANSACTION = "5bec194f3300006c29fbc233";
         String TRANSACTION_1 = "5bec170e330000c825fbc21a";
