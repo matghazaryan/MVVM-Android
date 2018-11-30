@@ -6,12 +6,10 @@ public interface IConstants {
 
     interface PrefName {
         String CONFIGS = "configs";
-        String EMAIL = "email";
-        String PASSWORD = "password";
         String TOKEN = "token";
         String LANGUAGE_CODE = "language_code";
         String IS_USER_LOGGED_IN = "isUserLoggedIn";
-        String IS_CHECKED_REMEMBER = "isCheckedRemember";
+        String IS_CHECKED_REMEMBER = "prefIsCheckedRemember";
         String PROFILE_PHOTO = "profile_photo";
 
     }
@@ -32,5 +30,15 @@ public interface IConstants {
 
     interface RequestCode {
         int CAMERA = 1000;
+    }
+
+    enum Action {
+        EMAIL_AND_PASSWORD,
+        OPEN_ACCOUNT_FRAGMENT,
+        OPEN_BIOMETRIC,
+        OPEN_ERROR_DIALOG,
+        OPEN_LOGIN_FRAGMENT,
+        DO_LOGIN,
+        ON_NEW_IMAGE_PATH
     }
 }

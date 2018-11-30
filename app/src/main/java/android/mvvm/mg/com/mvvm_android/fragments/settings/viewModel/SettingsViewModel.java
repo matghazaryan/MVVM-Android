@@ -2,26 +2,22 @@ package android.mvvm.mg.com.mvvm_android.fragments.settings.viewModel;
 
 import android.app.Activity;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
+import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMFileUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.models.CapturePhoto;
 import com.eraz.camera.models.MediaData;
 
-public class SettingsViewModel extends AndroidViewModel {
-
-    private MutableLiveData<String> newImagePath = new MutableLiveData<>();
-    private MutableLiveData<String> newImageNotFound = new MutableLiveData<>();
+public class SettingsViewModel extends BaseViewModel {
 
     public ObservableField<String> imagePath = new ObservableField<>();
     public ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
@@ -59,9 +55,9 @@ public class SettingsViewModel extends AndroidViewModel {
                 }
 
                 if (path != null) {
-                    newImagePath.setValue(path);
+                    doAction(Action.ON_NEW_IMAGE_PATH, path);
                 } else {
-                    newImageNotFound.setValue(null);
+                    doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_file_not_found));
                 }
             }
         }
@@ -69,16 +65,12 @@ public class SettingsViewModel extends AndroidViewModel {
 
     public DMLiveDataBag<String, RequestError> sendImage(final String path) {
         isProgressDialogVisible.set(true);
-        return DataRepository.getInstance().sendImage(getApplication().getApplicationContext(), path);
-    }
-
-    public MutableLiveData<String> getNewImagePath() {
-        return newImagePath;
+        return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), path);
     }
 
     public void updateImagePath(final String path) {
         isProgressDialogVisible.set(false);
-        DataRepository.getInstance().saveProfilePhoto(path);
+        DataRepository.getInstance().prefSaveProfilePhoto(path);
         imagePath.set(path);
     }
 
@@ -89,11 +81,7 @@ public class SettingsViewModel extends AndroidViewModel {
     }
 
     public void showProfilePhoto() {
-        final String path = DataRepository.getInstance().getProfilePhoto();
+        final String path = DataRepository.getInstance().prefGetProfilePhoto();
         imagePath.set(path);
-    }
-
-    public MutableLiveData<String> getNewImageNotFound() {
-        return newImageNotFound;
     }
 }

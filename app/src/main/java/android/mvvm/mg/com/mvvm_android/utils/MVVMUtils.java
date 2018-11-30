@@ -1,6 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.graphics.Color;
@@ -8,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.support.v4.content.ContextCompat;
 
 import java.util.Map;
@@ -49,5 +49,24 @@ public class MVVMUtils {
         layerDrawable.setLayerInset(1, (int) DMDimensionConverter.dpToPixel(0, context), 0, (int) DMDimensionConverter.dpToPixel(1, context), (int) DMDimensionConverter.dpToPixel(2, context));
 
         return layerDrawable;
+    }
+
+    public static String getTransactionUrl(final int page) {
+        final String url;
+        switch (page) {
+            case 0:
+                url = IUrls.Method.TRANSACTION_1;
+                break;
+            case 1:
+                url = IUrls.Method.TRANSACTION_2;
+                break;
+            case 2:
+                url = IUrls.Method.TRANSACTION_3;
+                break;
+            default:
+                url = IUrls.Method.TRANSACTION;
+        }
+
+        return url;
     }
 }

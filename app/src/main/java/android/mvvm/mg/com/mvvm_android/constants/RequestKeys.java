@@ -6,4 +6,5 @@ public interface RequestKeys {
     String PASSWORD = "password";
     String SIGNIN = "signin";
     String IMAGE = "image";
+    String PAGE = "page";
 }

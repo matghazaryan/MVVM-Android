@@ -6,7 +6,11 @@ import java.util.List;
 
 public class Transaction {
 
+    @JsonProperty("transactions")
     private List<Transaction> transactionList;
+
+    @JsonProperty("transaction_details")
+    private List<Transaction> transactionDetailsList;
 
     @JsonProperty("label")
     private String label;
@@ -14,8 +18,16 @@ public class Transaction {
     @JsonProperty("value")
     private String value;
 
+    @JsonProperty("next_page")
+    private int nextPage;
+
+
     public List<Transaction> getTransactionList() {
         return transactionList;
+    }
+
+    public List<Transaction> getTransactionDetailsList() {
+        return transactionDetailsList;
     }
 
     public String getLabel() {
@@ -24,5 +36,9 @@ public class Transaction {
 
     public String getValue() {
         return value;
+    }
+
+    public int getNextPage() {
+        return nextPage;
     }
 }

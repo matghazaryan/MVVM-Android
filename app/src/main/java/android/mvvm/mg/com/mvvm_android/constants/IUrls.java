@@ -17,11 +17,5 @@ public interface IUrls {
         String TRANSACTION_1 = "5bec170e330000c825fbc21a";
         String TRANSACTION_2 = "5bec1769330000ee28fbc21d";
         String TRANSACTION_3 = "5bec17b0330000c825fbc220";
-        String TRANSACTION_4 = "5bec18173300006125fbc221";
-        String TRANSACTION_5 = "5bec1850330000ee28fbc222";
-        String TRANSACTION_6 = "5bec188c3300002729fbc224";
-        String TRANSACTION_7 = "5bec18be330000cd25fbc227";
-        String TRANSACTION_8 = "5bec19143300007329fbc230";
-
     }
 }

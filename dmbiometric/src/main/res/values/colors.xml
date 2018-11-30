@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="status_normal_color">#80000000</color>
+    <color name="status_error_color">#D93025</color>
+    <color name="button_text_color">#0f57ab</color>
+    <color name="text_color">#19a0e6</color>
+
+</resources>

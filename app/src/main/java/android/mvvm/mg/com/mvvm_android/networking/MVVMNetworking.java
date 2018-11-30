@@ -69,7 +69,7 @@ public class MVVMNetworking extends DMBaseRequest {
 //                "&deviceScale=" + DMAppInfo.getDeviceDensity(context);
 //
 //        if (MVVMPrefUtils.isUserLoggedIn()) {
-//            return fullUrl + "&jwt=" + MVVMPrefUtils.getToken();
+//            return fullUrl + "&jwt=" + MVVMPrefUtils.prefGetToken();
 //        }
 
         return fullUrl;

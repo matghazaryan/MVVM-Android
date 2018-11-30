@@ -5,18 +5,35 @@
 
     <data>
 
+        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+
         <variable
             name="viewModel"
             type="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.PaymentHistoryViewModel" />
 
     </data>
 
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/activity_small_margin"
-        app:initLoadMoreRecycleView="@{viewModel.transactionList}"
-        tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment" />
+        tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/activity_small_margin"
+            app:initRecycleViewTransactionList="@{viewModel.transaction}"
+            tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment" />
+
+        <include
+            layout="@layout/progress_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
+
+    </RelativeLayout>
 
 </layout>

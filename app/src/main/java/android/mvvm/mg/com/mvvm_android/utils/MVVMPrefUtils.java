@@ -45,14 +45,6 @@ public class MVVMPrefUtils {
         return DMPrefsCacheManager.getInstance().getBooleanFromCashe(IConstants.PrefName.IS_USER_LOGGED_IN, false);
     }
 
-    public static String getEmail() {
-        return DMPrefsCacheManager.getInstance().getStringFromCashe(IConstants.PrefName.EMAIL, null);
-    }
-
-    public static void saveEmail(final String email) {
-        DMPrefsCacheManager.getInstance().putInCashe(IConstants.PrefName.EMAIL, email);
-    }
-
     public static String getProfilePhoto() {
         return DMPrefsCacheManager.getInstance().getStringFromCashe(IConstants.PrefName.PROFILE_PHOTO, null);
     }
@@ -60,13 +52,4 @@ public class MVVMPrefUtils {
     public static void saveProfilePhoto(final String path) {
         DMPrefsCacheManager.getInstance().putInCashe(IConstants.PrefName.PROFILE_PHOTO, path);
     }
-
-    public static String getPassword() {
-        return DMPrefsCacheManager.getInstance().getStringFromCashe(IConstants.PrefName.PASSWORD, null);
-    }
-
-    public static void savePassword(final String password) {
-        DMPrefsCacheManager.getInstance().putInCashe(IConstants.PrefName.PASSWORD, password);
-    }
-
 }

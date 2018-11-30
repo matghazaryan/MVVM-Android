@@ -11,7 +11,7 @@
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.account.IAccountHandler" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.account.handler.IAccountHandler" />
 
     </data>
 

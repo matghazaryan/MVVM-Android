@@ -45,8 +45,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(final @NonNull MyViewHolder holder, final int position) {
         final Transaction transaction = transactionList.get(position);
-        final List<Transaction> transactionList = transaction.getTransactionList();
-        if (transaction.getTransactionList() != null) {
+        final List<Transaction> transactionList = transaction.getTransactionDetailsList();
+        holder.binding.llContainer.removeAllViews();
+        if (transactionList != null) {
             for (final Transaction t : transactionList) {
                 final TransactionInnerItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.transaction_inner_item, null, false);
                 binding.setTransaction(t);
@@ -61,7 +62,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public void setTransactionList(final List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+        if (this.transactionList == null) {
+            this.transactionList = transactionList;
+        } else {
+            this.transactionList.addAll(transactionList);
+        }
         notifyDataSetChanged();
     }
 }

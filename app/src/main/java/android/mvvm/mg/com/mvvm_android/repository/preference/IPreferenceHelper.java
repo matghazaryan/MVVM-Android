@@ -5,27 +5,20 @@ import org.json.JSONException;
 
 public interface IPreferenceHelper {
 
-    void saveConfigs(final String json);
+    void prefSaveConfigs(final String json);
 
-    Configs getConfigs() throws JSONException;
+    Configs prefGetConfigs() throws JSONException;
 
-    void saveToken(final String token);
+    void prefSaveToken(final String token);
 
-    String getToken();
+    String prefGetToken();
 
-    boolean isCheckedRemember();
+    boolean prefIsCheckedRemember();
 
-    void setRemember(final boolean isChecked);
+    void prefSetRemember(final boolean isChecked);
 
-    void saveEmail(final String email);
 
-    String getEmail();
+    void prefSaveProfilePhoto(final String path);
 
-    void saveProfilePhoto(final String path);
-
-    String getProfilePhoto();
-
-    void savePassword(final String password);
-
-    String getPassword();
+    String prefGetProfilePhoto();
 }

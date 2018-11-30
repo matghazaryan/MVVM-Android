@@ -4,9 +4,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
-import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
-import android.mvvm.mg.com.mvvm_android.fragments.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.fragments.settings.ISettingsHandler;
+import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
+import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.settings.viewModel.SettingsViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.os.Bundle;
@@ -14,14 +14,11 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.eraz.camera.activities.ErazCameraActivity;
 import com.eraz.camera.constants.IConstants;
 
-import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
-
-public class SettingsFragment extends BaseFragment implements ISettingsHandler {
+public class SettingsFragment extends BaseFragment<SettingsViewModel> implements ISettingsHandler {
 
     private SettingsViewModel mViewModel;
     private FragmentSettingsBinding mBinding;
@@ -71,8 +68,7 @@ public class SettingsFragment extends BaseFragment implements ISettingsHandler {
     }
 
     private void subscribeOnGetImage() {
-        mViewModel.getNewImagePath().observe(mActivity, this::subscribeOnFileUpload);
-        mViewModel.getNewImageNotFound().observe(mActivity, s -> new MVVMAlertDialog().showErrorDialog(new DMBaseDialogConfigs<>(mActivity).setContentRes(R.string.error_file_not_found)));
+        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(this, this::subscribeOnFileUpload);
     }
 
     private void subscribeOnFileUpload(final String path) {
@@ -80,7 +76,6 @@ public class SettingsFragment extends BaseFragment implements ISettingsHandler {
 
         liveDataBag.getSuccessJsonResponse().observe(mActivity, jsonObject -> mViewModel.updateImagePath(path));
         liveDataBag.getFileProgress().observe(mActivity, fileProgress -> mViewModel.updateProgress(fileProgress));
-        liveDataBag.getNoInternetConnection().observe(mActivity,
-                s -> new MVVMAlertDialog().showWarningDialog(new DMBaseDialogConfigs<>(mActivity).setContentRes(R.string.dialog_no_internet_connection)));
+        liveDataBag.getNoInternetConnection().observe(mActivity, s -> MVVMDialog.showNoInternetDialog(mActivity));
     }
 }

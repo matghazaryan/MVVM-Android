@@ -1,30 +1,26 @@
 package android.mvvm.mg.com.mvvm_android.fragments.login.viewModel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.constants.RequestKeys;
-import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
+import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMValidator;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-
+import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
 import com.dm.dmnetworking.api_client.base.model.success.SuccessT;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
-import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
-
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
@@ -35,50 +31,51 @@ public class LoginViewModel extends AndroidViewModel {
     public ObservableField<String> emailError = new ObservableField<>();
     public ObservableField<String> passwordError = new ObservableField<>();
 
-    private MediatorLiveData<Boolean> emailAndPasswordValidation = new MediatorLiveData<>();
-
-    private Map<String, ObservableField<String>> uiTextFieldsTags;
-
-    public MutableLiveData<User> openNextPage = new MutableLiveData<>();
 
     public LoginViewModel(final @NonNull Application application) {
         super(application);
 
         makeUniteEmailAndPassword();
-        initUiTextFieldsTags();
 
-        isCheckedRemember.set(DataRepository.getInstance().isCheckedRemember());
+        isCheckedRemember.set(DataRepository.getInstance().prefIsCheckedRemember());
 
         email.setValue("david@helix.am");
         password.setValue("123456789");
     }
 
-    private void initUiTextFieldsTags() {
-        uiTextFieldsTags = new HashMap<>();
+    @Override
+    public void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
         uiTextFieldsTags.put(RequestKeys.EMAIL, emailError);
         uiTextFieldsTags.put(RequestKeys.PASSWORD, passwordError);
         uiTextFieldsTags.put(RequestKeys.SIGNIN, emailError);
     }
 
     private void makeUniteEmailAndPassword() {
-        emailAndPasswordValidation.addSource(email, email -> checkValidation());
-        emailAndPasswordValidation.addSource(password, password -> checkValidation());
+        getAction(Action.EMAIL_AND_PASSWORD).addSource(email, email -> checkValidation());
+        getAction(Action.EMAIL_AND_PASSWORD).addSource(password, password -> checkValidation());
     }
 
     private void checkValidation() {
-        emailAndPasswordValidation.setValue(!(TextUtils.isEmpty(email.getValue()) || TextUtils.isEmpty(password.getValue()) || !MVVMValidator.isValidEmail(email.getValue())));
+        getAction(Action.EMAIL_AND_PASSWORD).setValue(!(TextUtils.isEmpty(email.getValue()) || TextUtils.isEmpty(password.getValue()) || !MVVMValidator.isValidEmail(email.getValue())));
     }
 
-    public MediatorLiveData<Boolean> getEmailAndPasswordObservable() {
-        return emailAndPasswordValidation;
-    }
-
-    public MutableLiveData<User> getOpenNextPage() {
-        return openNextPage;
+    public void handleBiometricErrors(final User user, final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
+        switch (type) {
+            case AUTHENTICATION_FAILED:
+                break;
+            default:
+                doAction(Action.OPEN_ACCOUNT_FRAGMENT, new ArrayList<>());
+        }
     }
 
     public void setRemember(final boolean isChecked) {
-        DataRepository.getInstance().setRemember(isChecked);
+        isCheckedRemember.set(isChecked);
+        DataRepository.getInstance().prefSetRemember(isChecked);
+    }
+
+    public void handleLoginErrors(final ErrorE<RequestError> requestErrorErrorE) {
+        isProgressDialogVisible.set(false);
+        handleErrors(requestErrorErrorE);
     }
 
     public void onLoginSuccess(final SuccessT<User> userSuccessT) {
@@ -86,30 +83,20 @@ public class LoginViewModel extends AndroidViewModel {
 
         if (userSuccessT != null) {
             final User user = userSuccessT.getT();
-            DataRepository.getInstance().saveToken(user.getToken());
+            DataRepository.getInstance().prefSaveToken(user.getToken());
 
-            openNextPage.setValue(user);
-        }
-    }
-
-    public void onError(final ErrorE<RequestError> errorErrorE) {
-        isProgressDialogVisible.set(false);
-        if (errorErrorE != null) {
-            final RequestError error = errorErrorE.getE();
-            if (error != null) {
-                if (error.getErrors() != null) {
-                    MVVMUtils.showInvalidData(uiTextFieldsTags, error.getErrors());
-                } else if (error.getMessage() != null) {
-                    new MVVMAlertDialog().showErrorDialog(new DMBaseDialogConfigs<>(getApplication().getApplicationContext())
-                            .setContent(error.getMessage()));
-                }
+            final Boolean isChecked = isCheckedRemember.get();
+            if (isChecked != null && isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                doAction(Action.OPEN_BIOMETRIC, user);
+            } else {
+                doAction(Action.OPEN_ACCOUNT_FRAGMENT, user);
             }
         }
     }
 
     public DMLiveDataBag<User, RequestError> login() {
         isProgressDialogVisible.set(true);
-        return DataRepository.getInstance().login(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
+        return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
     }
 
     public void updateButtonStatus(final Boolean isEnable) {

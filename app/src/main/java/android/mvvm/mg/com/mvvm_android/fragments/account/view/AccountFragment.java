@@ -3,18 +3,17 @@ package android.mvvm.mg.com.mvvm_android.fragments.account.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
-import android.mvvm.mg.com.mvvm_android.fragments.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.fragments.account.IAccountHandler;
+import android.mvvm.mg.com.mvvm_android.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.account.viewModel.AccountViewModel;
+import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.navigation.Navigation;
 
-public class AccountFragment extends BaseFragment implements IAccountHandler {
+public class AccountFragment extends BaseFragment<AccountViewModel> implements IAccountHandler {
 
     private FragmentAccountBinding mBinding;
     private AccountViewModel mViewModel;

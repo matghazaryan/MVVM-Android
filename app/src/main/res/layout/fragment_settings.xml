@@ -11,7 +11,7 @@
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.settings.ISettingsHandler" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ISettingsHandler" />
 
     </data>
 

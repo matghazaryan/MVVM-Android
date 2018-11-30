@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.fragments.account;
+package android.mvvm.mg.com.mvvm_android.fragments.account.handler;
 
 import android.view.View;
 

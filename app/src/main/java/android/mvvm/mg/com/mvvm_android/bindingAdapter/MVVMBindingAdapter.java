@@ -59,8 +59,8 @@ public class MVVMBindingAdapter {
         textView.setText(text);
     }
 
-    @BindingAdapter("initRecycleView")
-    public static void initRecycleView(final RecyclerView recyclerView, final List<Card> cardList) {
+    @BindingAdapter("initRecycleViewCardList")
+    public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList) {
         final Context context = recyclerView.getContext();
         if (recyclerView.getAdapter() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -71,15 +71,19 @@ public class MVVMBindingAdapter {
         }
     }
 
-    @BindingAdapter("initRecycleView")
-    public static void initLoadMoreRecycleView(final RecyclerView recyclerView, final List<Transaction> transactionList) {
-        final Context context = recyclerView.getContext();
-        if (recyclerView.getAdapter() == null) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(new TransactionAdapter(transactionList != null ? transactionList : new ArrayList<>()));
-        } else {
-            ((TransactionAdapter) recyclerView.getAdapter()).setTransactionList(transactionList);
+    @BindingAdapter("initRecycleViewTransactionList")
+    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final Transaction transaction) {
+        if (transaction != null) {
+            if (transaction.getNextPage() == 0) {
+                recyclerView.clearOnScrollListeners();
+            }
+
+            if (recyclerView.getAdapter() == null) {
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(new TransactionAdapter(transaction.getTransactionList()));
+            } else {
+                ((TransactionAdapter) recyclerView.getAdapter()).setTransactionList(transaction.getTransactionList());
+            }
         }
     }
 
