@@ -11,19 +11,18 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.navigation.Navigation;
 
 public class AccountFragment extends BaseFragment<AccountViewModel> implements IAccountHandler {
 
     private FragmentAccountBinding mBinding;
-    private AccountViewModel mViewModel;
 
     public AccountFragment() {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
         mBinding = FragmentAccountBinding.inflate(inflater, container, false);
 
@@ -62,5 +61,10 @@ public class AccountFragment extends BaseFragment<AccountViewModel> implements I
     public void onLogoutClick(final View view) {
         mViewModel.logout();
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_loginFragment, null);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

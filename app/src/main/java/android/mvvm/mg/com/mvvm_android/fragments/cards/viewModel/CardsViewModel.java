@@ -9,14 +9,12 @@ import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
 import android.support.annotation.NonNull;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import com.dm.dmnetworking.api_client.base.model.success.SuccessListT;
 
 import java.util.List;
 
 public class CardsViewModel extends BaseViewModel {
 
     public ObservableField<List<Card>> cardList = new ObservableField<>();
-    public ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
 
     public CardsViewModel(final @NonNull Application application) {
         super(application);
@@ -26,8 +24,7 @@ public class CardsViewModel extends BaseViewModel {
         return DataRepository.getInstance().dbGetCardList(getApplication().getApplicationContext());
     }
 
-    public DMLiveDataBag<Card, RequestError> request() {
-        isProgressDialogVisible.set(true);
+    public DMLiveDataBag<Card, RequestError> getCards() {
         return DataRepository.getInstance().apiGetCardListFromNetwork(getApplication().getApplicationContext());
     }
 
@@ -35,11 +32,10 @@ public class CardsViewModel extends BaseViewModel {
         this.cardList.set(cardList);
     }
 
-    public void insertAll(final SuccessListT<Card> cardSuccessListT) {
-        isProgressDialogVisible.set(false);
-        if (cardSuccessListT != null && cardSuccessListT.getList() != null) {
+    public void insertAll(final List<Card> cardList) {
+        if (cardList != null) {
             DataRepository.getInstance().dbClearCardTable(getApplication().getApplicationContext(), ()
-                    -> DataRepository.getInstance().dbInsertCardList(getApplication().getApplicationContext(), cardSuccessListT.getList(), ids -> {
+                    -> DataRepository.getInstance().dbInsertCardList(getApplication().getApplicationContext(), cardList, ids -> {
             }));
         }
     }

@@ -53,27 +53,27 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_width_1"
                     android:layout_height="wrap_content"
                     android:onClick="@{(view) -> handler.onCardsClick(view)}"
                     android:text="@string/account_button_cards" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_width_1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_small_margin"
                     android:onClick="@{(view) -> handler.onPaymentHistoryClick(view)}"
                     android:text="@string/account_button_payment_history" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_width_1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_small_margin"
                     android:onClick="@{(view) -> handler.onSettingsClick(view)}"
                     android:text="@string/account_button_settings" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_width_1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_custom_extra_large_margin"
                     android:onClick="@{(view) -> handler.onLogoutClick(view)}"

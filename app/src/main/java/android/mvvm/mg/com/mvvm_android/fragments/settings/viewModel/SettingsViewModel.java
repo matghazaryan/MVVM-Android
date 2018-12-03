@@ -12,6 +12,7 @@ import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMFileUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.models.CapturePhoto;
@@ -20,7 +21,6 @@ import com.eraz.camera.models.MediaData;
 public class SettingsViewModel extends BaseViewModel {
 
     public ObservableField<String> imagePath = new ObservableField<>();
-    public ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
     public ObservableField<Integer> progress = new ObservableField<>();
 
     public SettingsViewModel(final @NonNull Application application) {
@@ -64,12 +64,10 @@ public class SettingsViewModel extends BaseViewModel {
     }
 
     public DMLiveDataBag<String, RequestError> sendImage(final String path) {
-        isProgressDialogVisible.set(true);
         return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), path);
     }
 
     public void updateImagePath(final String path) {
-        isProgressDialogVisible.set(false);
         DataRepository.getInstance().prefSaveProfilePhoto(path);
         imagePath.set(path);
     }
@@ -83,5 +81,13 @@ public class SettingsViewModel extends BaseViewModel {
     public void showProfilePhoto() {
         final String path = DataRepository.getInstance().prefGetProfilePhoto();
         imagePath.set(path);
+    }
+
+    public void saveLanguageCode(final String code) {
+        DataRepository.getInstance().prefLanguageCode(code);
+    }
+
+    public String getLanguageCode() {
+        return DataRepository.getInstance().prefGetLanguageCode();
     }
 }

@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_placeholder_email"
                 android:inputType="textEmailAddress"
+                android:onTextChanged="@{viewModel.onTextChanged}"
                 android:text="@={viewModel.email}"
                 app:setError="@{viewModel.emailError}" />
 
@@ -44,6 +45,7 @@
                 android:layout_marginTop="@dimen/activity_small_margin"
                 android:hint="@string/login_placeholder_password"
                 android:inputType="textPassword"
+                android:onTextChanged="@{viewModel.onTextChanged}"
                 android:text="@={viewModel.password}"
                 app:setError="@{viewModel.passwordError}" />
 

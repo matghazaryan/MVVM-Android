@@ -12,13 +12,12 @@ import android.mvvm.mg.com.mvvm_android.utils.MVVMValidator;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import biometric.dm.com.dmbiometric.constants.IBIOConstants;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
-import com.dm.dmnetworking.api_client.base.model.success.SuccessT;
 
-import java.util.ArrayList;
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+
 import java.util.Map;
+
+import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 
 public class LoginViewModel extends BaseViewModel {
 
@@ -27,15 +26,12 @@ public class LoginViewModel extends BaseViewModel {
 
     public ObservableField<Boolean> isButtonEnable = new ObservableField<>();
     public ObservableField<Boolean> isCheckedRemember = new ObservableField<>();
-    public ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
     public ObservableField<String> emailError = new ObservableField<>();
     public ObservableField<String> passwordError = new ObservableField<>();
 
 
     public LoginViewModel(final @NonNull Application application) {
         super(application);
-
-        makeUniteEmailAndPassword();
 
         isCheckedRemember.set(DataRepository.getInstance().prefIsCheckedRemember());
 
@@ -50,13 +46,12 @@ public class LoginViewModel extends BaseViewModel {
         uiTextFieldsTags.put(RequestKeys.SIGNIN, emailError);
     }
 
-    private void makeUniteEmailAndPassword() {
-        getAction(Action.EMAIL_AND_PASSWORD).addSource(email, email -> checkValidation());
-        getAction(Action.EMAIL_AND_PASSWORD).addSource(password, password -> checkValidation());
+    private void checkValidation() {
+        isButtonEnable.set(!(TextUtils.isEmpty(email.getValue()) || TextUtils.isEmpty(password.getValue()) || !MVVMValidator.isValidEmail(email.getValue())));
     }
 
-    private void checkValidation() {
-        getAction(Action.EMAIL_AND_PASSWORD).setValue(!(TextUtils.isEmpty(email.getValue()) || TextUtils.isEmpty(password.getValue()) || !MVVMValidator.isValidEmail(email.getValue())));
+    public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+        checkValidation();
     }
 
     public void handleBiometricErrors(final User user, final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
@@ -64,7 +59,7 @@ public class LoginViewModel extends BaseViewModel {
             case AUTHENTICATION_FAILED:
                 break;
             default:
-                doAction(Action.OPEN_ACCOUNT_FRAGMENT, new ArrayList<>());
+                doAction(Action.OPEN_ACCOUNT_FRAGMENT, null);
         }
     }
 
@@ -73,18 +68,13 @@ public class LoginViewModel extends BaseViewModel {
         DataRepository.getInstance().prefSetRemember(isChecked);
     }
 
-    public void handleLoginErrors(final ErrorE<RequestError> requestErrorErrorE) {
-        isProgressDialogVisible.set(false);
-        handleErrors(requestErrorErrorE);
+    public DMLiveDataBag<User, RequestError> login() {
+        return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
     }
 
-    public void onLoginSuccess(final SuccessT<User> userSuccessT) {
-        isProgressDialogVisible.set(false);
-
-        if (userSuccessT != null) {
-            final User user = userSuccessT.getT();
+    public void onSuccessLogin(final User user) {
+        if (user != null) {
             DataRepository.getInstance().prefSaveToken(user.getToken());
-
             final Boolean isChecked = isCheckedRemember.get();
             if (isChecked != null && isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 doAction(Action.OPEN_BIOMETRIC, user);
@@ -92,14 +82,5 @@ public class LoginViewModel extends BaseViewModel {
                 doAction(Action.OPEN_ACCOUNT_FRAGMENT, user);
             }
         }
-    }
-
-    public DMLiveDataBag<User, RequestError> login() {
-        isProgressDialogVisible.set(true);
-        return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
-    }
-
-    public void updateButtonStatus(final Boolean isEnable) {
-        isButtonEnable.set(isEnable);
     }
 }

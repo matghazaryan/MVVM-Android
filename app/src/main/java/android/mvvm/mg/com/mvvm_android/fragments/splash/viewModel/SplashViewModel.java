@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import com.dm.dmnetworking.api_client.base.model.success.SuccessT;
 import org.json.JSONObject;
 
 public class SplashViewModel extends BaseViewModel {
@@ -44,11 +43,13 @@ public class SplashViewModel extends BaseViewModel {
         }
     }
 
-    public void onLoginSuccess(final SuccessT<User> userSuccessT) {
-        final User user = userSuccessT.getT();
-        DataRepository.getInstance().prefSaveToken(user.getToken());
-
-        new Handler().postDelayed(() -> doAction(Action.OPEN_ACCOUNT_FRAGMENT, user), IConstants.Delay.SPLASH);
+    public void onLoginSuccess(final User user) {
+        if (user != null) {
+            DataRepository.getInstance().prefSaveToken(user.getToken());
+            new Handler().postDelayed(() -> doAction(Action.OPEN_ACCOUNT_FRAGMENT, user), IConstants.Delay.SPLASH);
+        } else {
+            doAction(Action.OPEN_ERROR_DIALOG, null);
+        }
     }
 
     public DMLiveDataBag<User, RequestError> login(final User user) {

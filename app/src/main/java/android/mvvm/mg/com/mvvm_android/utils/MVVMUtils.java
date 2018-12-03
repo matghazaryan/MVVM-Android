@@ -1,6 +1,9 @@
 package android.mvvm.mg.com.mvvm_android.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -9,7 +12,9 @@ import android.graphics.drawable.LayerDrawable;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 
+import java.util.Locale;
 import java.util.Map;
 
 import dmutils.com.dmutils.general.DMDimensionConverter;
@@ -68,5 +73,13 @@ public class MVVMUtils {
         }
 
         return url;
+    }
+
+    public static void updateLanguage(final Context context, final String code){
+        final Resources res = context.getResources();
+        final DisplayMetrics dm = res.getDisplayMetrics();
+        final Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(code);
+        res.updateConfiguration(conf, dm);
     }
 }

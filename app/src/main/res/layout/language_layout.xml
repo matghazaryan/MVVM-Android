@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+
+        <variable
+            name="handler"
+            type="android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ILanguageHandler" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="isVisible"
+            type="Boolean" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{(view) -> handler.onItemClick(view)}"
+        android:paddingStart="@dimen/activity_small_margin"
+        android:paddingTop="@dimen/activity_small_margin"
+        android:paddingEnd="@dimen/activity_small_margin">
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_check"
+            app:setVisibleView="@{safeUnbox(isVisible)}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_lang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/iv_check"
+            android:singleLine="true"
+            android:text="@{name}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/activity_large_margin"
+            android:background="@color/black_30" />
+
+    </RelativeLayout>
+
+</layout>

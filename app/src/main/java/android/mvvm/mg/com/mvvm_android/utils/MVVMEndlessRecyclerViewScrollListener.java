@@ -65,7 +65,7 @@ public abstract class MVVMEndlessRecyclerViewScrollListener extends RecyclerView
             lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
         }
 
-        // If the total item count is zero and the previous isn't, assume the
+        // If the total item count is zero and the previous isn'mViewModel, assume the
         // list is invalidated and should be reset back to initial state
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex;
@@ -82,7 +82,7 @@ public abstract class MVVMEndlessRecyclerViewScrollListener extends RecyclerView
             previousTotalItemCount = totalItemCount;
         }
 
-        // If it isn’t currently loading, we check to see if we have breached
+        // If it isn’mViewModel currently loading, we check to see if we have breached
         // the visibleThreshold and need to reload more data.
         // If we do need to reload some more data, we execute onLoadMore to fetch the data.
         // threshold should reflect how many total columns there are too

@@ -17,6 +17,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     private Map<Action, MediatorLiveData<Object>> mediatorLiveDataHashMap = new HashMap<>();
     private Map<String, ObservableField<String>> uiTextFieldsTags = new HashMap<>();
+    public ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
 
 
     public BaseViewModel(final @NonNull Application application) {
@@ -25,8 +26,16 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         initUiTextFieldsTags(uiTextFieldsTags);
     }
 
-    @Override
+    void showProgress() {
+        isProgressDialogVisible.set(true);
+    }
+
+    void hideProgress() {
+        isProgressDialogVisible.set(false);
+    }
+
     @SuppressWarnings("unchecked")
+    @Override
     public <T> MediatorLiveData<T> getAction(final Action action) {
         final MediatorLiveData<Object> data = mediatorLiveDataHashMap.get(action);
         if (data == null) {
@@ -49,7 +58,8 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
-    public void handleErrors(final ErrorE<RequestError> requestErrorErrorE) {
+    void handleErrors(final ErrorE<RequestError> requestErrorErrorE) {
+        hideProgress();
         if (requestErrorErrorE != null) {
             final RequestError error = requestErrorErrorE.getE();
             if (error != null) {
@@ -65,5 +75,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
                 getAction(Action.OPEN_ERROR_DIALOG).setValue(getApplication().getApplicationContext().getString(R.string.error_general_error));
             }
         }
+    }
+
+    void noInternetConnection() {
+        hideProgress();
+        getAction(Action.OPEN_ERROR_DIALOG).setValue(null);
     }
 }

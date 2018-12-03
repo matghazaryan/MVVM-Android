@@ -33,12 +33,12 @@ public interface IConstants {
     }
 
     enum Action {
-        EMAIL_AND_PASSWORD,
         OPEN_ACCOUNT_FRAGMENT,
         OPEN_BIOMETRIC,
         OPEN_ERROR_DIALOG,
         OPEN_LOGIN_FRAGMENT,
         DO_LOGIN,
-        ON_NEW_IMAGE_PATH
+        ON_NEW_IMAGE_PATH,
+        SHOW_NO_INTERNET
     }
 }

@@ -4,21 +4,20 @@ import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.activities.BaseActivity;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+
+import java.util.Objects;
 
 
 public abstract class BaseFragment<T extends BaseViewModel> extends Fragment implements IConstants {
 
     protected BaseActivity mActivity;
 
-    protected T t;
+    protected T mViewModel;
 
     public BaseFragment() {
     }
@@ -30,15 +29,15 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         mActivity = (BaseActivity) context;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
+    public void onResume() {
+        super.onResume();
         baseSubscribes();
-        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     private void baseSubscribes() {
-        t.<String>getAction(Action.OPEN_ERROR_DIALOG).observe(this, s -> MVVMDialog.showErrorDialog(mActivity, s));
+        mViewModel.<String>getAction(Action.OPEN_ERROR_DIALOG).observe(this, s -> MVVMDialog.showErrorDialog(mActivity, s));
+        mViewModel.<String>getAction(Action.SHOW_NO_INTERNET).observe(this, s -> MVVMDialog.showNoInternetDialog(mActivity));
     }
 
     protected void setTitle(final String title) {
@@ -61,5 +60,30 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         if (actionBar != null) {
             actionBar.show();
         }
+    }
+
+    protected <O> void handleRequest(final DMLiveDataBag<O, RequestError> liveDataBug, final IBaseRequestListener<O> listener) {
+        mViewModel.showProgress();
+
+        liveDataBug.getSuccessT().observe(this, oSuccessT -> {
+            mViewModel.hideProgress();
+            listener.onSuccess(Objects.requireNonNull(oSuccessT).getT());
+        });
+
+        liveDataBug.getSuccessListT().observe(this, oSuccessListT -> {
+            mViewModel.hideProgress();
+            listener.onSuccessList(Objects.requireNonNull(oSuccessListT).getList());
+        });
+        liveDataBug.getSuccessJsonResponse().observe(this, jsonObject -> {
+            mViewModel.hideProgress();
+            listener.onSuccessJsonObject(jsonObject);
+        });
+        liveDataBug.getFileProgress().observe(this, fileProgress -> {
+            mViewModel.hideProgress();
+            listener.onSuccessFileProgress(fileProgress);
+        });
+
+        liveDataBug.getErrorE().observe(this, requestErrorErrorE -> mViewModel.handleErrors(requestErrorErrorE));
+        liveDataBug.getNoInternetConnection().observe(this, s -> mViewModel.noInternetConnection());
     }
 }

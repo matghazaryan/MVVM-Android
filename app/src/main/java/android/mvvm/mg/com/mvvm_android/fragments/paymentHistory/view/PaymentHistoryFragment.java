@@ -3,8 +3,8 @@ package android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentPaymentHistoryBinding;
-import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.PaymentHistoryViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
@@ -16,19 +16,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class PaymentHistoryFragment extends BaseFragment<PaymentHistoryViewModel> {
 
     private FragmentPaymentHistoryBinding mBinding;
-    private PaymentHistoryViewModel mViewModel;
 
     public PaymentHistoryFragment() {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
         mBinding = FragmentPaymentHistoryBinding.inflate(inflater, container, false);
 
@@ -64,8 +63,11 @@ public class PaymentHistoryFragment extends BaseFragment<PaymentHistoryViewModel
     }
 
     private void subscribeTransactionLoad(final DMLiveDataBag<Transaction, RequestError> liveDataBag) {
-        liveDataBag.getSuccessT().observe(mActivity, transactionSuccessT -> mViewModel.onLoad(transactionSuccessT));
-        liveDataBag.getErrorE().observe(mActivity, requestErrorErrorE -> mViewModel.handleErrors(requestErrorErrorE));
-        liveDataBag.getNoInternetConnection().observe(mActivity, s -> MVVMDialog.showNoInternetDialog(mActivity));
+        handleRequest(liveDataBag, new IBaseRequestListener<Transaction>() {
+            @Override
+            public void onSuccess(final Transaction transaction) {
+                mViewModel.onLoad(transaction);
+            }
+        });
     }
 }

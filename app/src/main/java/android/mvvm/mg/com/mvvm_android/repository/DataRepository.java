@@ -18,10 +18,12 @@ import android.mvvm.mg.com.mvvm_android.room.helpers.card.CardHelper;
 import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMPrefUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
+
 import com.dm.dmnetworking.api_client.base.DMBaseRequestConfig;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.parser.DMJsonParser;
 import com.dm.dmnetworking.parser.DMParserConfigs;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -146,6 +148,16 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
     @Override
     public String prefGetProfilePhoto() {
         return MVVMPrefUtils.getProfilePhoto();
+    }
+
+    @Override
+    public void prefLanguageCode(final String code) {
+        MVVMPrefUtils.setLanguageCode(code);
+    }
+
+    @Override
+    public String prefGetLanguageCode() {
+        return MVVMPrefUtils.getLanguageCode();
     }
 
     @Override
