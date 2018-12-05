@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.fragments.base;
 
-import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 
@@ -12,7 +12,7 @@ public interface IBaseModelView extends IConstants {
 
     }
 
-    <T> MediatorLiveData<T> getAction(final Action action);
+    <T> LiveData<T> getAction(final Action action);
 
     <T> void doAction(final Action action, final T t);
 }

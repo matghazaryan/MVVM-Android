@@ -83,7 +83,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
             listener.onSuccessFileProgress(fileProgress);
         });
 
-        liveDataBug.getErrorE().observe(this, requestErrorErrorE -> mViewModel.handleErrors(requestErrorErrorE));
+        liveDataBug.getErrorE().observe(this, error -> mViewModel.handleErrors(error));
         liveDataBug.getNoInternetConnection().observe(this, s -> mViewModel.noInternetConnection());
     }
 }

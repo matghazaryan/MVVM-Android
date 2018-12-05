@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.adapters;
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.CardItemBinding;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

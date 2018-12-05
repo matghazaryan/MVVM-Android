@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.room.main;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.main;
 
 import android.arch.lifecycle.LiveData;
 

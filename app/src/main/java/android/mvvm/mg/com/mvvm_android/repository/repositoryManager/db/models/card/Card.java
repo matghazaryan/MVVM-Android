@@ -1,7 +1,7 @@
-package android.mvvm.mg.com.mvvm_android.room.models.card;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card;
 
 import android.arch.persistence.room.Entity;
-import android.mvvm.mg.com.mvvm_android.room.models.MVVMRoomBase;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.MVVMRoomBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity

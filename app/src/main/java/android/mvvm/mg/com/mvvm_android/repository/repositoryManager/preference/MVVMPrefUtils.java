@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.utils;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.preference;
 
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import dmutils.com.dmutils.pref.DMPrefsCacheManager;

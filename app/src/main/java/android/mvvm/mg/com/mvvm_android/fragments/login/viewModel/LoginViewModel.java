@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.fragments.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.constants.RequestKeys;
+import android.mvvm.mg.com.mvvm_android.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
@@ -41,9 +41,9 @@ public class LoginViewModel extends BaseViewModel {
 
     @Override
     public void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
-        uiTextFieldsTags.put(RequestKeys.EMAIL, emailError);
-        uiTextFieldsTags.put(RequestKeys.PASSWORD, passwordError);
-        uiTextFieldsTags.put(RequestKeys.SIGNIN, emailError);
+        uiTextFieldsTags.put(IRequestKeys.EMAIL, emailError);
+        uiTextFieldsTags.put(IRequestKeys.PASSWORD, passwordError);
+        uiTextFieldsTags.put(IRequestKeys.SIGNIN, emailError);
     }
 
     private void checkValidation() {

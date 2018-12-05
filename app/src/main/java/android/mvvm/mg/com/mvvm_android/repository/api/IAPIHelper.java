@@ -1,11 +1,11 @@
-package android.mvvm.mg.com.mvvm_android.repository.API;
+package android.mvvm.mg.com.mvvm_android.repository.api;
 
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.models.Configs;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
 import android.mvvm.mg.com.mvvm_android.models.User;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 

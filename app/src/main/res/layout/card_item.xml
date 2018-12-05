@@ -6,7 +6,7 @@
 
         <variable
             name="card"
-            type="android.mvvm.mg.com.mvvm_android.room.models.card.Card" />
+            type="android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card" />
 
     </data>
 

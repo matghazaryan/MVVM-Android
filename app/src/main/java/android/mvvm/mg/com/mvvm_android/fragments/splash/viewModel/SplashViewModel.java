@@ -24,7 +24,6 @@ public class SplashViewModel extends BaseViewModel {
     public void saveConfigs(final JSONObject jsonObject) {
         if (jsonObject != null) {
             DataRepository.getInstance().prefSaveConfigs(jsonObject.toString());
-
             openNextPage();
         } else {
             doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));

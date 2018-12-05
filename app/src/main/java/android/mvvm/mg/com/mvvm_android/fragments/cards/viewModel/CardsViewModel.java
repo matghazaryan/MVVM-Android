@@ -6,7 +6,7 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.support.annotation.NonNull;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 

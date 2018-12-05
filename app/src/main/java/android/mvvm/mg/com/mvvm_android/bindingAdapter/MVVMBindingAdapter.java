@@ -7,7 +7,7 @@ import android.mvvm.mg.com.mvvm_android.adapters.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.adapters.TransactionAdapter;
 import android.mvvm.mg.com.mvvm_android.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;

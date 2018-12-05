@@ -6,7 +6,7 @@ import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.cards.viewModel.CardsViewModel;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;

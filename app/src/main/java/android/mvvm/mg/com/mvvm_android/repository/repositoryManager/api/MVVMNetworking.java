@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.networking;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.api;
 
 import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
-import android.mvvm.mg.com.mvvm_android.utils.MVVMPrefUtils;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.preference.MVVMPrefUtils;
 import com.dm.dmnetworking.api_client.base.DMBaseRequest;
 import com.dm.dmnetworking.api_client.base.DMBaseTokenHandler;
 import com.dm.dmnetworking.api_client.listeners.DMIStatusHandleListener;

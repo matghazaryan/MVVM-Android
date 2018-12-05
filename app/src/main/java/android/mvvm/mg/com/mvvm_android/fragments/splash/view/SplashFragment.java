@@ -34,8 +34,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
         init();
 

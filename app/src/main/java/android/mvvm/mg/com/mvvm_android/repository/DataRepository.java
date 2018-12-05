@@ -3,27 +3,25 @@ package android.mvvm.mg.com.mvvm_android.repository;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
-import android.mvvm.mg.com.mvvm_android.constants.RequestKeys;
+import android.mvvm.mg.com.mvvm_android.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.models.Configs;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
 import android.mvvm.mg.com.mvvm_android.models.User;
-import android.mvvm.mg.com.mvvm_android.networking.MVVMNetworking;
-import android.mvvm.mg.com.mvvm_android.repository.API.IAPIHelper;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.api.MVVMNetworking;
+import android.mvvm.mg.com.mvvm_android.repository.api.IAPIHelper;
 import android.mvvm.mg.com.mvvm_android.repository.db.IDBHelper;
 import android.mvvm.mg.com.mvvm_android.repository.preference.IPreferenceHelper;
-import android.mvvm.mg.com.mvvm_android.room.helpers.IOnClearTableListener;
-import android.mvvm.mg.com.mvvm_android.room.helpers.IOnInsertAllListener;
-import android.mvvm.mg.com.mvvm_android.room.helpers.card.CardHelper;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
-import android.mvvm.mg.com.mvvm_android.utils.MVVMPrefUtils;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnClearTableListener;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnInsertAllListener;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.card.CardHelper;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.preference.MVVMPrefUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
-
 import com.dm.dmnetworking.api_client.base.DMBaseRequestConfig;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.parser.DMJsonParser;
 import com.dm.dmnetworking.parser.DMParserConfigs;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,8 +58,8 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
     @Override
     public DMLiveDataBag<User, RequestError> apiLogin(final Context context, final User user) {
         final Map<String, Object> params = new HashMap<>();
-        params.put(RequestKeys.EMAIL, user.getEmail());
-        params.put(RequestKeys.PASSWORD, user.getPassword());
+        params.put(IRequestKeys.EMAIL, user.getEmail());
+        params.put(IRequestKeys.PASSWORD, user.getPassword());
 
         final DMBaseRequestConfig<User, RequestError> config = new DMBaseRequestConfig<User, RequestError>(context)
                 .setUrl(IUrls.Method.LOGIN)
@@ -85,7 +83,7 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
     @Override
     public DMLiveDataBag<String, RequestError> apiSendImage(final Context context, final String path) {
         final Map<String, Object> params = new HashMap<>();
-        params.put(RequestKeys.IMAGE, new File(path));
+        params.put(IRequestKeys.IMAGE, new File(path));
 
         final DMBaseRequestConfig<String, RequestError> config = new DMBaseRequestConfig<String, RequestError>(context)
                 .setUrl(IUrls.Method.SAVE_IMAGE)
@@ -99,7 +97,7 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
     public DMLiveDataBag<Transaction, RequestError> apiGetTransactionList(final Context context, final int page) {
 
         final Map<String, Object> params = new HashMap<>();
-        params.put(RequestKeys.PAGE, page);
+        params.put(IRequestKeys.PAGE, page);
 
         final DMBaseRequestConfig<Transaction, RequestError> config = new DMBaseRequestConfig<Transaction, RequestError>(context)
                 .setUrl(MVVMUtils.getTransactionUrl(page))

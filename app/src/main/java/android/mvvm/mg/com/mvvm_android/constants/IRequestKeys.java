@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.constants;
 
-public interface RequestKeys {
+public interface IRequestKeys {
 
     String EMAIL = "email";
     String PASSWORD = "password";

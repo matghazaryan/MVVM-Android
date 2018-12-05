@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.room.models;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models;
 
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;

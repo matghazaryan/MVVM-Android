@@ -1,8 +1,8 @@
-package android.mvvm.mg.com.mvvm_android.room.models.card;
+package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.*;
-import android.mvvm.mg.com.mvvm_android.room.main.MVVMGeneralDao;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.main.MVVMGeneralDao;
 
 import java.util.List;
 

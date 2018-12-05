@@ -2,9 +2,9 @@ package android.mvvm.mg.com.mvvm_android.repository.db;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
-import android.mvvm.mg.com.mvvm_android.room.helpers.IOnClearTableListener;
-import android.mvvm.mg.com.mvvm_android.room.helpers.IOnInsertAllListener;
-import android.mvvm.mg.com.mvvm_android.room.models.card.Card;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnClearTableListener;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnInsertAllListener;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 
 import java.util.List;
 
