@@ -15,6 +15,8 @@ public interface IAPIHelper {
 
     DMLiveDataBag<User, RequestError> apiLogin(Context context, User user);
 
+    DMLiveDataBag<String, RequestError> apiLogout(final Context contex);
+
     DMLiveDataBag<Card, RequestError> apiGetCardListFromNetwork(Context context);
 
     DMLiveDataBag<String, RequestError> apiSendImage(Context context, String path);

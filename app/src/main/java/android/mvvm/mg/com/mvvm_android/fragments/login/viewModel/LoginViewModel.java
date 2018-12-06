@@ -3,6 +3,7 @@ package android.mvvm.mg.com.mvvm_android.fragments.login.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
@@ -63,12 +64,9 @@ public class LoginViewModel extends BaseViewModel {
         }
     }
 
-    public void setRemember(final boolean isChecked) {
-        isCheckedRemember.set(isChecked);
-        DataRepository.getInstance().prefSetRemember(isChecked);
-    }
-
     public DMLiveDataBag<User, RequestError> login() {
+        final Boolean isChecked = isCheckedRemember.get();
+        DataRepository.getInstance().prefSetRemember(isChecked != null ? isChecked : false);
         return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
     }
 
@@ -81,6 +79,8 @@ public class LoginViewModel extends BaseViewModel {
             } else {
                 doAction(Action.OPEN_ACCOUNT_FRAGMENT, user);
             }
+        } else {
+            doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
     }
 }

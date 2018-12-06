@@ -24,7 +24,7 @@ public class SplashViewModel extends BaseViewModel {
     public void saveConfigs(final JSONObject jsonObject) {
         if (jsonObject != null) {
             DataRepository.getInstance().prefSaveConfigs(jsonObject.toString());
-            openNextPage();
+            toNextPage();
         } else {
             doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
@@ -34,7 +34,7 @@ public class SplashViewModel extends BaseViewModel {
         return DataRepository.getInstance().apiGetConfigs(getApplication().getApplicationContext());
     }
 
-    private void openNextPage() {
+    private void toNextPage() {
         if (DataRepository.getInstance().prefIsCheckedRemember() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             doAction(Action.OPEN_BIOMETRIC, null);
         } else {
@@ -47,7 +47,7 @@ public class SplashViewModel extends BaseViewModel {
             DataRepository.getInstance().prefSaveToken(user.getToken());
             new Handler().postDelayed(() -> doAction(Action.OPEN_ACCOUNT_FRAGMENT, user), IConstants.Delay.SPLASH);
         } else {
-            doAction(Action.OPEN_ERROR_DIALOG, null);
+            doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
     }
 

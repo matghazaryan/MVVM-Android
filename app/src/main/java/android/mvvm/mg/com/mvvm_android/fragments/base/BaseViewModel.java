@@ -8,7 +8,9 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
 
 import java.util.HashMap;
@@ -17,14 +19,19 @@ import java.util.Map;
 public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
 
     private final Map<Action, MutableLiveData<Object>> mutableLiveDataHashMap = new HashMap<>();
+
     private final Map<String, ObservableField<String>> uiTextFieldsTags = new HashMap<>();
+
     public final ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
+    public final ObservableField<Boolean> isRootVisibleAfterLoading = new ObservableField<>(false);
+    public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
     public BaseViewModel(final @NonNull Application application) {
         super(application);
 
         initUiTextFieldsTags(uiTextFieldsTags);
+        new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 330);
     }
 
     void showProgress() {
@@ -32,7 +39,8 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void hideProgress() {
-        isProgressDialogVisible.set(false);
+        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 300);
+        new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 330);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,6 +88,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     void noInternetConnection() {
         hideProgress();
-        doAction(Action.OPEN_ERROR_DIALOG, null);
+        doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
     }
 }

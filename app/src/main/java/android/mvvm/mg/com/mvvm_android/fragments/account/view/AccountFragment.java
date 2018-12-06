@@ -6,11 +6,14 @@ import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.account.viewModel.AccountViewModel;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.json.JSONObject;
 
 import androidx.navigation.Navigation;
 
@@ -23,15 +26,12 @@ public class AccountFragment extends BaseFragment<AccountViewModel> implements I
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
         mBinding = FragmentAccountBinding.inflate(inflater, container, false);
-
-        init();
-
         return mBinding.getRoot();
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         showActionBar();
         setTitle(R.string.account_title);
 
@@ -40,6 +40,11 @@ public class AccountFragment extends BaseFragment<AccountViewModel> implements I
         mBinding.setHandler(this);
 
         mViewModel.load(getArguments());
+    }
+
+    @Override
+    public void subscribes() {
+        mViewModel.getAction(Action.OPEN_LOGIN_FRAGMENT).observe(mActivity, o -> openLoginPage());
     }
 
     @Override
@@ -57,14 +62,17 @@ public class AccountFragment extends BaseFragment<AccountViewModel> implements I
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_fileUploadFragment);
     }
 
-    @Override
-    public void onLogoutClick(final View view) {
-        mViewModel.logout();
-        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_loginFragment, null);
+    private void openLoginPage() {
+        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_loginFragment);
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onLogoutClick(final View view) {
+        handleRequest(mViewModel.doLogout(), new IBaseRequestListener<String>() {
+            @Override
+            public void onSuccessJsonObject(final JSONObject jsonObject) {
+                mViewModel.logout();
+            }
+        });
     }
 }

@@ -21,6 +21,7 @@
         android:background="@color/white"
         android:fillViewport="true"
         android:scrollbars="none"
+        app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
         tools:context=".fragments.settings.view.SettingsFragment">
 
         <LinearLayout

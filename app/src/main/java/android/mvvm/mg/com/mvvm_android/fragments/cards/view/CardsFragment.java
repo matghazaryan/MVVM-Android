@@ -24,24 +24,20 @@ public class CardsFragment extends BaseFragment<CardsViewModel> {
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
         mCardsBinding = FragmentCardsBinding.inflate(inflater, container, false);
-
-        init();
-
         return mCardsBinding.getRoot();
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         setTitle(R.string.cards_title);
 
         mViewModel = ViewModelProviders.of(this).get(CardsViewModel.class);
         mCardsBinding.setViewModel(mViewModel);
-
-        subscribes();
     }
 
-    private void subscribes() {
+    @Override
+    public void subscribes() {
         mViewModel.loadData().observe(mActivity, cardList -> mViewModel.initRecycleViewData(cardList));
         handleRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
             @Override

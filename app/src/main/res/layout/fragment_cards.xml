@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
-            app:initRecycleViewCardList="@{viewModel.cardList}" />
+            app:initRecycleViewCardList="@{viewModel.cardList}"
+            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
 
         <include
             layout="@layout/progress_dialog"

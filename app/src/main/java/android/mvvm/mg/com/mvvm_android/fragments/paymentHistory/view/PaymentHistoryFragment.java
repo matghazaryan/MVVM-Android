@@ -28,26 +28,22 @@ public class PaymentHistoryFragment extends BaseFragment<PaymentHistoryViewModel
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
         mBinding = FragmentPaymentHistoryBinding.inflate(inflater, container, false);
-
-        init();
-
         return mBinding.getRoot();
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         setTitle(R.string.payment_history_title);
 
         mViewModel = ViewModelProviders.of(this).get(PaymentHistoryViewModel.class);
         mBinding.setViewModel(mViewModel);
 
-        subscribes();
-
         initLoadMore();
     }
 
-    private void subscribes() {
+    @Override
+    public void subscribes() {
         subscribeTransactionLoad(mViewModel.onLoadTransactions(0));
     }
 

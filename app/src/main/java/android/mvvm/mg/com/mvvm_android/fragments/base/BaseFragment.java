@@ -5,19 +5,25 @@ import android.mvvm.mg.com.mvvm_android.activities.BaseActivity;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.view.View;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
 
 
-public abstract class BaseFragment<T extends BaseViewModel> extends Fragment implements IConstants {
+public abstract class BaseFragment<T extends BaseViewModel> extends Fragment implements IBaseMethod, IConstants {
 
     protected BaseActivity mActivity;
 
     protected T mViewModel;
+
+    private boolean isSubscribed;
 
     public BaseFragment() {
     }
@@ -27,6 +33,17 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         super.onAttach(context);
 
         mActivity = (BaseActivity) context;
+        isSubscribed = false;
+    }
+
+    @Override
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialize();
+        if (!isSubscribed) {
+            isSubscribed = true;
+            subscribes();
+        }
     }
 
     @Override

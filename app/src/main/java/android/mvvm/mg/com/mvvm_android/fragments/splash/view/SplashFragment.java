@@ -35,9 +35,6 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
-        init();
-
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 
@@ -49,15 +46,15 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
         }
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         hideActionBar();
         mViewModel = ViewModelProviders.of(this).get(SplashViewModel.class);
-        subscribes();
+        getConfigs();
     }
 
-    private void subscribes() {
-        getConfigs();
-
+    @Override
+    public void subscribes() {
         mViewModel.<User>getAction(Action.DO_LOGIN).observe(this, user -> doLogin(mViewModel.login(user)));
         mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(this, this::openAccount);
         mViewModel.<User>getAction(Action.OPEN_LOGIN_FRAGMENT).observe(this, user -> openLogin());

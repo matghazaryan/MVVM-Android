@@ -33,11 +33,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel> implements ILogi
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
         mBinding = FragmentLoginBinding.inflate(inflater, container, false);
-
-        init();
-
         return mBinding.getRoot();
     }
 
@@ -49,15 +45,14 @@ public class LoginFragment extends BaseFragment<LoginViewModel> implements ILogi
         }
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         showActionBar();
         setTitle(R.string.login_title);
 
         mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         mBinding.setViewModel(mViewModel);
         mBinding.setHandler(this);
-
-        subscribes();
     }
 
     @Override
@@ -71,11 +66,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel> implements ILogi
     }
 
     @Override
-    public void onCheckedChange(final boolean isChecked) {
-        mViewModel.setRemember(isChecked);
-    }
-
-    private void subscribes() {
+    public void subscribes() {
         mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(this, this::openAccount);
         mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(this, this::showBiometric);
     }

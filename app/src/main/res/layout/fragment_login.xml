@@ -63,8 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_custom_medium_margin"
-                android:checked="@{safeUnbox(viewModel.isCheckedRemember)}"
-                android:onCheckedChanged="@{(view, checked) -> handler.onCheckedChange(checked)}"
+                android:checked="@={viewModel.isCheckedRemember}"
                 android:text="@string/login_checkbox_remember" />
 
         </LinearLayout>

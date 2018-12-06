@@ -2,26 +2,28 @@ package android.mvvm.mg.com.mvvm_android.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
-import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.constants.IRequestKeys;
+import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.models.Configs;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
 import android.mvvm.mg.com.mvvm_android.models.User;
-import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.api.MVVMNetworking;
 import android.mvvm.mg.com.mvvm_android.repository.api.IAPIHelper;
 import android.mvvm.mg.com.mvvm_android.repository.db.IDBHelper;
 import android.mvvm.mg.com.mvvm_android.repository.preference.IPreferenceHelper;
+import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.api.MVVMNetworking;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnClearTableListener;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.IOnInsertAllListener;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.helpers.card.CardHelper;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.preference.MVVMPrefUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
+
 import com.dm.dmnetworking.api_client.base.DMBaseRequestConfig;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.parser.DMJsonParser;
 import com.dm.dmnetworking.parser.DMParserConfigs;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,6 +67,15 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
                 .setUrl(IUrls.Method.LOGIN)
                 .setParams(params)
                 .setParserConfigs(new DMParserConfigs<>(User.class, "data"))
+                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+
+        return MVVMNetworking.getInstance().request(config);
+    }
+
+    @Override
+    public DMLiveDataBag<String, RequestError> apiLogout(final Context context) {
+        final DMBaseRequestConfig<String, RequestError> config = new DMBaseRequestConfig<String, RequestError>(context)
+                .setUrl(IUrls.Method.LOGOUT)
                 .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);

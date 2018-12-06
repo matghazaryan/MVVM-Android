@@ -42,15 +42,12 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> implements
 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
         mBinding = FragmentSettingsBinding.inflate(inflater, container, false);
-
-        init();
-
         return mBinding.getRoot();
     }
 
-    private void init() {
+    @Override
+    public void initialize() {
         setTitle(R.string.settings_title);
 
         mViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
@@ -59,9 +56,12 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> implements
 
         mViewModel.showProfilePhoto();
 
-        subscribeOnGetImage();
-
         initLanguageViews();
+    }
+
+    @Override
+    public void subscribes() {
+        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(this, this::subscribeOnFileUpload);
     }
 
     @Override
@@ -75,10 +75,6 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> implements
         intent.putExtra(IConstants.BundleKey.MAX_COUNT, 1);
 
         startActivityForResult(intent, RequestCode.CAMERA);
-    }
-
-    private void subscribeOnGetImage() {
-        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(this, this::subscribeOnFileUpload);
     }
 
     private void subscribeOnFileUpload(final String path) {

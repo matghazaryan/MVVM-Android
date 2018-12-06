@@ -25,6 +25,7 @@
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewTransactionList="@{viewModel.transaction}"
+            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
             tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment" />
 
         <include

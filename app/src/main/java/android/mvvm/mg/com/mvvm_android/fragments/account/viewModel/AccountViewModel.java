@@ -5,10 +5,13 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.fragments.account.view.AccountFragmentArgs;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class AccountViewModel extends BaseViewModel {
 
@@ -34,21 +37,22 @@ public class AccountViewModel extends BaseViewModel {
                 final AccountFragmentArgs args = AccountFragmentArgs.fromBundle(bundle);
                 text = args.getName();
             }
-            setEmail(text);
+
+            this.email.set(text);
         }
     }
 
-    public void setEmail(final String email) {
-        this.email.set(email);
+    private void showProfilePhoto() {
+        imagePath.set(DataRepository.getInstance().prefGetProfilePhoto());
     }
 
-    private void showProfilePhoto() {
-        final String path = DataRepository.getInstance().prefGetProfilePhoto();
-        imagePath.set(path);
+    public DMLiveDataBag<String, RequestError> doLogout() {
+        return DataRepository.getInstance().apiLogout(getApplication().getApplicationContext());
     }
 
     public void logout() {
         DataRepository.getInstance().prefSaveToken(null);
         DataRepository.getInstance().prefSetRemember(false);
+        doAction(Action.OPEN_LOGIN_FRAGMENT, null);
     }
 }
