@@ -22,8 +22,13 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     private final Map<String, ObservableField<String>> uiTextFieldsTags = new HashMap<>();
 
+    //For show/hide progress on start/end request (include progress_dialog.xml and add app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" )
     public final ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
+
+    //For gone at first and visible with fade animation after request completed
     public final ObservableField<Boolean> isRootVisibleAfterLoading = new ObservableField<>(false);
+
+    //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
