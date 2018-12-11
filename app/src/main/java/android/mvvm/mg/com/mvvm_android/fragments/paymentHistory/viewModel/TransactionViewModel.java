@@ -9,11 +9,11 @@ import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.support.annotation.NonNull;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class PaymentHistoryViewModel extends BaseViewModel {
+public class TransactionViewModel extends BaseViewModel {
 
     public ObservableField<Transaction> transaction = new ObservableField<>();
 
-    public PaymentHistoryViewModel(final @NonNull Application application) {
+    public TransactionViewModel(final @NonNull Application application) {
         super(application);
     }
 

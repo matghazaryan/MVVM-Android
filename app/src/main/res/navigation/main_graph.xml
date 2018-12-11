@@ -91,9 +91,9 @@
         tools:layout="@layout/fragment_cards" />
     <fragment
         android:id="@+id/paymentHistoryFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.view.PaymentHistoryFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.view.TransactionsFragment"
         android:label="fragment_payment_history"
-        tools:layout="@layout/fragment_payment_history" />
+        tools:layout="@layout/fragment_transactions" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="android.mvvm.mg.com.mvvm_android.fragments.settings.view.SettingsFragment"

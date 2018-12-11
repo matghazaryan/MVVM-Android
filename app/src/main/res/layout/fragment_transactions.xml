@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.PaymentHistoryViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.TransactionViewModel" />
 
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment">
+        tools:context=".fragments.paymentHistory.view.TransactionsFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_transaction"
@@ -26,7 +26,7 @@
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewTransactionList="@{viewModel.transaction}"
             app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
-            tools:context=".fragments.paymentHistory.view.PaymentHistoryFragment" />
+            tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
 
         <include
             layout="@layout/progress_dialog"

@@ -5,7 +5,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentPaymentHistoryBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
-import android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.PaymentHistoryViewModel;
+import android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.TransactionViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMEndlessRecyclerViewScrollListener;
@@ -13,20 +13,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class PaymentHistoryFragment extends BaseFragment<PaymentHistoryViewModel, FragmentPaymentHistoryBinding> {
+public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentPaymentHistoryBinding> {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_payment_history;
+        return R.layout.fragment_transactions;
     }
 
     @Override
-    protected Class<PaymentHistoryViewModel> getViewModelClass() {
-        return PaymentHistoryViewModel.class;
+    protected Class<TransactionViewModel> getViewModelClass() {
+        return TransactionViewModel.class;
     }
 
     @Override
-    protected void initBinding(final FragmentPaymentHistoryBinding binding, final PaymentHistoryViewModel viewModel) {
+    protected void initBinding(final FragmentPaymentHistoryBinding binding, final TransactionViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 

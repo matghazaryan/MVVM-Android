@@ -60,10 +60,10 @@ public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAcco
 
     @Override
     public void onLogoutClick(final View view) {
+        mViewModel.logout();
         handleRequest(mViewModel.doLogout(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
-                mViewModel.logout();
             }
         });
     }
