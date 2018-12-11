@@ -52,7 +52,4 @@
     <string name="biometric_description">Description</string>
     <string name="biometric_cancel">Cancle</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>
