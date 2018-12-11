@@ -10,9 +10,9 @@ import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMFileUtils;
+import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.models.CapturePhoto;
@@ -22,11 +22,20 @@ public class SettingsViewModel extends BaseViewModel {
 
     public ObservableField<String> imagePath = new ObservableField<>();
     public ObservableField<Integer> progress = new ObservableField<>();
+    public ObservableField<String> language = new ObservableField<>();
 
     public SettingsViewModel(final @NonNull Application application) {
         super(application);
     }
 
+    @Override
+    public void initialize() {
+        imagePath.set(DataRepository.getInstance().prefGetProfilePhoto());
+        language.set(MVVMUtils.getLanguageName(getApplication().getApplicationContext(),
+                DataRepository.getInstance().prefGetLanguageCode()));
+    }
+
+    @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             Bundle bundle = null;
@@ -76,18 +85,5 @@ public class SettingsViewModel extends BaseViewModel {
         if (percent != null) {
             progress.set(percent.getPercent());
         }
-    }
-
-    public void showProfilePhoto() {
-        final String path = DataRepository.getInstance().prefGetProfilePhoto();
-        imagePath.set(path);
-    }
-
-    public void saveLanguageCode(final String code) {
-        DataRepository.getInstance().prefLanguageCode(code);
-    }
-
-    public String getLanguageCode() {
-        return DataRepository.getInstance().prefGetLanguageCode();
     }
 }

@@ -29,16 +29,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_small_margin">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="@dimen/image_size_2"
@@ -59,6 +52,35 @@
                     app:progress="@{safeUnbox(viewModel.progress)}" />
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{(view)->handler.onLanguageClick(view)}"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_medium_margin">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layout_height_2"
+                    android:background="@color/black_30" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_medium_margin"
+                    android:text="@string/settings_language"
+                    android:textSize="@dimen/text_size_11"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_small_margin"
+                    android:text="@{viewModel.language}"
+                    android:textSize="@dimen/text_size_3" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

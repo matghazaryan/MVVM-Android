@@ -60,7 +60,7 @@ public class LoginViewModel extends BaseViewModel {
             case AUTHENTICATION_FAILED:
                 break;
             default:
-                doAction(Action.OPEN_ACCOUNT_FRAGMENT, null);
+                doAction(Action.OPEN_ACCOUNT_FRAGMENT, user);
         }
     }
 

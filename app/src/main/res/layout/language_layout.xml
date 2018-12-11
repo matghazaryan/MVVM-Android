@@ -9,7 +9,7 @@
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ILanguageHandler" />
+            type="android.mvvm.mg.com.mvvm_android.fragments.language.handler.ILanguageHandler" />
 
         <variable
             name="name"

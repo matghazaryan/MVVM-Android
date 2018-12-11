@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.fragments.settings.handler;
+package android.mvvm.mg.com.mvvm_android.fragments.language.handler;
 
 import android.view.View;
 

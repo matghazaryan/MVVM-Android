@@ -11,9 +11,12 @@ import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import biometric.dm.com.dmbiometric.constants.IBIOConstants;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+
 import org.json.JSONObject;
+
+import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 
 public class SplashViewModel extends BaseViewModel {
 
@@ -55,12 +58,12 @@ public class SplashViewModel extends BaseViewModel {
         return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), user);
     }
 
-    public void handleBiometricErrors(final User user, final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
+    public void handleBiometricErrors(final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
         switch (type) {
             case AUTHENTICATION_FAILED:
                 break;
             default:
-                doAction(Action.OPEN_LOGIN_FRAGMENT, user);
+                doAction(Action.OPEN_LOGIN_FRAGMENT, null);
         }
     }
 }

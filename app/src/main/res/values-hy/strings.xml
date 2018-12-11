@@ -37,9 +37,13 @@
     <!-- Settings -->
     <string name="settings_title">Կարգավորումներ</string>
     <string name="settings_gallery_title">Պատկերասրահ</string>
-    <string name="settings_language_english">English</string>
-    <string name="settings_language_russian">Русский</string>
-    <string name="settings_language_armenian">Հայերեն</string>
+    <string name="settings_language">Լեզուն</string>
+
+    <!-- Language -->
+    <string name="language_title">Լեզուն</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
 
     <!-- Biometric -->
     <string name="biometric_title">Կոչում</string>

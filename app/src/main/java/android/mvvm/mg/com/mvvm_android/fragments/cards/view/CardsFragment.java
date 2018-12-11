@@ -1,44 +1,40 @@
 package android.mvvm.mg.com.mvvm_android.fragments.cards.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.cards.viewModel.CardsViewModel;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.List;
 
-public class CardsFragment extends BaseFragment<CardsViewModel> {
+public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBinding> {
 
-    private FragmentCardsBinding mCardsBinding;
-
-    public CardsFragment() {
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_cards;
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        mCardsBinding = FragmentCardsBinding.inflate(inflater, container, false);
-        return mCardsBinding.getRoot();
+    protected Class<CardsViewModel> getViewModelClass() {
+        return CardsViewModel.class;
     }
 
     @Override
-    public void initialize() {
-        setTitle(R.string.cards_title);
-
-        mViewModel = ViewModelProviders.of(this).get(CardsViewModel.class);
-        mCardsBinding.setViewModel(mViewModel);
+    protected void initBinding(final FragmentCardsBinding binding, final CardsViewModel viewModel) {
+        binding.setViewModel(viewModel);
     }
 
     @Override
-    public void subscribes() {
-        mViewModel.loadData().observe(mActivity, cardList -> mViewModel.initRecycleViewData(cardList));
+    public int getTitleRes() {
+        return R.string.cards_title;
+    }
+
+    @Override
+    public void subscribes(final LifecycleOwner owner) {
+        mViewModel.loadData().observe(owner, cardList -> mViewModel.initRecycleViewData(cardList));
         handleRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
             @Override
             public void onSuccessList(final List<Card> cardList) {

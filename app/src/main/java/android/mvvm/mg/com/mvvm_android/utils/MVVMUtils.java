@@ -1,7 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.ObservableField;
@@ -10,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -75,11 +75,24 @@ public class MVVMUtils {
         return url;
     }
 
-    public static void updateLanguage(final Context context, final String code){
+    public static void updateLanguage(final Context context, final String code) {
         final Resources res = context.getResources();
         final DisplayMetrics dm = res.getDisplayMetrics();
         final Configuration conf = res.getConfiguration();
         conf.locale = new Locale(code);
         res.updateConfiguration(conf, dm);
+    }
+
+    public static String getLanguageName(final Context context, final String code) {
+        switch (code) {
+            case IConstants.Language.HY:
+                return context.getString(R.string.language_armenian);
+            case IConstants.Language.EN:
+                return context.getString(R.string.language_english);
+            case IConstants.Language.RU:
+                return context.getString(R.string.language_russian);
+            default:
+                return null;
+        }
     }
 }

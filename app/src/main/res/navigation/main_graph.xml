@@ -78,7 +78,7 @@
             app:popExitAnim="@anim/left_to_right_2" />
         <action
             android:id="@+id/action_accountFragment_to_fileUploadFragment"
-            app:destination="@id/fileUploadFragment"
+            app:destination="@id/settingsFragment"
             app:enterAnim="@anim/right_to_left_1"
             app:exitAnim="@anim/right_to_left_2"
             app:popEnterAnim="@anim/left_to_right_1"
@@ -95,8 +95,21 @@
         android:label="fragment_payment_history"
         tools:layout="@layout/fragment_payment_history" />
     <fragment
-        android:id="@+id/fileUploadFragment"
+        android:id="@+id/settingsFragment"
         android:name="android.mvvm.mg.com.mvvm_android.fragments.settings.view.SettingsFragment"
         android:label="fragment_file_upload"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.fragments.language.view.LanguageFragment"
+        android:label="language_layout"
+        tools:layout="@layout/language_layout" />
 </navigation>

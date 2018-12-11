@@ -1,7 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.fragments.splash.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.databinding.FragmentSplashBinding;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
@@ -11,36 +12,40 @@ import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-
-import org.json.JSONObject;
-
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import org.json.JSONObject;
 
-public class SplashFragment extends BaseFragment<SplashViewModel> {
+public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplashBinding> {
 
     private DMBiometricManager<User> mBiometricManager;
 
-    public SplashFragment() {
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_splash;
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_splash, container, false);
+    protected Class<SplashViewModel> getViewModelClass() {
+        return SplashViewModel.class;
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void initBinding(final FragmentSplashBinding binding, final SplashViewModel viewModel) {
+    }
+
+    @Override
+    public boolean isShowActionBar() {
+        return false;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBiometricManager != null) {
             mBiometricManager.onStop();
         }
@@ -48,17 +53,16 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
 
     @Override
     public void initialize() {
-        hideActionBar();
-        mViewModel = ViewModelProviders.of(this).get(SplashViewModel.class);
         getConfigs();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void subscribes() {
-        mViewModel.<User>getAction(Action.DO_LOGIN).observe(this, user -> doLogin(mViewModel.login(user)));
-        mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(this, this::openAccount);
-        mViewModel.<User>getAction(Action.OPEN_LOGIN_FRAGMENT).observe(this, user -> openLogin());
-        mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(this, this::showBiometric);
+    public void subscribes(final LifecycleOwner owner) {
+        mViewModel.<User>getAction(Action.DO_LOGIN).observe(owner, user -> doLogin(mViewModel.login(user)));
+        mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
+        mViewModel.<User>getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, user -> openLogin());
+        mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, t -> showBiometric());
     }
 
     private void getConfigs() {
@@ -90,7 +94,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void showBiometric(final User user) {
+    private void showBiometric() {
         mBiometricManager = MVVMDialog.showBiometricForDecrypt(mActivity, new IDMBiometricListener<User>() {
             @Override
             public void onSuccessDecrypted(final User user) {
@@ -99,7 +103,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel> {
 
             @Override
             public void onFailed(final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
-                mViewModel.handleBiometricErrors(user, type, helpCode, helpString);
+                mViewModel.handleBiometricErrors(type, helpCode, helpString);
             }
         });
     }

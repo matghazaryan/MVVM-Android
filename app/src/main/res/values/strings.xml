@@ -37,14 +37,22 @@
     <!-- Settings -->
     <string name="settings_title">Settings</string>
     <string name="settings_gallery_title">Gallery</string>
-    <string name="settings_language_english">English</string>
-    <string name="settings_language_russian">Русский</string>
-    <string name="settings_language_armenian">Հայերեն</string>
+    <string name="settings_language">Language</string>
+
+
+    <!-- Language -->
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
 
     <!-- Biometric -->
     <string name="biometric_title">Title</string>
     <string name="biometric_sub_title">Subtitle</string>
     <string name="biometric_description">Description</string>
     <string name="biometric_cancel">Cancle</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

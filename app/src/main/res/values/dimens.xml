@@ -35,6 +35,7 @@
 
 
     <dimen name="layout_height_1">60dp</dimen>
+    <dimen name="layout_height_2">0.5dp</dimen>
     <dimen name="layout_width_1">200dp</dimen>
 
     <dimen name="corner_radius_1">13dp</dimen>

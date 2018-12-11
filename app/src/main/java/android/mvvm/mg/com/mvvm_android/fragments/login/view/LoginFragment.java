@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.fragments.login.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMDialog;
@@ -11,48 +11,45 @@ import android.mvvm.mg.com.mvvm_android.fragments.login.viewModel.LoginViewModel
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
 
-public class LoginFragment extends BaseFragment<LoginViewModel> implements ILoginHandler {
-
-    private FragmentLoginBinding mBinding;
+public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
 
     private DMBiometricManager<User> mBiometricManager;
 
-    public LoginFragment() {
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_login;
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        mBinding = FragmentLoginBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
+    protected Class<LoginViewModel> getViewModelClass() {
+        return LoginViewModel.class;
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void initBinding(final FragmentLoginBinding binding, final LoginViewModel viewModel) {
+        binding.setViewModel(viewModel);
+        binding.setHandler(this);
+    }
+
+    @Override
+    public int getTitleRes() {
+        return R.string.login_title;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBiometricManager != null) {
             mBiometricManager.onStop();
         }
-    }
-
-    @Override
-    public void initialize() {
-        showActionBar();
-        setTitle(R.string.login_title);
-
-        mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        mBinding.setViewModel(mViewModel);
-        mBinding.setHandler(this);
     }
 
     @Override
@@ -66,9 +63,9 @@ public class LoginFragment extends BaseFragment<LoginViewModel> implements ILogi
     }
 
     @Override
-    public void subscribes() {
-        mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(this, this::openAccount);
-        mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(this, this::showBiometric);
+    public void subscribes(final LifecycleOwner owner) {
+        mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
+        mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, this::showBiometric);
     }
 
     private void openAccount(final User user) {

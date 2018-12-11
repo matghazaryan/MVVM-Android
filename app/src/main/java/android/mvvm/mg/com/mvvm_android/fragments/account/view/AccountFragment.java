@@ -1,50 +1,42 @@
 package android.mvvm.mg.com.mvvm_android.fragments.account.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.account.viewModel.AccountViewModel;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
+import androidx.navigation.Navigation;
 import org.json.JSONObject;
 
-import androidx.navigation.Navigation;
+public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
 
-public class AccountFragment extends BaseFragment<AccountViewModel> implements IAccountHandler {
-
-    private FragmentAccountBinding mBinding;
-
-    public AccountFragment() {
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_account;
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        mBinding = FragmentAccountBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
+    protected Class<AccountViewModel> getViewModelClass() {
+        return AccountViewModel.class;
     }
 
     @Override
-    public void initialize() {
-        showActionBar();
-        setTitle(R.string.account_title);
-
-        mViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
-        mBinding.setViewModel(mViewModel);
-        mBinding.setHandler(this);
-
-        mViewModel.load(getArguments());
+    protected void initBinding(final FragmentAccountBinding binding, final AccountViewModel viewModel) {
+        binding.setViewModel(viewModel);
+        binding.setHandler(this);
     }
 
     @Override
-    public void subscribes() {
-        mViewModel.getAction(Action.OPEN_LOGIN_FRAGMENT).observe(mActivity, o -> openLoginPage());
+    public int getTitleRes() {
+        return R.string.account_title;
+    }
+
+    @Override
+    public void subscribes(final LifecycleOwner owner) {
+        mViewModel.getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, o -> openLoginPage());
     }
 
     @Override

@@ -1,6 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.fragments.account.viewModel;
 
 import android.app.Application;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.fragments.account.view.AccountFragmentArgs;
@@ -22,7 +24,8 @@ public class AccountViewModel extends BaseViewModel {
         super(application);
     }
 
-    public void load(final Bundle bundle) {
+    @Override
+    public void initialize(final Bundle bundle) {
         showProfilePhoto();
         initData(bundle);
     }

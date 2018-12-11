@@ -36,7 +36,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         super(application);
 
         initUiTextFieldsTags(uiTextFieldsTags);
-        new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 330);
+        new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 230);
     }
 
     void showProgress() {
@@ -44,8 +44,8 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void hideProgress() {
-        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 300);
-        new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 330);
+        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 200);
+        new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 230);
     }
 
     @SuppressWarnings("unchecked")

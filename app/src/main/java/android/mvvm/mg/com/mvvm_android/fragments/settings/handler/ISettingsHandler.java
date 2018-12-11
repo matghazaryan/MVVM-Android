@@ -4,5 +4,7 @@ import android.view.View;
 
 public interface ISettingsHandler {
 
-    void onImageClick(View view);
+    void onImageClick(final View view);
+
+    void onLanguageClick(final View view);
 }

@@ -1,67 +1,46 @@
 package android.mvvm.mg.com.mvvm_android.fragments.settings.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
-import android.mvvm.mg.com.mvvm_android.databinding.LanguageLayoutBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.settings.viewModel.SettingsViewModel;
-import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
+import androidx.navigation.Navigation;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.activities.ErazCameraActivity;
 import com.eraz.camera.constants.IConstants;
-
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
-public class SettingsFragment extends BaseFragment<SettingsViewModel> implements ISettingsHandler {
-
-    private FragmentSettingsBinding mBinding;
-
-    private List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
-
-    public SettingsFragment() {
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_settings;
     }
 
     @Override
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        mViewModel.onActivityResult(requestCode, resultCode, data);
+    protected Class<SettingsViewModel> getViewModelClass() {
+        return SettingsViewModel.class;
     }
 
     @Override
-    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        mBinding = FragmentSettingsBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
+    protected void initBinding(final FragmentSettingsBinding binding, final SettingsViewModel viewModel) {
+        binding.setViewModel(viewModel);
+        binding.setHandler(this);
     }
 
     @Override
-    public void initialize() {
-        setTitle(R.string.settings_title);
-
-        mViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
-        mBinding.setViewModel(mViewModel);
-        mBinding.setHandler(this);
-
-        mViewModel.showProfilePhoto();
-
-        initLanguageViews();
+    public int getTitleRes() {
+        return R.string.settings_title;
     }
 
     @Override
-    public void subscribes() {
-        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(this, this::subscribeOnFileUpload);
+    public void subscribes(final LifecycleOwner owner) {
+        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(owner, this::subscribeOnFileUpload);
     }
 
     @Override
@@ -77,6 +56,11 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> implements
         startActivityForResult(intent, RequestCode.CAMERA);
     }
 
+    @Override
+    public void onLanguageClick(final View view) {
+        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_settingsFragment_to_languageFragment);
+    }
+
     private void subscribeOnFileUpload(final String path) {
         handleRequest(mViewModel.sendImage(path), new IBaseRequestListener<String>() {
             @Override
@@ -89,32 +73,5 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> implements
                 mViewModel.updateProgress(fileProgress);
             }
         });
-    }
-
-    private void initLanguageViews() {
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.settings_language_armenian), Language.HY));
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.settings_language_english), Language.EN));
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.settings_language_russian), Language.RU));
-    }
-
-    private LanguageLayoutBinding createLanguageView(final String name, final String code) {
-        final LanguageLayoutBinding binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.language_layout, null, false);
-        binding.setName(name);
-        binding.setIsVisible(code.equalsIgnoreCase(mViewModel.getLanguageCode()));
-        binding.setHandler((View) -> changeLanguage(binding, code));
-
-        mBinding.llLanguage.addView(binding.getRoot());
-
-        return binding;
-    }
-
-    private void changeLanguage(final LanguageLayoutBinding layoutBinding, final String code) {
-        for (final LanguageLayoutBinding binding : mLanguageLayoutBindingList) {
-            binding.setIsVisible(false);
-        }
-        layoutBinding.setIsVisible(true);
-        mViewModel.saveLanguageCode(code);
-        MVVMUtils.updateLanguage(mActivity, code);
-        setTitle(R.string.settings_title);
     }
 }
