@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.repository.api;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.models.Configs;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.models.Transaction;
+import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 
@@ -21,5 +21,5 @@ public interface IAPIHelper {
 
     DMLiveDataBag<String, RequestError> apiSendImage(Context context, String path);
 
-    DMLiveDataBag<Transaction, RequestError> apiGetTransactionList(final Context context, final int page);
+    DMLiveDataBag<TransactionData, RequestError> apiGetTransactionList(final Context context, final int page);
 }

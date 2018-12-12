@@ -5,6 +5,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionInnerItemBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionItemBinding;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
+import android.mvvm.mg.com.mvvm_android.models.TransactionGroup;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder> {
 
-    private List<Transaction> transactionList;
+    private List<TransactionGroup> transactionGroupList;
     private LayoutInflater inflater;
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -27,8 +28,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
     }
 
-    public TransactionAdapter(final List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public TransactionAdapter(final List<TransactionGroup> transactionGroupList) {
+        this.transactionGroupList = transactionGroupList;
     }
 
     @NonNull
@@ -44,8 +45,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(final @NonNull MyViewHolder holder, final int position) {
-        final Transaction transaction = transactionList.get(position);
-        final List<Transaction> transactionList = transaction.getTransactionDetailsList();
+        final TransactionGroup transactionGroup = transactionGroupList.get(position);
+        final List<Transaction> transactionList = transactionGroup.getTransactionList();
         holder.binding.llContainer.removeAllViews();
         if (transactionList != null) {
             for (final Transaction t : transactionList) {
@@ -58,14 +59,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public int getItemCount() {
-        return transactionList.size();
+        return transactionGroupList.size();
     }
 
-    public void setTransactionList(final List<Transaction> transactionList) {
-        if (this.transactionList == null) {
-            this.transactionList = transactionList;
+    public void setTransactionGroupList(final List<TransactionGroup> transactionGroupList) {
+        if (this.transactionGroupList == null) {
+            this.transactionGroupList = transactionGroupList;
         } else {
-            this.transactionList.addAll(transactionList);
+            this.transactionGroupList.addAll(transactionGroupList);
         }
         notifyDataSetChanged();
     }

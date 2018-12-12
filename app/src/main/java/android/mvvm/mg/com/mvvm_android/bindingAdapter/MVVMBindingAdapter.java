@@ -9,7 +9,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.adapters.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.adapters.TransactionAdapter;
 import android.mvvm.mg.com.mvvm_android.glide.GlideApp;
-import android.mvvm.mg.com.mvvm_android.models.Transaction;
+import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,7 +18,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -106,17 +105,17 @@ public class MVVMBindingAdapter {
     }
 
     @BindingAdapter("initRecycleViewTransactionList")
-    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final Transaction transaction) {
-        if (transaction != null) {
-            if (transaction.getNextPage() == 0) {
+    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData) {
+        if (transactionData != null) {
+            if (transactionData.getNextPage() == 0) {
                 recyclerView.clearOnScrollListeners();
             }
 
             if (recyclerView.getAdapter() == null) {
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(new TransactionAdapter(transaction.getTransactionList()));
+                recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
             } else {
-                ((TransactionAdapter) recyclerView.getAdapter()).setTransactionList(transaction.getTransactionList());
+                ((TransactionAdapter) recyclerView.getAdapter()).setTransactionGroupList(transactionData.getTransactionList());
             }
         }
     }

@@ -2,18 +2,19 @@ package android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.databinding.FragmentPaymentHistoryBinding;
+import android.mvvm.mg.com.mvvm_android.databinding.FragmentTransactionsBinding;
 import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.TransactionViewModel;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.models.Transaction;
+import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMEndlessRecyclerViewScrollListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentPaymentHistoryBinding> {
+public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> {
 
     @Override
     protected int getLayout() {
@@ -26,7 +27,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
     }
 
     @Override
-    protected void initBinding(final FragmentPaymentHistoryBinding binding, final TransactionViewModel viewModel) {
+    protected void initBinding(final FragmentTransactionsBinding binding, final TransactionViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 
@@ -56,11 +57,11 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
         });
     }
 
-    private void subscribeTransactionLoad(final DMLiveDataBag<Transaction, RequestError> liveDataBag) {
-        handleRequest(liveDataBag, new IBaseRequestListener<Transaction>() {
+    private void subscribeTransactionLoad(final DMLiveDataBag<TransactionData, RequestError> liveDataBag) {
+        handleRequest(liveDataBag, new IBaseRequestListener<TransactionData>() {
             @Override
-            public void onSuccess(final Transaction transaction) {
-                mViewModel.onLoad(transaction);
+            public void onSuccess(final TransactionData transactionData) {
+                mViewModel.onLoad(transactionData);
             }
         });
     }

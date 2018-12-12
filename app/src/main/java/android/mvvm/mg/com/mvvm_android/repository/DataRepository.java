@@ -6,7 +6,7 @@ import android.mvvm.mg.com.mvvm_android.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.models.Configs;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.models.Transaction;
+import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.models.User;
 import android.mvvm.mg.com.mvvm_android.repository.api.IAPIHelper;
 import android.mvvm.mg.com.mvvm_android.repository.db.IDBHelper;
@@ -105,15 +105,15 @@ public class DataRepository implements IAPIHelper, IDBHelper, IPreferenceHelper 
     }
 
     @Override
-    public DMLiveDataBag<Transaction, RequestError> apiGetTransactionList(final Context context, final int page) {
+    public DMLiveDataBag<TransactionData, RequestError> apiGetTransactionList(final Context context, final int page) {
 
         final Map<String, Object> params = new HashMap<>();
         params.put(IRequestKeys.PAGE, page);
 
-        final DMBaseRequestConfig<Transaction, RequestError> config = new DMBaseRequestConfig<Transaction, RequestError>(context)
+        final DMBaseRequestConfig<TransactionData, RequestError> config = new DMBaseRequestConfig<TransactionData, RequestError>(context)
                 .setUrl(MVVMUtils.getTransactionUrl(page))
                 .setParams(params)
-                .setParserConfigs(new DMParserConfigs<>(Transaction.class, "data"))
+                .setParserConfigs(new DMParserConfigs<>(TransactionData.class, "data"))
                 .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
