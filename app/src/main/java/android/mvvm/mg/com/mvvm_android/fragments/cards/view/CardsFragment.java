@@ -7,6 +7,7 @@ import android.mvvm.mg.com.mvvm_android.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.cards.viewModel.CardsViewModel;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
 
     @Override
     public void subscribes(final LifecycleOwner owner) {
+        mViewModel.<String>getAction(Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
         mViewModel.loadData().observe(owner, cardList -> mViewModel.initRecycleViewData(cardList));
         handleRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
             @Override

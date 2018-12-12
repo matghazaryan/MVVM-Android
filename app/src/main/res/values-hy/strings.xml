@@ -38,6 +38,7 @@
     <string name="settings_title">Կարգավորումներ</string>
     <string name="settings_gallery_title">Պատկերասրահ</string>
     <string name="settings_language">Լեզուն</string>
+    <string name="settings_save_picture">Պահպանել նկարը</string>
 
     <!-- Language -->
     <string name="language_title">Լեզուն</string>

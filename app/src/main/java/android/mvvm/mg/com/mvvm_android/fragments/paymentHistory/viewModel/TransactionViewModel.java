@@ -12,7 +12,7 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class TransactionViewModel extends BaseViewModel {
 
-    public ObservableField<TransactionData> transactionData = new ObservableField<>();
+    public final ObservableField<TransactionData> transactionData = new ObservableField<>();
 
     public TransactionViewModel(final @NonNull Application application) {
         super(application);

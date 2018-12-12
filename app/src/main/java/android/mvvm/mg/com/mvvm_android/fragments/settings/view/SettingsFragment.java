@@ -9,11 +9,14 @@ import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.fragments.settings.viewModel.SettingsViewModel;
 import android.view.View;
-import androidx.navigation.Navigation;
+
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.activities.ErazCameraActivity;
 import com.eraz.camera.constants.IConstants;
+
 import org.json.JSONObject;
+
+import androidx.navigation.Navigation;
 
 public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
@@ -40,7 +43,7 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
 
     @Override
     public void subscribes(final LifecycleOwner owner) {
-        mViewModel.<String>getAction(Action.ON_NEW_IMAGE_PATH).observe(owner, this::subscribeOnFileUpload);
+        mViewModel.<String>getAction(Action.ON_UPLOAD_IMAGE).observe(owner, this::subscribeOnFileUpload);
     }
 
     @Override
@@ -61,11 +64,16 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_settingsFragment_to_languageFragment);
     }
 
+    @Override
+    public void onSavePictureClick(final View view) {
+        mViewModel.uploadImage();
+    }
+
     private void subscribeOnFileUpload(final String path) {
         handleRequest(mViewModel.sendImage(path), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
-                mViewModel.updateImagePath(path);
+                mViewModel.updateImagePath();
             }
 
             @Override

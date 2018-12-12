@@ -1,8 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.fragments.account.viewModel;
 
 import android.app.Application;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.fragments.account.view.AccountFragmentArgs;
@@ -17,8 +15,8 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class AccountViewModel extends BaseViewModel {
 
-    public ObservableField<String> email = new ObservableField<>();
-    public ObservableField<String> imagePath = new ObservableField<>();
+    public final ObservableField<String> email = new ObservableField<>();
+    public final ObservableField<String> imagePath = new ObservableField<>();
 
     public AccountViewModel(final @NonNull Application application) {
         super(application);

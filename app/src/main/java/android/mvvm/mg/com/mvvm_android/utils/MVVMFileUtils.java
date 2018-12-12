@@ -19,7 +19,7 @@ public class MVVMFileUtils {
     public static String onSavePicture(final byte[] data) {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String outputFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + "aaa" + ".jpeg";
+        final String outputFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + "image_" + timeStamp.toString() + ".jpeg";
 
         File pictureFile = new File(outputFileName);
         if (pictureFile.exists()) {

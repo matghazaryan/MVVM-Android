@@ -3,16 +3,17 @@ package android.mvvm.mg.com.mvvm_android.fragments.cards.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.fragments.base.BaseViewModelItemClick;
 import android.mvvm.mg.com.mvvm_android.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.List;
 
-public class CardsViewModel extends BaseViewModel {
+public class CardsViewModel extends BaseViewModelItemClick<Card> {
 
     public ObservableField<List<Card>> cardList = new ObservableField<>();
 
@@ -38,5 +39,10 @@ public class CardsViewModel extends BaseViewModel {
                     -> DataRepository.getInstance().dbInsertCardList(getApplication().getApplicationContext(), cardList, ids -> {
             }));
         }
+    }
+
+    @Override
+    public void onItemClick(final Card card) {
+        doAction(Action.SHOW_TOAST, card.getCardNumber());
     }
 }

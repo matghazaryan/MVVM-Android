@@ -8,6 +8,7 @@ import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.adapters.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.adapters.TransactionAdapter;
+import android.mvvm.mg.com.mvvm_android.fragments.base.IBaseOnItemClickListener;
 import android.mvvm.mg.com.mvvm_android.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
@@ -18,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -92,15 +94,15 @@ public class MVVMBindingAdapter {
         textView.setText(text);
     }
 
-    @BindingAdapter("initRecycleViewCardList")
-    public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList) {
+    @BindingAdapter(value = {"initRecycleViewCardList", "listener"})
+    public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList, final IBaseOnItemClickListener<Card> listener) {
         final Context context = recyclerView.getContext();
         if (recyclerView.getAdapter() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>()));
+            recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
         } else {
-            ((CardAdapter) recyclerView.getAdapter()).setCardList(cardList);
+            ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
         }
     }
 
@@ -115,7 +117,7 @@ public class MVVMBindingAdapter {
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
             } else {
-                ((TransactionAdapter) recyclerView.getAdapter()).setTransactionGroupList(transactionData.getTransactionList());
+                ((TransactionAdapter) recyclerView.getAdapter()).addList(transactionData.getTransactionList());
             }
         }
     }

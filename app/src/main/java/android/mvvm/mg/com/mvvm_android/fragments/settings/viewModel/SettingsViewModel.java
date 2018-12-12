@@ -13,6 +13,7 @@ import android.mvvm.mg.com.mvvm_android.utils.MVVMFileUtils;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.models.CapturePhoto;
@@ -20,9 +21,12 @@ import com.eraz.camera.models.MediaData;
 
 public class SettingsViewModel extends BaseViewModel {
 
-    public ObservableField<String> imagePath = new ObservableField<>();
-    public ObservableField<Integer> progress = new ObservableField<>();
-    public ObservableField<String> language = new ObservableField<>();
+    private String newPath;
+
+    public final ObservableField<String> imagePath = new ObservableField<>();
+    public final ObservableField<Integer> progress = new ObservableField<>();
+    public final ObservableField<String> language = new ObservableField<>();
+    public final ObservableField<Boolean> isSaveButtonVisible = new ObservableField<>();
 
     public SettingsViewModel(final @NonNull Application application) {
         super(application);
@@ -30,7 +34,7 @@ public class SettingsViewModel extends BaseViewModel {
 
     @Override
     public void initialize() {
-        imagePath.set(DataRepository.getInstance().prefGetProfilePhoto());
+        imagePath.set(newPath == null ? DataRepository.getInstance().prefGetProfilePhoto() : newPath);
         language.set(MVVMUtils.getLanguageName(getApplication().getApplicationContext(),
                 DataRepository.getInstance().prefGetLanguageCode()));
     }
@@ -64,7 +68,7 @@ public class SettingsViewModel extends BaseViewModel {
                 }
 
                 if (path != null) {
-                    doAction(Action.ON_NEW_IMAGE_PATH, path);
+                    initNewImage(path);
                 } else {
                     doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_file_not_found));
                 }
@@ -76,9 +80,19 @@ public class SettingsViewModel extends BaseViewModel {
         return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), path);
     }
 
-    public void updateImagePath(final String path) {
-        DataRepository.getInstance().prefSaveProfilePhoto(path);
-        imagePath.set(path);
+    public void updateImagePath() {
+        DataRepository.getInstance().prefSaveProfilePhoto(newPath);
+        isSaveButtonVisible.set(false);
+    }
+
+    public void uploadImage() {
+        doAction(Action.ON_UPLOAD_IMAGE, newPath);
+    }
+
+    private void initNewImage(final String newPath) {
+        this.newPath = newPath;
+        imagePath.set(newPath);
+        isSaveButtonVisible.set(true);
     }
 
     public void updateProgress(final FileProgress percent) {

@@ -7,45 +7,23 @@ import android.mvvm.mg.com.mvvm_android.databinding.TransactionItemBinding;
 import android.mvvm.mg.com.mvvm_android.models.Transaction;
 import android.mvvm.mg.com.mvvm_android.models.TransactionGroup;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
 
 import java.util.List;
 
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder> {
+public class TransactionAdapter extends BaseAdapter<TransactionGroup, TransactionItemBinding> {
 
-    private List<TransactionGroup> transactionGroupList;
-    private LayoutInflater inflater;
-
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private final TransactionItemBinding binding;
-
-        MyViewHolder(final TransactionItemBinding itemBinding) {
-            super(itemBinding.getRoot());
-            this.binding = itemBinding;
-        }
-    }
-
-    public TransactionAdapter(final List<TransactionGroup> transactionGroupList) {
-        this.transactionGroupList = transactionGroupList;
-    }
-
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(final @NonNull ViewGroup parent, final int viewType) {
-        if (inflater == null) {
-            inflater = LayoutInflater.from(parent.getContext());
-        }
-
-        final TransactionItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.transaction_item, parent, false);
-        return new MyViewHolder(binding);
+    public TransactionAdapter(final List<TransactionGroup> transactionGroups) {
+        super(transactionGroups);
     }
 
     @Override
-    public void onBindViewHolder(final @NonNull MyViewHolder holder, final int position) {
-        final TransactionGroup transactionGroup = transactionGroupList.get(position);
+    protected int getItemLayout() {
+        return R.layout.transaction_item;
+    }
+
+    @Override
+    protected View onBaseBindViewHolder(final @NonNull BaseViewHolder<TransactionItemBinding> holder, final int position, final TransactionGroup transactionGroup) {
         final List<Transaction> transactionList = transactionGroup.getTransactionList();
         holder.binding.llContainer.removeAllViews();
         if (transactionList != null) {
@@ -55,19 +33,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 holder.binding.llContainer.addView(binding.getRoot());
             }
         }
-    }
 
-    @Override
-    public int getItemCount() {
-        return transactionGroupList.size();
-    }
-
-    public void setTransactionGroupList(final List<TransactionGroup> transactionGroupList) {
-        if (this.transactionGroupList == null) {
-            this.transactionGroupList = transactionGroupList;
-        } else {
-            this.transactionGroupList.addAll(transactionGroupList);
-        }
-        notifyDataSetChanged();
+        return null;
     }
 }

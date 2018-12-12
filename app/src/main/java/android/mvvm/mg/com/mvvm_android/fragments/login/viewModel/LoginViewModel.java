@@ -22,13 +22,13 @@ import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 
 public class LoginViewModel extends BaseViewModel {
 
-    public MutableLiveData<String> email = new MutableLiveData<>();
-    public MutableLiveData<String> password = new MutableLiveData<>();
+    public final MutableLiveData<String> email = new MutableLiveData<>();
+    public final MutableLiveData<String> password = new MutableLiveData<>();
 
-    public ObservableField<Boolean> isButtonEnable = new ObservableField<>();
-    public ObservableField<Boolean> isCheckedRemember = new ObservableField<>();
-    public ObservableField<String> emailError = new ObservableField<>();
-    public ObservableField<String> passwordError = new ObservableField<>();
+    public final ObservableField<Boolean> isButtonEnable = new ObservableField<>();
+    public final ObservableField<Boolean> isCheckedRemember = new ObservableField<>();
+    public final ObservableField<String> emailError = new ObservableField<>();
+    public final ObservableField<String> passwordError = new ObservableField<>();
 
 
     public LoginViewModel(final @NonNull Application application) {

@@ -38,6 +38,7 @@
     <string name="settings_title">Настройки</string>
     <string name="settings_gallery_title">Галерея</string>
     <string name="settings_language">Язык</string>
+    <string name="settings_save_picture">Сохранить картинку</string>
 
     <!-- Language -->
     <string name="language_title">Язык</string>
