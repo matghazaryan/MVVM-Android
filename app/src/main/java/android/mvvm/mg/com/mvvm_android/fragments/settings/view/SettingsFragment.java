@@ -1,6 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.fragments.settings.view;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
@@ -42,11 +41,6 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
     }
 
     @Override
-    public void subscribes(final LifecycleOwner owner) {
-        mViewModel.<String>getAction(Action.ON_UPLOAD_IMAGE).observe(owner, this::subscribeOnFileUpload);
-    }
-
-    @Override
     public void onImageClick(final View view) {
         final Intent intent = new Intent(mActivity, ErazCameraActivity.class);
 
@@ -66,11 +60,11 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
 
     @Override
     public void onSavePictureClick(final View view) {
-        mViewModel.uploadImage();
+        subscribeOnFileUpload();
     }
 
-    private void subscribeOnFileUpload(final String path) {
-        handleRequest(mViewModel.sendImage(path), new IBaseRequestListener<String>() {
+    private void subscribeOnFileUpload() {
+        handleRequest(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
                 mViewModel.updateImagePath();

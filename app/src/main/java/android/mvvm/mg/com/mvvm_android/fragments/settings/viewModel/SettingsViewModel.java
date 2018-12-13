@@ -68,7 +68,7 @@ public class SettingsViewModel extends BaseViewModel {
                 }
 
                 if (path != null) {
-                    initNewImage(path);
+                    displayNewImage(path);
                 } else {
                     doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_file_not_found));
                 }
@@ -76,20 +76,17 @@ public class SettingsViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<String, RequestError> sendImage(final String path) {
-        return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), path);
+    public DMLiveDataBag<String, RequestError> uploadImage() {
+        return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), newPath);
     }
 
     public void updateImagePath() {
         DataRepository.getInstance().prefSaveProfilePhoto(newPath);
         isSaveButtonVisible.set(false);
+        newPath = null;
     }
 
-    public void uploadImage() {
-        doAction(Action.ON_UPLOAD_IMAGE, newPath);
-    }
-
-    private void initNewImage(final String newPath) {
+    private void displayNewImage(final String newPath) {
         this.newPath = newPath;
         imagePath.set(newPath);
         isSaveButtonVisible.set(true);

@@ -38,7 +38,6 @@ public interface IConstants {
         OPEN_ERROR_DIALOG,
         OPEN_LOGIN_FRAGMENT,
         DO_LOGIN,
-        ON_UPLOAD_IMAGE,
         SHOW_NO_INTERNET,
         SHOW_TOAST
     }
