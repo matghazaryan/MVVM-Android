@@ -21,7 +21,7 @@ import dmutils.com.dmutils.general.DMDimensionConverter;
 
 public class MVVMUtils {
 
-    public static void showInvalidData(Map<String, ObservableField<String>> mapUiFields, final Map<String, String> errorMap) {
+    public static void showInvalidData(final Map<String, ObservableField<String>> mapUiFields, final Map<String, String> errorMap) {
         if (mapUiFields != null && errorMap != null) {
             for (final Map.Entry<String, String> entry : errorMap.entrySet()) {
                 final ObservableField<String> field = mapUiFields.get(entry.getKey());

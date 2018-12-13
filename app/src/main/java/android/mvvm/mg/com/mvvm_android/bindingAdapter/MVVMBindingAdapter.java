@@ -13,6 +13,7 @@ import android.mvvm.mg.com.mvvm_android.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.db.models.card.Card;
 import android.mvvm.mg.com.mvvm_android.utils.MVVMUtils;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -125,5 +126,10 @@ public class MVVMBindingAdapter {
     @BindingAdapter(value = {"color1", "color2"})
     public static void makeBackground(final View view, final String color1, final String color2) {
         view.setBackground(MVVMUtils.changeDrawableColor(view.getContext(), color1, color2));
+    }
+
+    @BindingAdapter("android:checked")
+    public static void setChecked(final AppCompatCheckBox checkBox, final Boolean isChecked) {
+        checkBox.setChecked(isChecked != null ? isChecked : false);
     }
 }
