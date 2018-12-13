@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_small_margin"
                     android:onClick="@{(view) -> handler.onPaymentHistoryClick(view)}"
-                    android:text="@string/account_button_payment_history" />
+                    android:text="@string/account_button_transactions" />
 
                 <Button
                     android:layout_width="@dimen/layout_width_1"

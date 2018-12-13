@@ -21,7 +21,7 @@
     <!-- Account -->
     <string name="account_title">Учетная запись</string>
     <string name="account_button_cards">Карты</string>
-    <string name="account_button_payment_history">История платежей</string>
+    <string name="account_button_transactions">История платежей</string>
     <string name="account_button_settings">Настройки</string>
     <string name="account_button_logout">Выйти</string>
 
@@ -32,7 +32,7 @@
     <string name="cards_secondary">Вторичная карта</string>
 
     <!-- PaymentHistory -->
-    <string name="payment_history_title">История платежей</string>
+    <string name="transactions_title">История платежей</string>
 
     <!-- Settings -->
     <string name="settings_title">Настройки</string>

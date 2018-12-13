@@ -11,15 +11,15 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public interface IAPIHelper {
 
-    DMLiveDataBag<Configs, RequestError> apiGetConfigs(Context context);
+    DMLiveDataBag<Configs, RequestError> getConfigs(Context context);
 
-    DMLiveDataBag<User, RequestError> apiLogin(Context context, User user);
+    DMLiveDataBag<User, RequestError> login(Context context, User user);
 
-    DMLiveDataBag<String, RequestError> apiLogout(final Context contex);
+    DMLiveDataBag<String, RequestError> logout(final Context context);
 
-    DMLiveDataBag<Card, RequestError> apiGetCardListFromNetwork(Context context);
+    DMLiveDataBag<Card, RequestError> getCardListFromNetwork(Context context);
 
-    DMLiveDataBag<String, RequestError> apiSendImage(Context context, String path);
+    DMLiveDataBag<String, RequestError> sendImage(Context context, String path);
 
-    DMLiveDataBag<TransactionData, RequestError> apiGetTransactionList(final Context context, final int page);
+    DMLiveDataBag<TransactionData, RequestError> getTransactionList(final Context context, final int page);
 }

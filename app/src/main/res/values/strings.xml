@@ -21,7 +21,7 @@
     <!-- Account -->
     <string name="account_title">Account</string>
     <string name="account_button_cards">Cards</string>
-    <string name="account_button_payment_history">Payment History</string>
+    <string name="account_button_transactions">Transactions</string>
     <string name="account_button_settings">Settings</string>
     <string name="account_button_logout">Logout</string>
 
@@ -31,8 +31,8 @@
     <string name="cards_default">Default card</string>
     <string name="cards_secondary">Secondary card</string>
 
-    <!-- PaymentHistory -->
-    <string name="payment_history_title">Payment History</string>
+    <!-- Transactions -->
+    <string name="transactions_title">Transactions</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

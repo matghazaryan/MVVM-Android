@@ -8,7 +8,7 @@ public abstract class BaseViewModelItemClick<O> extends BaseViewModel implements
 
     public final ObservableField<IBaseOnItemClickListener<O>> itemClickListener = new ObservableField<>();
 
-    public BaseViewModelItemClick(final @NonNull Application application) {
+    protected BaseViewModelItemClick(final @NonNull Application application) {
         super(application);
         itemClickListener.set(this);
     }

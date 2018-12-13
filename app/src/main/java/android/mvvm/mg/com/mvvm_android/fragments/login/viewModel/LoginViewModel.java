@@ -34,7 +34,7 @@ public class LoginViewModel extends BaseViewModel {
     public LoginViewModel(final @NonNull Application application) {
         super(application);
 
-        isCheckedRemember.set(DataRepository.getInstance().prefIsCheckedRemember());
+        isCheckedRemember.set(DataRepository.preference().isCheckedRemember());
 
         email.setValue("david@helix.am");
         password.setValue("123456789");
@@ -44,7 +44,7 @@ public class LoginViewModel extends BaseViewModel {
     public void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
         uiTextFieldsTags.put(IRequestKeys.EMAIL, emailError);
         uiTextFieldsTags.put(IRequestKeys.PASSWORD, passwordError);
-        uiTextFieldsTags.put(IRequestKeys.SIGNIN, emailError);
+        uiTextFieldsTags.put(IRequestKeys.SIGN_IN, emailError);
     }
 
     private void checkValidation() {
@@ -66,13 +66,13 @@ public class LoginViewModel extends BaseViewModel {
 
     public DMLiveDataBag<User, RequestError> login() {
         final Boolean isChecked = isCheckedRemember.get();
-        DataRepository.getInstance().prefSetRemember(isChecked != null ? isChecked : false);
-        return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
+        DataRepository.preference().setRemember(isChecked != null ? isChecked : false);
+        return DataRepository.api().login(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
     }
 
     public void onSuccessLogin(final User user) {
         if (user != null) {
-            DataRepository.getInstance().prefSaveToken(user.getToken());
+            DataRepository.preference().saveToken(user.getToken());
             final Boolean isChecked = isCheckedRemember.get();
             if (isChecked != null && isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 doAction(Action.OPEN_BIOMETRIC, user);

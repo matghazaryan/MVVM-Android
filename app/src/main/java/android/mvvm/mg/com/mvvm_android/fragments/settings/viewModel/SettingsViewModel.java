@@ -34,9 +34,9 @@ public class SettingsViewModel extends BaseViewModel {
 
     @Override
     public void initialize() {
-        imagePath.set(newPath == null ? DataRepository.getInstance().prefGetProfilePhoto() : newPath);
+        imagePath.set(newPath == null ? DataRepository.preference().getProfilePhoto() : newPath);
         language.set(MVVMUtils.getLanguageName(getApplication().getApplicationContext(),
-                DataRepository.getInstance().prefGetLanguageCode()));
+                DataRepository.preference().getLanguageCode()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class SettingsViewModel extends BaseViewModel {
         }
     }
 
-    public void setImage(final Bundle bundle) {
+    private void setImage(final Bundle bundle) {
         if (bundle != null) {
             final MediaData mediaData = bundle.getParcelable(com.eraz.camera.constants.IConstants.BundleKey.MEDIA_DATA);
             if (mediaData != null) {
@@ -77,11 +77,11 @@ public class SettingsViewModel extends BaseViewModel {
     }
 
     public DMLiveDataBag<String, RequestError> uploadImage() {
-        return DataRepository.getInstance().apiSendImage(getApplication().getApplicationContext(), newPath);
+        return DataRepository.api().sendImage(getApplication().getApplicationContext(), newPath);
     }
 
     public void updateImagePath() {
-        DataRepository.getInstance().prefSaveProfilePhoto(newPath);
+        DataRepository.preference().saveProfilePhoto(newPath);
         isSaveButtonVisible.set(false);
         newPath = null;
     }

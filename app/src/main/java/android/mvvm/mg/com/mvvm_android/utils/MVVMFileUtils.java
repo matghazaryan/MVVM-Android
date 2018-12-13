@@ -1,5 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -16,10 +17,11 @@ import java.util.Date;
 
 public class MVVMFileUtils {
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static String onSavePicture(final byte[] data) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String outputFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + "image_" + timeStamp.toString() + ".jpeg";
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        final String outputFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + "image_" + timeStamp + ".jpeg";
 
         File pictureFile = new File(outputFileName);
         if (pictureFile.exists()) {
@@ -58,7 +60,7 @@ public class MVVMFileUtils {
         return pictureFile.getAbsolutePath();
     }
 
-    public static Bitmap rotate(Bitmap bitmap, int degree) {
+    private static Bitmap rotate(Bitmap bitmap, int degree) {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
 

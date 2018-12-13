@@ -1,6 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.repository.repositoryManager.api;
 
-import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.mvvm.mg.com.mvvm_android.R;
@@ -8,14 +7,18 @@ import android.mvvm.mg.com.mvvm_android.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.dialog.MVVMAlertDialog;
 import android.mvvm.mg.com.mvvm_android.repository.repositoryManager.preference.MVVMPrefUtils;
+
 import com.dm.dmnetworking.api_client.base.DMBaseRequest;
 import com.dm.dmnetworking.api_client.base.DMBaseTokenHandler;
 import com.dm.dmnetworking.api_client.listeners.DMIStatusHandleListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import alertdialog.dm.com.dmalertdialog.configs.DMBaseDialogConfigs;
 
-public class MVVMNetworking extends DMBaseRequest {
+
+public final class MVVMNetworking extends DMBaseRequest {
 
     private static MVVMNetworking ourInstance;
 
@@ -63,16 +66,7 @@ public class MVVMNetworking extends DMBaseRequest {
 
     @Override
     protected String getFullUrl(final Context context, final String url) {
-        final String fullUrl = BuildConfig.BASE_URL + "/" + url;
-//        + "/" + "?deviceType=android&applicationId="
-//                + DMAppInfo.getDeviceID(context) + "&applicationVersion=" + DMAppInfo.getAppVersionCode(context) +
-//                "&deviceScale=" + DMAppInfo.getDeviceDensity(context);
-//
-//        if (MVVMPrefUtils.isUserLoggedIn()) {
-//            return fullUrl + "&jwt=" + MVVMPrefUtils.prefGetToken();
-//        }
-
-        return fullUrl;
+        return BuildConfig.BASE_URL + "/" + url;
     }
 
     @Override

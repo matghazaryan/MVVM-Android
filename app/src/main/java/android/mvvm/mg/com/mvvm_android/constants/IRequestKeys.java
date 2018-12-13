@@ -4,7 +4,7 @@ public interface IRequestKeys {
 
     String EMAIL = "email";
     String PASSWORD = "password";
-    String SIGNIN = "signin";
+    String SIGN_IN = "sign_in";
     String IMAGE = "image";
     String PAGE = "page";
 }

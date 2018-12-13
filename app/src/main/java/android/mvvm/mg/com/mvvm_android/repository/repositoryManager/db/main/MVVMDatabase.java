@@ -7,7 +7,7 @@ public class MVVMDatabase {
 
     private static MVVMDatabase instance;
 
-    private MVVMRoomDatabase db;
+    private final MVVMRoomDatabase db;
 
     private MVVMDatabase(final Context context) {
         db = Room.databaseBuilder(context,

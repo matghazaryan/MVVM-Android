@@ -33,7 +33,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
 
     @Override
     public int getTitleRes() {
-        return R.string.payment_history_title;
+        return R.string.transactions_title;
     }
 
     @Override

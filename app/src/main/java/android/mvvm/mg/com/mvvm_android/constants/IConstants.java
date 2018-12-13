@@ -9,7 +9,7 @@ public interface IConstants {
         String TOKEN = "token";
         String LANGUAGE_CODE = "language_code";
         String IS_USER_LOGGED_IN = "isUserLoggedIn";
-        String IS_CHECKED_REMEMBER = "prefIsCheckedRemember";
+        String IS_CHECKED_REMEMBER = "isCheckedRemember";
         String PROFILE_PHOTO = "profile_photo";
 
     }

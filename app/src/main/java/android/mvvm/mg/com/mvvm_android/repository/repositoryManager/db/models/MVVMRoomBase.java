@@ -17,6 +17,6 @@ public class MVVMRoomBase {
     }
 
     @Ignore
-    public MVVMRoomBase() {
+    protected MVVMRoomBase() {
     }
 }

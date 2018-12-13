@@ -26,7 +26,7 @@ public class SplashViewModel extends BaseViewModel {
 
     public void saveConfigs(final JSONObject jsonObject) {
         if (jsonObject != null) {
-            DataRepository.getInstance().prefSaveConfigs(jsonObject.toString());
+            DataRepository.preference().saveConfigs(jsonObject.toString());
             toNextPage();
         } else {
             doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
@@ -34,11 +34,11 @@ public class SplashViewModel extends BaseViewModel {
     }
 
     public DMLiveDataBag<Configs, RequestError> getConfigs() {
-        return DataRepository.getInstance().apiGetConfigs(getApplication().getApplicationContext());
+        return DataRepository.api().getConfigs(getApplication().getApplicationContext());
     }
 
     private void toNextPage() {
-        if (DataRepository.getInstance().prefIsCheckedRemember() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (DataRepository.preference().isCheckedRemember() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             doAction(Action.OPEN_BIOMETRIC, null);
         } else {
             new Handler().postDelayed(() -> doAction(Action.OPEN_LOGIN_FRAGMENT, null), IConstants.Delay.SPLASH);
@@ -47,7 +47,7 @@ public class SplashViewModel extends BaseViewModel {
 
     public void onLoginSuccess(final User user) {
         if (user != null) {
-            DataRepository.getInstance().prefSaveToken(user.getToken());
+            DataRepository.preference().saveToken(user.getToken());
             new Handler().postDelayed(() -> doAction(Action.OPEN_ACCOUNT_FRAGMENT, user), IConstants.Delay.SPLASH);
         } else {
             doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
@@ -55,7 +55,7 @@ public class SplashViewModel extends BaseViewModel {
     }
 
     public DMLiveDataBag<User, RequestError> login(final User user) {
-        return DataRepository.getInstance().apiLogin(getApplication().getApplicationContext(), user);
+        return DataRepository.api().login(getApplication().getApplicationContext(), user);
     }
 
     public void handleBiometricErrors(final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {

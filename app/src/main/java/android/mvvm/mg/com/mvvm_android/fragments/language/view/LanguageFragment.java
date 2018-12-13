@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLanguageBinding> {
 
-    private List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
+    private final List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
 
     @Override
     protected int getLayout() {

@@ -19,7 +19,7 @@ public class TransactionViewModel extends BaseViewModel {
     }
 
     public DMLiveDataBag<TransactionData, RequestError> onLoadTransactions(final int page) {
-        return DataRepository.getInstance().apiGetTransactionList(getApplication().getApplicationContext(), page);
+        return DataRepository.api().getTransactionList(getApplication().getApplicationContext(), page);
     }
 
     public void onLoad(final TransactionData transactionData) {

@@ -15,18 +15,18 @@ import java.util.List;
 
 public class CardsViewModel extends BaseViewModelItemClick<Card> {
 
-    public ObservableField<List<Card>> cardList = new ObservableField<>();
+    public final ObservableField<List<Card>> cardList = new ObservableField<>();
 
     public CardsViewModel(final @NonNull Application application) {
         super(application);
     }
 
     public LiveData<List<Card>> loadData() {
-        return DataRepository.getInstance().dbGetCardList(getApplication().getApplicationContext());
+        return DataRepository.database().getCardList(getApplication().getApplicationContext());
     }
 
     public DMLiveDataBag<Card, RequestError> getCards() {
-        return DataRepository.getInstance().apiGetCardListFromNetwork(getApplication().getApplicationContext());
+        return DataRepository.api().getCardListFromNetwork(getApplication().getApplicationContext());
     }
 
     public void initRecycleViewData(final List<Card> cardList) {
@@ -35,8 +35,8 @@ public class CardsViewModel extends BaseViewModelItemClick<Card> {
 
     public void insertAll(final List<Card> cardList) {
         if (cardList != null) {
-            DataRepository.getInstance().dbClearCardTable(getApplication().getApplicationContext(), ()
-                    -> DataRepository.getInstance().dbInsertCardList(getApplication().getApplicationContext(), cardList, ids -> {
+            DataRepository.database().clearCardTable(getApplication().getApplicationContext(), ()
+                    -> DataRepository.database().insertCardList(getApplication().getApplicationContext(), cardList, ids -> {
             }));
         }
     }

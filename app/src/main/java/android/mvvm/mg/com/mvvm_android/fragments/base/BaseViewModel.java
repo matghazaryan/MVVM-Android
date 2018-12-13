@@ -32,7 +32,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
-    public BaseViewModel(final @NonNull Application application) {
+    protected BaseViewModel(final @NonNull Application application) {
         super(application);
 
         initUiTextFieldsTags(uiTextFieldsTags);

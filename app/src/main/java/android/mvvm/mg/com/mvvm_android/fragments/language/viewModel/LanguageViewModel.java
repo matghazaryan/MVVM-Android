@@ -12,10 +12,10 @@ public class LanguageViewModel extends BaseViewModel {
     }
 
     public void saveLanguageCode(final String code) {
-        DataRepository.getInstance().prefLanguageCode(code);
+        DataRepository.preference().languageCode(code);
     }
 
     public String getLanguageCode() {
-        return DataRepository.getInstance().prefGetLanguageCode();
+        return DataRepository.preference().getLanguageCode();
     }
 }

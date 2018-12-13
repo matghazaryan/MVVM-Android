@@ -44,16 +44,16 @@ public class AccountViewModel extends BaseViewModel {
     }
 
     private void showProfilePhoto() {
-        imagePath.set(DataRepository.getInstance().prefGetProfilePhoto());
+        imagePath.set(DataRepository.preference().getProfilePhoto());
     }
 
     public DMLiveDataBag<String, RequestError> doLogout() {
-        return DataRepository.getInstance().apiLogout(getApplication().getApplicationContext());
+        return DataRepository.api().logout(getApplication().getApplicationContext());
     }
 
     public void logout() {
-        DataRepository.getInstance().prefSaveToken(null);
-        DataRepository.getInstance().prefSetRemember(false);
+        DataRepository.preference().saveToken(null);
+        DataRepository.preference().setRemember(false);
         doAction(Action.OPEN_LOGIN_FRAGMENT, null);
     }
 }

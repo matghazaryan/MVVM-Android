@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface IDBHelper {
 
-    LiveData<List<Card>> dbGetCardList(final Context context);
+    LiveData<List<Card>> getCardList(final Context context);
 
-    void dbInsertCardList(final Context context, final List<Card> cardList, final IOnInsertAllListener listener);
+    void insertCardList(final Context context, final List<Card> cardList, final IOnInsertAllListener listener);
 
-    void dbClearCardTable(final Context context, final IOnClearTableListener listener);
+    void clearCardTable(final Context context, final IOnClearTableListener listener);
 }
