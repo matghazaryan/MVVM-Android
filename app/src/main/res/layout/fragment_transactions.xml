@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.viewModel.TransactionViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel" />
 
     </data>
 

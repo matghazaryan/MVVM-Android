@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.account.viewModel.AccountViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel" />
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.account.handler.IAccountHandler" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.account.handler.IAccountHandler" />
 
     </data>
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.splash.view.SplashFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.splash.view.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.login.view.LoginFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.login.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.account.view.AccountFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.account.view.AccountFragment"
         android:label="account_fragment"
         tools:layout="@layout/fragment_account">
         <argument
@@ -86,17 +86,17 @@
     </fragment>
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.cards.view.CardsFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view.CardsFragment"
         android:label="fragment_cards"
         tools:layout="@layout/fragment_cards" />
     <fragment
         android:id="@+id/paymentHistoryFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.paymentHistory.view.TransactionsFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.view.TransactionsFragment"
         android:label="fragment_payment_history"
         tools:layout="@layout/fragment_transactions" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.settings.view.SettingsFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.settings.view.SettingsFragment"
         android:label="fragment_file_upload"
         tools:layout="@layout/fragment_settings">
         <action
@@ -109,7 +109,7 @@
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
-        android:name="android.mvvm.mg.com.mvvm_android.fragments.language.view.LanguageFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.language.view.LanguageFragment"
         android:label="language_layout"
         tools:layout="@layout/language_layout" />
 </navigation>

@@ -5,7 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
-import android.view.WindowManager;
+
 import biometric.dm.com.dmbiometric.R;
 import biometric.dm.com.dmbiometric.interfaces.IBIOBiometric;
 

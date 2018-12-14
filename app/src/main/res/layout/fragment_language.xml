@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.language.viewModel.LanguageViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.LanguageViewModel" />
 
     </data>
 

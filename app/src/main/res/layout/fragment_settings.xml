@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.settings.viewModel.SettingsViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel" />
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.settings.handler.ISettingsHandler" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsHandler" />
 
     </data>
 

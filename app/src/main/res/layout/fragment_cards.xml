@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.cards.viewModel.CardsViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel" />
 
     </data>
 

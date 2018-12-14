@@ -6,15 +6,15 @@
 
         <import type="android.view.View" />
 
-        <import type="android.mvvm.mg.com.mvvm_android.utils.MVVMSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.fragments.login.viewModel.LoginViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.login.viewModel.LoginViewModel" />
 
         <variable
             name="handler"
-            type="android.mvvm.mg.com.mvvm_android.fragments.login.handler.ILoginHandler" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.login.handler.ILoginHandler" />
 
     </data>
 

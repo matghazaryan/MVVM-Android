@@ -1,10 +1,8 @@
 package biometric.dm.com.dmbiometric.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresPermission;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 
 @SuppressLint({"MissingPermission"})
