@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
+
+        <variable
+            name="viewModel"
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.paymentHistory.view.TransactionsFragment">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/activity_small_margin"
+            app:initRecycleViewTransactionList="@{viewModel.transactionData}"
+            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
+            tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
+
+        <include
+            layout="@layout/progress_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
+
+    </RelativeLayout>
+
+</layout>

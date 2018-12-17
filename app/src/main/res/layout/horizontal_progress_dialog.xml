@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
+
+        <variable
+            name="isVisible"
+            type="boolean" />
+
+        <variable
+            name="progress"
+            type="int" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_30"
+        app:setVisibleView="@{isVisible}">
+
+        <ProgressBar
+            android:id="@+id/pb_horizontal"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/activity_large_margin"
+            android:layout_marginEnd="@dimen/activity_large_margin"
+            android:max="100"
+            android:progress="@{safeUnbox(progress)}" />
+
+    </RelativeLayout>
+
+</layout>
+
+
+
+
+

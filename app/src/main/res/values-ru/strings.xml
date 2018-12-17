@@ -1,0 +1,55 @@
+<resources>
+
+    <string name="app_name">MVVM-Android</string>
+
+    <!--Dialog-->
+    <string name="dialog_no_internet_connection">Нет соединения с интернетом</string>
+
+    <!-- Error -->
+    <string name="error_field_required">Обязательное поле</string>
+    <string name="error_invalid_email">Неверный адрес электронной почты</string>
+    <string name="error_general_error">Что-то пошло не так. Попробуй еще раз!!!</string>
+    <string name="error_file_not_found">Файл не найден</string>
+
+    <!--Login-->
+    <string name="login_title">Логин</string>
+    <string name="login_button_login">Логин</string>
+    <string name="login_placeholder_email">Эл. адрес</string>
+    <string name="login_placeholder_password">Пароль</string>
+    <string name="login_checkbox_remember">Запомнить логин и пароль</string>
+
+    <!-- Account -->
+    <string name="account_title">Учетная запись</string>
+    <string name="account_button_cards">Карты</string>
+    <string name="account_button_transactions">История платежей</string>
+    <string name="account_button_settings">Настройки</string>
+    <string name="account_button_logout">Выйти</string>
+
+    <!-- Cards -->
+    <string name="cards_title">Карты</string>
+    <string name="cards_valid">Действительный:</string>
+    <string name="cards_default">Карта по умолчанию</string>
+    <string name="cards_secondary">Вторичная карта</string>
+
+    <!-- PaymentHistory -->
+    <string name="transactions_title">История платежей</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_gallery_title">Галерея</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_save_picture">Сохранить картинку</string>
+
+    <!-- Language -->
+    <string name="language_title">Язык</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
+
+    <!-- Biometric -->
+    <string name="biometric_title">Заглавие</string>
+    <string name="biometric_sub_title">Подзаголовок</string>
+    <string name="biometric_description">Описание</string>
+    <string name="biometric_cancel">Отменить</string>
+
+</resources>

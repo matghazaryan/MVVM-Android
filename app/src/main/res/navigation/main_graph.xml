@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.splash.view.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2"
+            app:popUpTo="@+id/main_graph"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_splashFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2"
+            app:popUpTo="@+id/main_graph"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.login.view.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.account.view.AccountFragment"
+        android:label="account_fragment"
+        tools:layout="@layout/fragment_account">
+        <argument
+            android:name="name"
+            android:defaultValue="John"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/left_to_right_1"
+            app:exitAnim="@anim/left_to_right_2"
+            app:popEnterAnim="@anim/right_to_left_1"
+            app:popExitAnim="@anim/right_to_left_2"
+            app:popUpTo="@+id/accountFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2" />
+        <action
+            android:id="@+id/action_accountFragment_to_paymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2" />
+        <action
+            android:id="@+id/action_accountFragment_to_fileUploadFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardsFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view.CardsFragment"
+        android:label="fragment_cards"
+        tools:layout="@layout/fragment_cards" />
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.view.TransactionsFragment"
+        android:label="fragment_payment_history"
+        tools:layout="@layout/fragment_transactions" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.settings.view.SettingsFragment"
+        android:label="fragment_file_upload"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/right_to_left_1"
+            app:exitAnim="@anim/right_to_left_2"
+            app:popEnterAnim="@anim/left_to_right_1"
+            app:popExitAnim="@anim/left_to_right_2" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="android.mvvm.mg.com.mvvm_android.ui.fragments.language.view.LanguageFragment"
+        android:label="language_layout"
+        tools:layout="@layout/language_layout" />
+</navigation>

@@ -1,3 +1,56 @@
 <resources>
+
     <string name="app_name">MVVM-Android</string>
+
+    <!--Dialog-->
+    <string name="dialog_no_internet_connection">No internet connection</string>
+
+    <!-- Error -->
+    <string name="error_field_required">Field required</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_general_error">Something went wrong, Try again later</string>
+    <string name="error_file_not_found">File not found</string>
+
+    <!--Login-->
+    <string name="login_title">Login</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_placeholder_email">Email</string>
+    <string name="login_placeholder_password">Password</string>
+    <string name="login_checkbox_remember">Remember login and password</string>
+
+    <!-- Account -->
+    <string name="account_title">Account</string>
+    <string name="account_button_cards">Cards</string>
+    <string name="account_button_transactions">Transactions</string>
+    <string name="account_button_settings">Settings</string>
+    <string name="account_button_logout">Logout</string>
+
+    <!-- Cards -->
+    <string name="cards_title">Cards</string>
+    <string name="cards_valid">Valid:</string>
+    <string name="cards_default">Default card</string>
+    <string name="cards_secondary">Secondary card</string>
+
+    <!-- Transactions -->
+    <string name="transactions_title">Transactions</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_gallery_title">Gallery</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_save_picture">Save picture</string>
+
+
+    <!-- Language -->
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
+
+    <!-- Biometric -->
+    <string name="biometric_title">Title</string>
+    <string name="biometric_sub_title">Subtitle</string>
+    <string name="biometric_description">Description</string>
+    <string name="biometric_cancel">Cancle</string>
+
 </resources>

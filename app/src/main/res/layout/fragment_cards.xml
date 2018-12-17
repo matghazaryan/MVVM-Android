@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.cards.view.CardsFragment">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/activity_small_margin"
+            app:initRecycleViewCardList="@{viewModel.cardList}"
+            app:listener="@{viewModel.itemClickListener}"
+            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
+
+        <include
+            layout="@layout/progress_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
+
+    </RelativeLayout>
+
+</layout>
