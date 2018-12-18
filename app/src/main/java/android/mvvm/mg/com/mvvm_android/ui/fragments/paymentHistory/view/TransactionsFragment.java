@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
@@ -62,7 +61,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
     }
 
     private void subscribeTransactionLoad(final DMLiveDataBag<TransactionData, RequestError> liveDataBag) {
-        handleRequest(liveDataBag, new IBaseRequestListener<TransactionData>() {
+        makeRequest(liveDataBag, new IBaseRequestListener<TransactionData>() {
             @Override
             public void onSuccess(final TransactionData transactionData) {
                 mViewModel.onLoad(transactionData);
