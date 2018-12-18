@@ -32,6 +32,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
+
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
 
@@ -44,7 +45,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void hideProgress() {
-        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 250);
+        new Handler().postDelayed(() -> {
+            isProgressDialogVisible.set(false);
+            initEmptyView();
+        }, 250);
         new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 280);
     }
 
@@ -93,6 +97,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     void noInternetConnection() {
         hideProgress();
-        doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
+        doAction(Action.SHOW_NO_INTERNET, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
     }
 }

@@ -3,6 +3,7 @@ package android.mvvm.mg.com.mvvm_android.core.bindingAdapter;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
@@ -12,6 +13,7 @@ import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.transaction.TransactionAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseEmptyViewListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnItemClickListener;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,6 +28,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dmutils.com.dmutils.animation.DMTranslateViewAnimation;
 
 public class MVVMBindingAdapter {
 
@@ -70,6 +74,16 @@ public class MVVMBindingAdapter {
         }
     }
 
+    @BindingAdapter("setEmptyViewVisibleAnim")
+    public static void setEmptyViewVisibleAnim(final View view, final boolean isVisible) {
+        view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        if (isVisible) {
+            DMTranslateViewAnimation.upView((Activity) view.getContext(), view, 500, () -> {
+
+            });
+        }
+    }
+
     @BindingAdapter("setImageUrl")
     public static void setImageUrl(final ImageView imageView, final String path) {
         GlideApp.with(imageView.getContext())
@@ -102,13 +116,15 @@ public class MVVMBindingAdapter {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
+            listener.onVisible(cardList == null || cardList.size() == 0);
         } else {
             ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
+            listener.onVisible(cardList == null || cardList.size() == 0);
         }
     }
 
-    @BindingAdapter("initRecycleViewTransactionList")
-    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData) {
+    @BindingAdapter(value = {"initRecycleViewTransactionList", "listener"})
+    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData, final IBaseEmptyViewListener listener) {
         if (transactionData != null) {
             if (transactionData.getNextPage() == 0) {
                 recyclerView.clearOnScrollListeners();
@@ -117,9 +133,12 @@ public class MVVMBindingAdapter {
             if (recyclerView.getAdapter() == null) {
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
+                listener.onVisible(transactionData.getTransactionList() == null || transactionData.getTransactionList().size() == 0);
             } else {
                 ((TransactionAdapter) recyclerView.getAdapter()).addList(transactionData.getTransactionList());
             }
+        } else {
+            listener.onVisible(true);
         }
     }
 

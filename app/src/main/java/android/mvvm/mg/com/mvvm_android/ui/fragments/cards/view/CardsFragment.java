@@ -2,16 +2,18 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBinding> {
+public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBinding> implements IEmptyViewHandler {
 
     @Override
     protected int getLayout() {
@@ -26,6 +28,7 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
     @Override
     protected void initBinding(final FragmentCardsBinding binding, final CardsViewModel viewModel) {
         binding.setViewModel(viewModel);
+        binding.setHandler(this);
     }
 
     @Override
@@ -43,5 +46,10 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
                 mViewModel.insertAll(cardList);
             }
         });
+    }
+
+    @Override
+    public void onClick(final View view) {
+        Toast.makeText(getContext(), "Card Empty view click", Toast.LENGTH_SHORT).show();
     }
 }
