@@ -8,10 +8,8 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountVi
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
 import android.view.View;
-
-import org.json.JSONObject;
-
 import androidx.navigation.Navigation;
+import org.json.JSONObject;
 
 public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
 
@@ -63,7 +61,7 @@ public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAcco
     @Override
     public void onLogoutClick(final View view) {
         mViewModel.logout();
-        handleRequest(mViewModel.doLogout(), new IBaseRequestListener<String>() {
+        makeRequest(mViewModel.doLogout(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
             }

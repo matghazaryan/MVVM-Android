@@ -13,15 +13,12 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.splash.viewModel.SplashView
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-
-import org.json.JSONObject;
-
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import org.json.JSONObject;
 
 public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplashBinding> {
 
@@ -69,7 +66,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
     }
 
     private void getConfigs() {
-        handleRequest(mViewModel.getConfigs(), new IBaseRequestListener<Configs>() {
+        makeRequest(mViewModel.getConfigs(), new IBaseRequestListener<Configs>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
                 mViewModel.saveConfigs(jsonObject);
@@ -78,7 +75,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
     }
 
     private void doLogin(final DMLiveDataBag<User, RequestError> loginLiveDataBug) {
-        handleRequest(loginLiveDataBug, new IBaseRequestListener<User>() {
+        makeRequest(loginLiveDataBug, new IBaseRequestListener<User>() {
             @Override
             public void onSuccess(final User user) {
                 mViewModel.onLoginSuccess(user);

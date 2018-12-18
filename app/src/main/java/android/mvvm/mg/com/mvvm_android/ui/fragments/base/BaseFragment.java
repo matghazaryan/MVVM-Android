@@ -7,7 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.ui.activities.base.BaseActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +16,6 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
@@ -90,7 +88,7 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
 
     private void baseSubscribes() {
         mViewModel.<String>getAction(Action.OPEN_ERROR_DIALOG).observe(getViewLifecycleOwner(), s -> MVVMDialog.showErrorDialog(mActivity, s));
-//        mViewModel.<String>getAction(Action.SHOW_NO_INTERNET).observe(getViewLifecycleOwner(), s -> MVVMDialog.showNoInternetDialog(mActivity));
+        mViewModel.<String>getAction(Action.SHOW_NO_INTERNET).observe(getViewLifecycleOwner(), s -> MVVMDialog.showNoInternetDialog(mActivity));
     }
 
     protected void setTitle(final String title) {
@@ -115,28 +113,48 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         }
     }
 
-    protected <O> void handleRequest(final DMLiveDataBag<O, RequestError> liveDataBug, final IBaseRequestListener<O> listener) {
+    protected <O, ErrorRequest extends IBaseError> void makeRequest(final DMLiveDataBag<O, ErrorRequest> liveDataBug, final IBaseRequestListener<O> listener) {
         mViewModel.showProgress();
 
         liveDataBug.getSuccessT().observe(getViewLifecycleOwner(), oSuccessT -> {
             mViewModel.hideProgress();
             listener.onSuccess(Objects.requireNonNull(oSuccessT).getT());
         });
-
         liveDataBug.getSuccessListT().observe(getViewLifecycleOwner(), oSuccessListT -> {
             mViewModel.hideProgress();
             listener.onSuccessList(Objects.requireNonNull(oSuccessListT).getList());
         });
-        liveDataBug.getSuccessJsonResponse().observe(getViewLifecycleOwner(), jsonObject -> {
+        liveDataBug.getSuccessJsonResponse().observe(getViewLifecycleOwner(), successJSONObject -> {
             mViewModel.hideProgress();
-            listener.onSuccessJsonObject(jsonObject);
+            listener.onSuccessJsonObject(successJSONObject);
+        });
+        liveDataBug.getSuccessResponse().observe(getViewLifecycleOwner(), successResponse -> {
+            mViewModel.hideProgress();
+            listener.onSuccessResponse(successResponse);
         });
         liveDataBug.getFileProgress().observe(getViewLifecycleOwner(), fileProgress -> {
             mViewModel.hideProgress();
             listener.onSuccessFileProgress(fileProgress);
         });
-
-        liveDataBug.getErrorE().observe(getViewLifecycleOwner(), error -> mViewModel.handleErrors(error));
-        liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> mViewModel.noInternetConnection());
+        liveDataBug.getSuccessFile().observe(getViewLifecycleOwner(), file -> {
+            mViewModel.hideProgress();
+            listener.onSuccessFile(file);
+        });
+        liveDataBug.getErrorJsonResponse().observe(getViewLifecycleOwner(), errorJSONObject -> {
+            mViewModel.hideProgress();
+            listener.onErrorJsonResponse(errorJSONObject);
+        });
+        liveDataBug.getErrorResponse().observe(getViewLifecycleOwner(), errorResponse -> {
+            mViewModel.hideProgress();
+            listener.onErrorResponse(errorResponse);
+        });
+        liveDataBug.getErrorE().observe(getViewLifecycleOwner(), error -> {
+            mViewModel.hideProgress();
+            mViewModel.handleErrors(error);
+        });
+        liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> {
+            mViewModel.hideProgress();
+            mViewModel.noInternetConnection();
+        });
     }
 }

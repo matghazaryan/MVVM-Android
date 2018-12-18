@@ -40,7 +40,7 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
     public void subscribes(final LifecycleOwner owner) {
         mViewModel.<String>getAction(Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
         mViewModel.loadData().observe(owner, cardList -> mViewModel.initRecycleViewData(cardList));
-        handleRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
+        makeRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
             @Override
             public void onSuccessList(final List<Card> cardList) {
                 mViewModel.insertAll(cardList);

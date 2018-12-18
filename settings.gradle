@@ -1,1 +1,1 @@
-include ':app', ':DMCamera', ':dmbiometric'
+include ':app', ':DMCamera'

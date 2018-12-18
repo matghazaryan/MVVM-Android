@@ -3,7 +3,6 @@ package android.mvvm.mg.com.mvvm_android.core.utils;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,24 +12,11 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-
-import java.util.Locale;
-import java.util.Map;
-
 import dmutils.com.dmutils.general.DMDimensionConverter;
 
-public class MVVMUtils {
+import java.util.Locale;
 
-    public static void showInvalidData(final Map<String, ObservableField<String>> mapUiFields, final Map<String, String> errorMap) {
-        if (mapUiFields != null && errorMap != null) {
-            for (final Map.Entry<String, String> entry : errorMap.entrySet()) {
-                final ObservableField<String> field = mapUiFields.get(entry.getKey());
-                if (field != null) {
-                    field.set(entry.getValue());
-                }
-            }
-        }
-    }
+public class MVVMUtils {
 
     public static LayerDrawable changeDrawableColor(final Context context, final String startColor, final String endColor) {
 

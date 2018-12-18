@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.github.pmbfish40:DMNetworking:1.1.5'
     implementation 'com.github.pmbfish40:DMAlertDialog:1.0.1'
     implementation 'com.github.pmbfish40:DMUtils:1.0.0'
+    //For biometric
+    implementation 'com.github.pmbfish40:DMBiometric:1.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     //For live data
     implementation 'android.arch.lifecycle:extensions:1.1.1'
@@ -60,7 +62,5 @@ dependencies {
     implementation project(':DMCamera')
     //For card view
     implementation 'com.android.support:cardview-v7:28.0.0'
-    //For biometric
-    implementation project(':dmbiometric')
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
 }

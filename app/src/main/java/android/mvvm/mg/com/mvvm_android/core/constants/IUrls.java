@@ -6,8 +6,8 @@ public interface IUrls {
         String CONFIGS = "5bebd4123300006000fbc05c";
         String REFRESH_TOKEN = "refresh_token";
 
-        String LOGIN = "5bebd5603300005900fbc067";
-//        String LOGIN = "5beea62f2e00004615eee9af";          //Error
+        //        String LOGIN = "5bebd5603300005900fbc067";
+        String LOGIN = "5beea62f2e00004615eee9af";          //Error
 
         String LOGOUT = "5bebd5bd3300009500fbc06b";
         String CARDS = "5bec1fe1330000cd25fbc282";

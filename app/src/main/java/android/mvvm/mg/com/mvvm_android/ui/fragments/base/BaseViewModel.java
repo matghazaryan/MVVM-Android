@@ -6,11 +6,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
 
 import java.util.HashMap;
@@ -32,12 +29,14 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
-
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
-
-        initUiTextFieldsTags(uiTextFieldsTags);
         new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 280);
+    }
+
+    @Override
+    public void initialize() {
+        initUiTextFieldsTags(uiTextFieldsTags);
     }
 
     void showProgress() {
@@ -76,14 +75,13 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
-    void handleErrors(final ErrorE<RequestError> errorE) {
-        hideProgress();
+    <ErrorRequest extends IBaseError> void handleErrors(final ErrorE<ErrorRequest> errorE) {
         if (errorE != null) {
-            final RequestError error = errorE.getE();
+            final ErrorRequest error = errorE.getE();
             if (error != null) {
                 final HashMap<String, String> errors = error.getErrors();
                 if (errors != null && errors.size() > 0) {
-                    MVVMUtils.showInvalidData(uiTextFieldsTags, error.getErrors());
+                    showInvalidData(uiTextFieldsTags, error.getErrors());
                 } else if (error.getMessage() != null) {
                     doAction(Action.OPEN_ERROR_DIALOG, error.getMessage());
                 } else {
@@ -95,8 +93,18 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
+    private static void showInvalidData(final Map<String, ObservableField<String>> mapUiFields, final Map<String, String> errorMap) {
+        if (mapUiFields != null && errorMap != null) {
+            for (final Map.Entry<String, String> entry : errorMap.entrySet()) {
+                final ObservableField<String> field = mapUiFields.get(entry.getKey());
+                if (field != null) {
+                    field.set(entry.getValue());
+                }
+            }
+        }
+    }
+
     void noInternetConnection() {
-        hideProgress();
         doAction(Action.SHOW_NO_INTERNET, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
     }
 }

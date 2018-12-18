@@ -8,14 +8,11 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
 import android.view.View;
-
+import androidx.navigation.Navigation;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.eraz.camera.activities.ErazCameraActivity;
 import com.eraz.camera.constants.IConstants;
-
 import org.json.JSONObject;
-
-import androidx.navigation.Navigation;
 
 public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
@@ -64,7 +61,7 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
     }
 
     private void subscribeOnFileUpload() {
-        handleRequest(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
+        makeRequest(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
                 mViewModel.updateImagePath();

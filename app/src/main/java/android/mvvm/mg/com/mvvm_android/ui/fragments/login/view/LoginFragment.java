@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
-
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
@@ -54,7 +53,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
 
     @Override
     public void onClickLogin(final View view) {
-        handleRequest(mViewModel.login(), new IBaseRequestListener<User>() {
+        makeRequest(mViewModel.login(), new IBaseRequestListener<User>() {
             @Override
             public void onSuccess(final User user) {
                 mViewModel.onSuccessLogin(user);
