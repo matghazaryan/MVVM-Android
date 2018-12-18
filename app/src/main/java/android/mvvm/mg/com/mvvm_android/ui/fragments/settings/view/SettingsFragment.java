@@ -9,9 +9,9 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsH
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
 import android.view.View;
 import androidx.navigation.Navigation;
+import com.dm.camera.activities.DMCameraActivity;
+import com.dm.camera.constants.IDMCameraConstants;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
-import com.eraz.camera.activities.ErazCameraActivity;
-import com.eraz.camera.constants.IConstants;
 import org.json.JSONObject;
 
 public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
@@ -39,13 +39,13 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
 
     @Override
     public void onImageClick(final View view) {
-        final Intent intent = new Intent(mActivity, ErazCameraActivity.class);
+        final Intent intent = new Intent(mActivity, DMCameraActivity.class);
 
-        intent.putExtra(IConstants.BundleKey.CAMERA_TYPE, IConstants.Camera.PHOTO_ONLY);
-        intent.putExtra(IConstants.BundleKey.IS_MULTIPLY_GALLERY_IMAGE, false);
-        intent.putExtra(IConstants.BundleKey.PICKER_TYPE, IConstants.Picker.DEFAULT);
-        intent.putExtra(IConstants.BundleKey.ACTIONBAR_TITLE, getResources().getString(R.string.settings_gallery_title));
-        intent.putExtra(IConstants.BundleKey.MAX_COUNT, 1);
+        intent.putExtra(IDMCameraConstants.BundleKey.CAMERA_TYPE, IDMCameraConstants.Camera.PHOTO_ONLY);
+        intent.putExtra(IDMCameraConstants.BundleKey.IS_MULTIPLY_GALLERY_IMAGE, false);
+        intent.putExtra(IDMCameraConstants.BundleKey.PICKER_TYPE, IDMCameraConstants.Picker.DEFAULT);
+        intent.putExtra(IDMCameraConstants.BundleKey.ACTIONBAR_TITLE, getResources().getString(R.string.settings_gallery_title));
+        intent.putExtra(IDMCameraConstants.BundleKey.MAX_COUNT, 1);
 
         startActivityForResult(intent, RequestCode.CAMERA);
     }

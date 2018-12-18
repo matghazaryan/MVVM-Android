@@ -14,10 +14,11 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.dm.camera.constants.IDMCameraConstants;
+import com.dm.camera.models.CapturePhoto;
+import com.dm.camera.models.MediaData;
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
-import com.eraz.camera.models.CapturePhoto;
-import com.eraz.camera.models.MediaData;
 
 public class SettingsViewModel extends BaseViewModel {
 
@@ -57,7 +58,7 @@ public class SettingsViewModel extends BaseViewModel {
 
     private void setImage(final Bundle bundle) {
         if (bundle != null) {
-            final MediaData mediaData = bundle.getParcelable(com.eraz.camera.constants.IConstants.BundleKey.MEDIA_DATA);
+            final MediaData mediaData = bundle.getParcelable(IDMCameraConstants.BundleKey.MEDIA_DATA);
             if (mediaData != null) {
                 String path = null;
                 final CapturePhoto capturePhoto = mediaData.getCapturePhoto();
