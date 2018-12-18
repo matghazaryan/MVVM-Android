@@ -62,7 +62,6 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void subscribes(final LifecycleOwner owner) {
-        mViewModel.<User>getAction(Action.DO_LOGIN).observe(owner, user -> doLogin(mViewModel.login(user)));
         mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
         mViewModel.<User>getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, user -> openLogin());
         mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, t -> showBiometric());
