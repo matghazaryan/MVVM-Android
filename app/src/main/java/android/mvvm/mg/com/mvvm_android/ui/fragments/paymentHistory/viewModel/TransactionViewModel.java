@@ -2,17 +2,19 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.core.models.Empty;
 import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModelEmptyView;
 import android.support.annotation.NonNull;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class TransactionViewModel extends BaseViewModel {
+public class TransactionViewModel extends BaseViewModelEmptyView<Empty> {
 
     public final ObservableField<TransactionData> transactionData = new ObservableField<>();
+
 
     public TransactionViewModel(final @NonNull Application application) {
         super(application);
@@ -26,5 +28,10 @@ public class TransactionViewModel extends BaseViewModel {
         if (transactionData != null) {
             this.transactionData.set(transactionData);
         }
+    }
+
+    @Override
+    public Empty getEmptyObject() {
+        return new Empty("Transaction empty view");
     }
 }

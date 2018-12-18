@@ -2,6 +2,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMEndlessRecyclerViewScrollListener;
@@ -11,10 +12,12 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> {
+public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
 
     @Override
     protected int getLayout() {
@@ -29,6 +32,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
     @Override
     protected void initBinding(final FragmentTransactionsBinding binding, final TransactionViewModel viewModel) {
         binding.setViewModel(viewModel);
+        binding.setHandler(this);
     }
 
     @Override
@@ -64,5 +68,10 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
                 mViewModel.onLoad(transactionData);
             }
         });
+    }
+
+    @Override
+    public void onClick(final View view) {
+        Toast.makeText(getContext(), "Transaction Empty view click", Toast.LENGTH_SHORT).show();
     }
 }

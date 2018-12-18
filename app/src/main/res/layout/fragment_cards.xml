@@ -9,6 +9,14 @@
             name="viewModel"
             type="android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel" />
 
+        <variable
+            name="handler"
+            type="android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler" />
+
+        <variable
+            name="empty"
+            type="android.mvvm.mg.com.mvvm_android.core.models.Empty" />
+
     </data>
 
     <RelativeLayout
@@ -24,6 +32,14 @@
             app:initRecycleViewCardList="@{viewModel.cardList}"
             app:listener="@{viewModel.itemClickListener}"
             app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
+
+        <include
+            layout="@layout/empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:empty="@{viewModel.empty}"
+            app:handler="@{handler}"
+            app:isVisible="@{safeUnbox(viewModel.isEmptyViewVisible)}" />
 
         <include
             layout="@layout/progress_dialog"

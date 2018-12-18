@@ -8,6 +8,14 @@
         <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
 
         <variable
+            name="handler"
+            type="android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler" />
+
+        <variable
+            name="empty"
+            type="android.mvvm.mg.com.mvvm_android.core.models.Empty" />
+
+        <variable
             name="viewModel"
             type="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel" />
 
@@ -25,8 +33,17 @@
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewTransactionList="@{viewModel.transactionData}"
+            app:listener="@{viewModel.emptyViewListener}"
             app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
             tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
+
+        <include
+            layout="@layout/empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:empty="@{viewModel.empty}"
+            app:handler="@{handler}"
+            app:isVisible="@{safeUnbox(viewModel.isEmptyViewVisible)}" />
 
         <include
             layout="@layout/progress_dialog"

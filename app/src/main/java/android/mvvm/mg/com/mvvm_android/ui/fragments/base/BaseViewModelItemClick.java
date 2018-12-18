@@ -4,7 +4,7 @@ import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
-public abstract class BaseViewModelItemClick<O> extends BaseViewModel implements IBaseOnItemClickListener<O> {
+public abstract class BaseViewModelItemClick<O, Empty> extends BaseViewModelEmptyView<Empty> implements IBaseOnItemClickListener<O> {
 
     public final ObservableField<IBaseOnItemClickListener<O>> itemClickListener = new ObservableField<>();
 
