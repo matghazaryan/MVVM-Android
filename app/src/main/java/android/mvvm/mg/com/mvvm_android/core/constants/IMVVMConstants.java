@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.core.constants;
 
-public interface IConstants {
+public interface IMVVMConstants {
 
     String TAG = "MVVM";
 

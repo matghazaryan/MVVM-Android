@@ -23,7 +23,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
     private DMBiometricManager<User> mBiometricManager;
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_login;
     }
 
@@ -33,7 +33,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
     }
 
     @Override
-    protected void initBinding(final FragmentLoginBinding binding, final LoginViewModel viewModel) {
+    protected void setBinding(final FragmentLoginBinding binding, final LoginViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
     }
@@ -53,7 +53,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
 
     @Override
     public void onClickLogin(final View view) {
-        makeRequest(mViewModel.login(), new IBaseRequestListener<User>() {
+        handleRequestFor(mViewModel.apiLogin(), new IBaseRequestListener<User>() {
             @Override
             public void onSuccess(final User user) {
                 mViewModel.onSuccessLogin(user);
@@ -62,7 +62,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
     }
 
     @Override
-    public void subscribes(final LifecycleOwner owner) {
+    public void subscribers(final LifecycleOwner owner) {
         mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
         mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, this::showBiometric);
     }

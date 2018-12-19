@@ -3,12 +3,12 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.os.Bundle;
 
 import java.util.Map;
 
-public interface IBaseModelView extends IConstants {
+public interface IBaseModelView extends IMVVMConstants {
 
     default void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
     }

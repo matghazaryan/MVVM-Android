@@ -1,15 +1,15 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.view;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMEndlessRecyclerViewScrollListener;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentTransactionsBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,8 +18,10 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
 
+    private int PAGE_NUMBER = 0;
+
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_transactions;
     }
 
@@ -29,7 +31,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
     }
 
     @Override
-    protected void initBinding(final FragmentTransactionsBinding binding, final TransactionViewModel viewModel) {
+    protected void setBinding(final FragmentTransactionsBinding binding, final TransactionViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
     }
@@ -41,27 +43,27 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
 
     @Override
     public void initialize() {
-        initLoadMore();
+        setupLoadMore();
     }
 
     @Override
-    public void subscribes(final LifecycleOwner owner) {
-        subscribeTransactionLoad(mViewModel.onLoadTransactions(0));
+    public void subscribers(final LifecycleOwner owner) {
+        subscribeToTransactionLoad(mViewModel.apiTransactions(PAGE_NUMBER));
     }
 
-    private void initLoadMore() {
+    private void setupLoadMore() {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         mBinding.rvTransaction.setLayoutManager(linearLayoutManager);
         mBinding.rvTransaction.addOnScrollListener(new MVVMEndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(final int page, final int totalItemsCount, final RecyclerView view) {
-                subscribeTransactionLoad(mViewModel.onLoadTransactions(page));
+                subscribeToTransactionLoad(mViewModel.apiTransactions(page));
             }
         });
     }
 
-    private void subscribeTransactionLoad(final DMLiveDataBag<TransactionData, RequestError> liveDataBag) {
-        makeRequest(liveDataBag, new IBaseRequestListener<TransactionData>() {
+    private void subscribeToTransactionLoad(final DMLiveDataBag<TransactionData, RequestError> apiTransactionLiveDataBag) {
+        handleRequestFor(apiTransactionLiveDataBag, new IBaseRequestListener<TransactionData>() {
             @Override
             public void onSuccess(final TransactionData transactionData) {
                 mViewModel.onLoad(transactionData);
@@ -70,7 +72,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
     }
 
     @Override
-    public void onClick(final View view) {
-        Toast.makeText(getContext(), "Transaction Empty view click", Toast.LENGTH_SHORT).show();
+    public void onEmptyViewClick(final View view) {
+        Toast.makeText(getContext(), getString(R.string.on_empty_click), Toast.LENGTH_SHORT).show();
     }
 }

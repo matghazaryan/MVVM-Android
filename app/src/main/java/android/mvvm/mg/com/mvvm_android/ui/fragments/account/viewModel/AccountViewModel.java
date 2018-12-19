@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.view.AccountFragmentArgs;
@@ -30,7 +30,7 @@ public class AccountViewModel extends BaseViewModel {
 
     private void initData(final Bundle bundle) {
         if (bundle != null) {
-            final User user = bundle.getParcelable(IConstants.BundleKey.USER);
+            final User user = bundle.getParcelable(IMVVMConstants.BundleKey.USER);
             final String text;
             if (user != null) {
                 text = user.getEmail();

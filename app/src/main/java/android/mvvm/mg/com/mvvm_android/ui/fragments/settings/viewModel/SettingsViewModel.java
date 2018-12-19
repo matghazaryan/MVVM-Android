@@ -5,8 +5,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMFileUtils;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
@@ -49,7 +49,7 @@ public class SettingsViewModel extends BaseViewModel {
             }
 
             switch (requestCode) {
-                case IConstants.RequestCode.CAMERA:
+                case IMVVMConstants.RequestCode.CAMERA:
                     setImage(bundle);
                     break;
             }

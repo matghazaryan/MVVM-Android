@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.ui.adapters.transaction;
 
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.models.Transaction;
-import android.mvvm.mg.com.mvvm_android.core.models.TransactionGroup;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.Transaction;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionGroup;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionInnerItemBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionItemBinding;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.base.BaseAdapter;

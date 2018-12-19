@@ -1,10 +1,10 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.core.models.Empty;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
+import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModelEmptyView;
 import android.support.annotation.NonNull;
@@ -20,7 +20,7 @@ public class TransactionViewModel extends BaseViewModelEmptyView<Empty> {
         super(application);
     }
 
-    public DMLiveDataBag<TransactionData, RequestError> onLoadTransactions(final int page) {
+    public DMLiveDataBag<TransactionData, RequestError> apiTransactions(final int page) {
         return DataRepository.api().getTransactionList(getApplication().getApplicationContext(), page);
     }
 

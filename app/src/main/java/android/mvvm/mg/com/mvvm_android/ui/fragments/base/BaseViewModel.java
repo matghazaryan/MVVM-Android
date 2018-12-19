@@ -29,6 +29,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
+
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
         new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 280);
@@ -46,7 +47,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     void hideProgress() {
         new Handler().postDelayed(() -> {
             isProgressDialogVisible.set(false);
-            initEmptyView();
         }, 250);
         new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 280);
     }

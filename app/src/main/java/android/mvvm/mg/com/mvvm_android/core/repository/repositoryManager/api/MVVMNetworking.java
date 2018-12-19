@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.api;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMAlertDialog;
 import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.preference.MVVMPrefUtils;
@@ -71,7 +71,7 @@ public final class MVVMNetworking extends DMBaseRequest {
 
     @Override
     public String getTagForLogger() {
-        return IConstants.TAG;
+        return IMVVMConstants.TAG;
     }
 
     @Override

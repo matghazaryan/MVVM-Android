@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.core.repository.api;
 
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 

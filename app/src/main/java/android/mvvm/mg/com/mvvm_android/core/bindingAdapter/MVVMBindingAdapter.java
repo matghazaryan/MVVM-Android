@@ -8,7 +8,7 @@ import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.glide.GlideApp;
-import android.mvvm.mg.com.mvvm_android.core.models.TransactionData;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
@@ -19,6 +19,7 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -111,34 +112,56 @@ public class MVVMBindingAdapter {
 
     @BindingAdapter(value = {"initRecycleViewCardList", "listener"})
     public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList, final IBaseOnItemClickListener<Card> listener) {
-        final Context context = recyclerView.getContext();
-        if (recyclerView.getAdapter() == null) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
-            listener.onVisible(cardList == null || cardList.size() == 0);
+        boolean isFirstTime = false;
+        if (recyclerView.getTag(R.string.key1) == null) {
+            isFirstTime = true;
+        }
+        recyclerView.setTag(R.string.key1,"");
+
+        if (!isFirstTime) {
+            final Context context = recyclerView.getContext();
+            if (recyclerView.getAdapter() == null) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
+                listener.onVisible(cardList == null || cardList.size() == 0);
+                Log.d("bbbb",(cardList == null || cardList.size() == 0) + "");
+            } else {
+                ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
+                listener.onVisible(cardList == null || cardList.size() == 0);
+                Log.d("cccc",(cardList == null || cardList.size() == 0) + "" + cardList.size() );
+            }
         } else {
-            ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
-            listener.onVisible(cardList == null || cardList.size() == 0);
+            listener.onVisible(false);
         }
     }
 
     @BindingAdapter(value = {"initRecycleViewTransactionList", "listener"})
     public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData, final IBaseEmptyViewListener listener) {
-        if (transactionData != null) {
-            if (transactionData.getNextPage() == 0) {
-                recyclerView.clearOnScrollListeners();
-            }
+        boolean isFirstTime = false;
+        if (recyclerView.getTag(R.string.key1) == null) {
+            isFirstTime = true;
+        }
+        recyclerView.setTag(R.string.key1,"");
 
-            if (recyclerView.getAdapter() == null) {
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
-                listener.onVisible(transactionData.getTransactionList() == null || transactionData.getTransactionList().size() == 0);
+        if (!isFirstTime) {
+            if (transactionData != null) {
+                if (transactionData.getNextPage() == 0) {
+                    recyclerView.clearOnScrollListeners();
+                }
+
+                if (recyclerView.getAdapter() == null) {
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
+                    listener.onVisible(transactionData.getTransactionList() == null || transactionData.getTransactionList().size() == 0);
+                } else {
+                    ((TransactionAdapter) recyclerView.getAdapter()).addList(transactionData.getTransactionList());
+                }
             } else {
-                ((TransactionAdapter) recyclerView.getAdapter()).addList(transactionData.getTransactionList());
+                listener.onVisible(true);
             }
         } else {
-            listener.onVisible(true);
+            listener.onVisible(false);
         }
     }
 

@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSplashBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
@@ -25,7 +25,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
     private DMBiometricManager<User> mBiometricManager;
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_splash;
     }
 
@@ -35,7 +35,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
     }
 
     @Override
-    protected void initBinding(final FragmentSplashBinding binding, final SplashViewModel viewModel) {
+    protected void setBinding(final FragmentSplashBinding binding, final SplashViewModel viewModel) {
     }
 
     @Override
@@ -58,23 +58,23 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void subscribes(final LifecycleOwner owner) {
+    public void subscribers(final LifecycleOwner owner) {
         mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
         mViewModel.<User>getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, user -> openLogin());
         mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, t -> showBiometric());
     }
 
     private void getConfigs() {
-        makeRequest(mViewModel.getConfigs(), new IBaseRequestListener<Configs>() {
+        handleRequestFor(mViewModel.apiConfigs(), new IBaseRequestListener<Configs>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
-                mViewModel.saveConfigs(jsonObject);
+                mViewModel.prefSaveConfigs(jsonObject);
             }
         });
     }
 
     private void doLogin(final DMLiveDataBag<User, RequestError> loginLiveDataBug) {
-        makeRequest(loginLiveDataBug, new IBaseRequestListener<User>() {
+        handleRequestFor(loginLiveDataBug, new IBaseRequestListener<User>() {
             @Override
             public void onSuccess(final User user) {
                 mViewModel.onLoginSuccess(user);
@@ -97,7 +97,7 @@ public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplash
         mBiometricManager = MVVMDialog.showBiometricForDecrypt(mActivity, new IDMBiometricListener<User>() {
             @Override
             public void onSuccessDecrypted(final User user) {
-                doLogin(mViewModel.login(user));
+                doLogin(mViewModel.apiLogin(user));
             }
 
             @Override

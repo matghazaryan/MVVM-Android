@@ -8,7 +8,7 @@ public interface IBaseMethod {
     default void initialize() {
     }
 
-    default void subscribes(final LifecycleOwner owner) {
+    default void subscribers(final LifecycleOwner owner) {
     }
 
     default int getTitleRes() {

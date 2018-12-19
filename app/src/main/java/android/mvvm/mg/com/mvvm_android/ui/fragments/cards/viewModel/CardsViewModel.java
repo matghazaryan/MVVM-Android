@@ -3,8 +3,8 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.core.models.Empty;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModelItemClick;
@@ -22,15 +22,15 @@ public class CardsViewModel extends BaseViewModelItemClick<Card, Empty> {
         super(application);
     }
 
-    public LiveData<List<Card>> loadData() {
+    public LiveData<List<Card>> dbCards() {
         return DataRepository.database().getCardList(getApplication().getApplicationContext());
     }
 
-    public DMLiveDataBag<Card, RequestError> getCards() {
+    public DMLiveDataBag<Card, RequestError> apiCards() {
         return DataRepository.api().getCardListFromNetwork(getApplication().getApplicationContext());
     }
 
-    public void initRecycleViewData(final List<Card> cardList) {
+    public void setRecycleViewData(final List<Card> cardList) {
         this.cardList.set(cardList);
     }
 

@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.constants.IRequestKeys;
-import android.mvvm.mg.com.mvvm_android.core.models.RequestError;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMValidator;
@@ -33,6 +33,11 @@ public class LoginViewModel extends BaseViewModel {
 
     public LoginViewModel(final @NonNull Application application) {
         super(application);
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
 
         isCheckedRemember.set(DataRepository.preference().isCheckedRemember());
 
@@ -64,7 +69,7 @@ public class LoginViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<User, RequestError> login() {
+    public DMLiveDataBag<User, RequestError> apiLogin() {
         final Boolean isChecked = isCheckedRemember.get();
         DataRepository.preference().setRemember(isChecked != null ? isChecked : false);
         return DataRepository.api().login(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));

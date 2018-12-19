@@ -5,7 +5,7 @@
 
         <variable
             name="transaction"
-            type="android.mvvm.mg.com.mvvm_android.core.models.Transaction" />
+            type="android.mvvm.mg.com.mvvm_android.core.models.transaction.Transaction" />
 
     </data>
 

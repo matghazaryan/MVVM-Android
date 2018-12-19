@@ -52,4 +52,6 @@
     <string name="biometric_description">Նկարագրությունը</string>
     <string name="biometric_cancel">Չեղարկել</string>
 
+    <string name="on_empty_click">on empty click</string>
+
 </resources>

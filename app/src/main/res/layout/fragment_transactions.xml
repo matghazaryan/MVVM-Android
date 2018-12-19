@@ -13,11 +13,11 @@
 
         <variable
             name="empty"
-            type="android.mvvm.mg.com.mvvm_android.core.models.Empty" />
+            type="android.mvvm.mg.com.mvvm_android.core.models.empty.Empty" />
 
         <variable
             name="viewModel"
-            type="android.mvvm.mg.com.mvvm_android.ui.fragments.paymentHistory.viewModel.TransactionViewModel" />
+            type="android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel" />
 
     </data>
 

@@ -17,7 +17,7 @@ import org.json.JSONObject;
 public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_settings;
     }
 
@@ -27,7 +27,7 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
     }
 
     @Override
-    protected void initBinding(final FragmentSettingsBinding binding, final SettingsViewModel viewModel) {
+    protected void setBinding(final FragmentSettingsBinding binding, final SettingsViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
     }
@@ -61,7 +61,7 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
     }
 
     private void subscribeOnFileUpload() {
-        makeRequest(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
+        handleRequestFor(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
                 mViewModel.updateImagePath();

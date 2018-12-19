@@ -52,4 +52,6 @@
     <string name="biometric_description">Описание</string>
     <string name="biometric_cancel">Отменить</string>
 
+    <string name="on_empty_click">on empty click</string>
+
 </resources>

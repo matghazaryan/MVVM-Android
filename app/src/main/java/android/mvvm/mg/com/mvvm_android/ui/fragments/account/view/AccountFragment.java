@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_account;
     }
 
@@ -24,7 +24,7 @@ public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAcco
     }
 
     @Override
-    protected void initBinding(final FragmentAccountBinding binding, final AccountViewModel viewModel) {
+    protected void setBinding(final FragmentAccountBinding binding, final AccountViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
     }
@@ -35,7 +35,7 @@ public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAcco
     }
 
     @Override
-    public void subscribes(final LifecycleOwner owner) {
+    public void subscribers(final LifecycleOwner owner) {
         mViewModel.getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, o -> openLoginPage());
     }
 
@@ -61,7 +61,7 @@ public class AccountFragment extends BaseFragment<AccountViewModel, FragmentAcco
     @Override
     public void onLogoutClick(final View view) {
         mViewModel.logout();
-        makeRequest(mViewModel.doLogout(), new IBaseRequestListener<String>() {
+        handleRequestFor(mViewModel.doLogout(), new IBaseRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
             }

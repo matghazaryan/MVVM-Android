@@ -16,7 +16,7 @@ public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLa
     private final List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_language;
     }
 
@@ -26,7 +26,7 @@ public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLa
     }
 
     @Override
-    protected void initBinding(final FragmentLanguageBinding binding, final LanguageViewModel viewModel) {
+    protected void setBinding(final FragmentLanguageBinding binding, final LanguageViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 

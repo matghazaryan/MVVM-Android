@@ -4,5 +4,5 @@ import android.view.View;
 
 public interface IEmptyViewHandler {
 
-    void onClick(final View view);
+    void onEmptyViewClick(final View view);
 }

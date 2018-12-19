@@ -53,4 +53,8 @@
     <string name="biometric_description">Description</string>
     <string name="biometric_cancel">Cancle</string>
 
+    <string name="on_empty_click">On empty click</string>
+
+    <string name="key1" translatable="false">barev</string>
+
 </resources>

@@ -3,6 +3,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
 import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implements IBaseEmptyViewListener, IBaseEmptyMethods<Empty> {
 
@@ -20,16 +21,15 @@ public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implem
 
     @Override
     public void onVisible(final boolean isVisible) {
-        final Boolean isProgressDialogVisible = this.isProgressDialogVisible.get();
-        if (isProgressDialogVisible != null && isProgressDialogVisible) {
-            this.isVisible = isVisible;
-        } else {
-            isEmptyViewVisible.set(isVisible);
-        }
-    }
+        Log.d("aaaaaa",isVisible + "");
 
-    @Override
-    public void initEmptyView() {
-        isEmptyViewVisible.set(isVisible);
+//        final Boolean isProgressDialogVisible = this.isProgressDialogVisible.get();
+//        if (isProgressDialogVisible != null && isProgressDialogVisible) {
+////            this.isVisible = isVisible;
+//        } else {
+//            isEmptyViewVisible.set(isVisible);
+//        }
+
+            isEmptyViewVisible.set(isVisible);
     }
 }

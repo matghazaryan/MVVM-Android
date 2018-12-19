@@ -11,7 +11,7 @@
 
         <variable
             name="empty"
-            type="android.mvvm.mg.com.mvvm_android.core.models.Empty" />
+            type="android.mvvm.mg.com.mvvm_android.core.models.empty.Empty" />
 
         <variable
             name="handler"
@@ -22,6 +22,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:setVisibleView="@{isVisible}">
 
         <LinearLayout
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_small_margin"
-                android:onClick="@{(view) -> handler.onClick(view)}"
+                android:onClick="@{(view) -> handler.onEmptyViewClick(view)}"
                 android:text="Click" />
 
         </LinearLayout>

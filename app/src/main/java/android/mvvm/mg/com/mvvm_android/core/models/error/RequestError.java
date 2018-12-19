@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.core.models;
+package android.mvvm.mg.com.mvvm_android.core.models.error;
 
 
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseError;

@@ -16,7 +16,7 @@ import java.util.List;
 public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBinding> implements IEmptyViewHandler {
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutRes() {
         return R.layout.fragment_cards;
     }
 
@@ -26,7 +26,7 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
     }
 
     @Override
-    protected void initBinding(final FragmentCardsBinding binding, final CardsViewModel viewModel) {
+    protected void setBinding(final FragmentCardsBinding binding, final CardsViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
     }
@@ -37,10 +37,10 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
     }
 
     @Override
-    public void subscribes(final LifecycleOwner owner) {
+    public void subscribers(final LifecycleOwner owner) {
         mViewModel.<String>getAction(Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
-        mViewModel.loadData().observe(owner, cardList -> mViewModel.initRecycleViewData(cardList));
-        makeRequest(mViewModel.getCards(), new IBaseRequestListener<Card>() {
+        mViewModel.dbCards().observe(owner, cardList -> mViewModel.setRecycleViewData(cardList));
+        handleRequestFor(mViewModel.apiCards(), new IBaseRequestListener<Card>() {
             @Override
             public void onSuccessList(final List<Card> cardList) {
                 mViewModel.insertAll(cardList);
@@ -49,7 +49,7 @@ public class CardsFragment extends BaseFragment<CardsViewModel, FragmentCardsBin
     }
 
     @Override
-    public void onClick(final View view) {
-        Toast.makeText(getContext(), "Card Empty view click", Toast.LENGTH_SHORT).show();
+    public void onEmptyViewClick(final View view) {
+        Toast.makeText(getContext(), getString(R.string.on_empty_click), Toast.LENGTH_SHORT).show();
     }
 }

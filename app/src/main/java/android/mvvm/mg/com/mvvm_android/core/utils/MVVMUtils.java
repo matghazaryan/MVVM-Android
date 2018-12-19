@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -71,11 +71,11 @@ public class MVVMUtils {
 
     public static String getLanguageName(final Context context, final String code) {
         switch (code) {
-            case IConstants.Language.HY:
+            case IMVVMConstants.Language.HY:
                 return context.getString(R.string.language_armenian);
-            case IConstants.Language.EN:
+            case IMVVMConstants.Language.EN:
                 return context.getString(R.string.language_english);
-            case IConstants.Language.RU:
+            case IMVVMConstants.Language.RU:
                 return context.getString(R.string.language_russian);
             default:
                 return null;

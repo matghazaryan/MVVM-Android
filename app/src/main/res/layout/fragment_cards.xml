@@ -15,7 +15,7 @@
 
         <variable
             name="empty"
-            type="android.mvvm.mg.com.mvvm_android.core.models.Empty" />
+            type="android.mvvm.mg.com.mvvm_android.core.models.empty.Empty" />
 
     </data>
 

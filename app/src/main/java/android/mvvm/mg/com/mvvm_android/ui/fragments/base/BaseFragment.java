@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.mvvm.mg.com.mvvm_android.core.constants.IConstants;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.ui.activities.base.BaseActivity;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
 
-public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseMethod, IConstants {
+public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseMethod, IMVVMConstants {
 
     protected BaseActivity mActivity;
 
@@ -31,11 +31,11 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
     protected BaseFragment() {
     }
 
-    protected abstract int getLayout();
+    protected abstract int getLayoutRes();
 
     protected abstract Class<ViewModel> getViewModelClass();
 
-    protected abstract void initBinding(final Binding binding, final ViewModel viewModel);
+    protected abstract void setBinding(final Binding binding, final ViewModel viewModel);
 
     @Override
     public void onAttach(final Context context) {
@@ -57,16 +57,16 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         initialize();
         mViewModel.initialize();
         mViewModel.initialize(getArguments());
-        subscribes(getViewLifecycleOwner());
+        subscribers(getViewLifecycleOwner());
     }
 
     @Nullable
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, getLayout(), container, false, DataBindingUtil.getDefaultComponent());
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false, DataBindingUtil.getDefaultComponent());
         mViewModel = ViewModelProviders.of(this).get(getViewModelClass());
 
-        initBinding(mBinding, mViewModel);
+        setBinding(mBinding, mViewModel);
 
         return mBinding.getRoot();
     }
@@ -113,48 +113,48 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         }
     }
 
-    protected <O, ErrorRequest extends IBaseError> void makeRequest(final DMLiveDataBag<O, ErrorRequest> liveDataBug, final IBaseRequestListener<O> listener) {
+    protected <O, ErrorRequest extends IBaseError> void handleRequestFor(final DMLiveDataBag<O, ErrorRequest> liveDataBug, final IBaseRequestListener<O> listener) {
         mViewModel.showProgress();
 
         liveDataBug.getSuccessT().observe(getViewLifecycleOwner(), oSuccessT -> {
-            mViewModel.hideProgress();
             listener.onSuccess(Objects.requireNonNull(oSuccessT).getT());
+            mViewModel.hideProgress();
         });
         liveDataBug.getSuccessListT().observe(getViewLifecycleOwner(), oSuccessListT -> {
-            mViewModel.hideProgress();
             listener.onSuccessList(Objects.requireNonNull(oSuccessListT).getList());
+            mViewModel.hideProgress();
         });
         liveDataBug.getSuccessJsonResponse().observe(getViewLifecycleOwner(), successJSONObject -> {
-            mViewModel.hideProgress();
             listener.onSuccessJsonObject(successJSONObject);
+            mViewModel.hideProgress();
         });
         liveDataBug.getSuccessResponse().observe(getViewLifecycleOwner(), successResponse -> {
-            mViewModel.hideProgress();
             listener.onSuccessResponse(successResponse);
+            mViewModel.hideProgress();
         });
         liveDataBug.getFileProgress().observe(getViewLifecycleOwner(), fileProgress -> {
-            mViewModel.hideProgress();
             listener.onSuccessFileProgress(fileProgress);
+            mViewModel.hideProgress();
         });
         liveDataBug.getSuccessFile().observe(getViewLifecycleOwner(), file -> {
-            mViewModel.hideProgress();
             listener.onSuccessFile(file);
+            mViewModel.hideProgress();
         });
         liveDataBug.getErrorJsonResponse().observe(getViewLifecycleOwner(), errorJSONObject -> {
-            mViewModel.hideProgress();
             listener.onErrorJsonResponse(errorJSONObject);
+            mViewModel.hideProgress();
         });
         liveDataBug.getErrorResponse().observe(getViewLifecycleOwner(), errorResponse -> {
-            mViewModel.hideProgress();
             listener.onErrorResponse(errorResponse);
+            mViewModel.hideProgress();
         });
         liveDataBug.getErrorE().observe(getViewLifecycleOwner(), error -> {
-            mViewModel.hideProgress();
             mViewModel.handleErrors(error);
+            mViewModel.hideProgress();
         });
         liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> {
-            mViewModel.hideProgress();
             mViewModel.noInternetConnection();
+            mViewModel.hideProgress();
         });
     }
 }
