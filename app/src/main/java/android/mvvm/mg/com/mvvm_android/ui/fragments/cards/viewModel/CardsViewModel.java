@@ -36,8 +36,10 @@ public class CardsViewModel extends BaseViewModelItemClick<Card, Empty> {
 
     public void insertAll(final List<Card> cardList) {
         if (cardList != null) {
+            setEnableEmptyView(false);
             DataRepository.database().clearCardTable(getApplication().getApplicationContext(), ()
                     -> DataRepository.database().insertCardList(getApplication().getApplicationContext(), cardList, ids -> {
+                setEnableEmptyView(true);
             }));
         }
     }

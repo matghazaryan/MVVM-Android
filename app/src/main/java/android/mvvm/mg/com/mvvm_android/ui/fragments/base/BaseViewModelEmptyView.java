@@ -3,7 +3,6 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
 import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implements IBaseEmptyViewListener, IBaseEmptyMethods<Empty> {
 
@@ -11,7 +10,8 @@ public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implem
     public final ObservableField<Boolean> isEmptyViewVisible = new ObservableField<>(false);
     public final ObservableField<Empty> empty = new ObservableField<>();
 
-    private boolean isVisible;
+    private boolean isEnableEmptyView = true;
+    private boolean isEnableEmptyFromNetwork = true;
 
     protected BaseViewModelEmptyView(final @NonNull Application application) {
         super(application);
@@ -21,15 +21,18 @@ public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implem
 
     @Override
     public void onVisible(final boolean isVisible) {
-        Log.d("aaaaaa",isVisible + "");
-
-//        final Boolean isProgressDialogVisible = this.isProgressDialogVisible.get();
-//        if (isProgressDialogVisible != null && isProgressDialogVisible) {
-////            this.isVisible = isVisible;
-//        } else {
-//            isEmptyViewVisible.set(isVisible);
-//        }
-
+        if (isEnableEmptyFromNetwork && isEnableEmptyView) {
             isEmptyViewVisible.set(isVisible);
+        }
+    }
+
+    @Override
+    public void setEnableEmptyView(final boolean enableEmptyView) {
+        isEnableEmptyView = enableEmptyView;
+    }
+
+    @Override
+    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
+        isEnableEmptyFromNetwork = enableEmptyView;
     }
 }

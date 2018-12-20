@@ -28,4 +28,7 @@ public interface IBaseModelView extends IMVVMConstants {
     <T> LiveData<T> getAction(final Action action);
 
     <T> void doAction(final Action action, final T t);
+
+    default void setEnableEmptyView(final boolean enableEmptyView) {
+    }
 }

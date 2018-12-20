@@ -8,6 +8,7 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
 
 import java.util.HashMap;
@@ -29,6 +30,9 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
 
+    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
+
+    }
 
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
@@ -41,14 +45,14 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void showProgress() {
+        setEnableEmptyViewFromNetwork(false);
         isProgressDialogVisible.set(true);
     }
 
     void hideProgress() {
-        new Handler().postDelayed(() -> {
-            isProgressDialogVisible.set(false);
-        }, 250);
+        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 250);
         new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 280);
+        setEnableEmptyViewFromNetwork(true);
     }
 
     @SuppressWarnings("unchecked")

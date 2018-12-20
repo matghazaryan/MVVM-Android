@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
@@ -117,44 +118,44 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         mViewModel.showProgress();
 
         liveDataBug.getSuccessT().observe(getViewLifecycleOwner(), oSuccessT -> {
-            listener.onSuccess(Objects.requireNonNull(oSuccessT).getT());
             mViewModel.hideProgress();
+            listener.onSuccess(Objects.requireNonNull(oSuccessT).getT());
         });
         liveDataBug.getSuccessListT().observe(getViewLifecycleOwner(), oSuccessListT -> {
-            listener.onSuccessList(Objects.requireNonNull(oSuccessListT).getList());
             mViewModel.hideProgress();
+            listener.onSuccessList(Objects.requireNonNull(oSuccessListT).getList());
         });
         liveDataBug.getSuccessJsonResponse().observe(getViewLifecycleOwner(), successJSONObject -> {
-            listener.onSuccessJsonObject(successJSONObject);
             mViewModel.hideProgress();
+            listener.onSuccessJsonObject(successJSONObject);
         });
         liveDataBug.getSuccessResponse().observe(getViewLifecycleOwner(), successResponse -> {
-            listener.onSuccessResponse(successResponse);
             mViewModel.hideProgress();
+            listener.onSuccessResponse(successResponse);
         });
         liveDataBug.getFileProgress().observe(getViewLifecycleOwner(), fileProgress -> {
-            listener.onSuccessFileProgress(fileProgress);
             mViewModel.hideProgress();
+            listener.onSuccessFileProgress(fileProgress);
         });
         liveDataBug.getSuccessFile().observe(getViewLifecycleOwner(), file -> {
-            listener.onSuccessFile(file);
             mViewModel.hideProgress();
+            listener.onSuccessFile(file);
         });
         liveDataBug.getErrorJsonResponse().observe(getViewLifecycleOwner(), errorJSONObject -> {
-            listener.onErrorJsonResponse(errorJSONObject);
             mViewModel.hideProgress();
+            listener.onErrorJsonResponse(errorJSONObject);
         });
         liveDataBug.getErrorResponse().observe(getViewLifecycleOwner(), errorResponse -> {
-            listener.onErrorResponse(errorResponse);
             mViewModel.hideProgress();
+            listener.onErrorResponse(errorResponse);
         });
         liveDataBug.getErrorE().observe(getViewLifecycleOwner(), error -> {
-            mViewModel.handleErrors(error);
             mViewModel.hideProgress();
+            mViewModel.handleErrors(error);
         });
         liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> {
-            mViewModel.noInternetConnection();
             mViewModel.hideProgress();
+            mViewModel.noInternetConnection();
         });
     }
 }
