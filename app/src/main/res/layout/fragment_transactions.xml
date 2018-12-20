@@ -34,7 +34,7 @@
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewTransactionList="@{viewModel.transactionData}"
             app:listener="@{viewModel.emptyViewListener}"
-            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
+            app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
             tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
 
         <include

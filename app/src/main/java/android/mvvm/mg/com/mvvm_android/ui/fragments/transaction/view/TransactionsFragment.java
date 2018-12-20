@@ -14,11 +14,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
-
-    private int PAGE_NUMBER = 0;
 
     @Override
     protected int getLayoutRes() {
@@ -48,7 +47,7 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
 
     @Override
     public void subscribers(final LifecycleOwner owner) {
-        subscribeToTransactionLoad(mViewModel.apiTransactions(PAGE_NUMBER));
+        subscribeToTransactionLoad(mViewModel.apiTransactions(DefaultValue.FIRST_PAGE));
     }
 
     private void setupLoadMore() {

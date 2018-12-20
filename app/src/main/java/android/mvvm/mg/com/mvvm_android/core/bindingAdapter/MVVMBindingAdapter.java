@@ -1,9 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.core.bindingAdapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
@@ -15,7 +11,6 @@ import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.transaction.TransactionAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseEmptyViewListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnItemClickListener;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,60 +24,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import dmutils.com.dmutils.animation.DMTranslateViewAnimation;
-
-public class MVVMBindingAdapter {
-
-    @BindingAdapter("setError")
-    public static void setError(final MaterialEditText editText, final String error) {
-        editText.setError(error);
-    }
-
-    @BindingAdapter("setVisibleView")
-    public static void setVisibleView(final View view, final boolean isVisible) {
-        view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-    }
-
-    @BindingAdapter("setFadAnim")
-    public static void setFadAnim(final View view, final boolean isVisible) {
-        boolean isFirstTime = false;
-        if (view.getTag() == null) {
-            isFirstTime = true;
-        }
-        view.setTag("");
-
-        if (isFirstTime) {
-            view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-        } else {
-            if (isVisible) {
-                view.setVisibility(View.VISIBLE);
-                final ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                anim.setDuration(300);
-                anim.start();
-            } else {
-                view.animate()
-                        .alpha(0.0f)
-                        .setDuration(300)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                view.setVisibility(View.GONE);
-                            }
-                        });
-            }
-        }
-    }
-
-    @BindingAdapter("setEmptyViewVisibleAnim")
-    public static void setEmptyViewVisibleAnim(final View view, final boolean isVisible) {
-        view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-        if (isVisible) {
-            DMTranslateViewAnimation.upView((Activity) view.getContext(), view, 500, () -> {
-
-            });
-        }
-    }
+public class MVVMBindingAdapter extends BaseBindingAdapter {
 
     @BindingAdapter("setImageUrl")
     public static void setImageUrl(final ImageView imageView, final String path) {
@@ -92,8 +34,12 @@ public class MVVMBindingAdapter {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .placeholder(R.drawable.placeholder_profile_photo)
-//                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
+    }
+
+    @BindingAdapter("setError")
+    public static void setError(final MaterialEditText editText, final String error) {
+        editText.setError(error);
     }
 
     @BindingAdapter("setCardStatus")
@@ -145,10 +91,5 @@ public class MVVMBindingAdapter {
     @BindingAdapter(value = {"color1", "color2"})
     public static void makeBackground(final View view, final String color1, final String color2) {
         view.setBackground(MVVMUtils.changeDrawableColor(view.getContext(), color1, color2));
-    }
-
-    @BindingAdapter("android:checked")
-    public static void setChecked(final AppCompatCheckBox checkBox, final Boolean isChecked) {
-        checkBox.setChecked(isChecked != null ? isChecked : false);
     }
 }

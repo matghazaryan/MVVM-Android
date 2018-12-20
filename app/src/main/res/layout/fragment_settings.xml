@@ -23,7 +23,7 @@
         android:background="@color/white"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
+        app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
         tools:context=".fragments.settings.view.SettingsFragment">
 
         <RelativeLayout
@@ -80,7 +80,7 @@
                     android:layout_marginTop="@dimen/activity_custom_medium_margin"
                     android:onClick="@{(view) -> handler.onSavePictureClick(view)}"
                     android:text="@string/settings_save_picture"
-                    app:setFadAnim="@{safeUnbox(viewModel.isSaveButtonVisible)}" />
+                    app:baseFadAnim="@{safeUnbox(viewModel.isSaveButtonVisible)}" />
 
             </LinearLayout>
 

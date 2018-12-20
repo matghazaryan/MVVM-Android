@@ -20,6 +20,10 @@ public interface IMVVMConstants {
         String RU = "ru";
     }
 
+    interface DefaultValue {
+        int FIRST_PAGE = 0;
+    }
+
     interface BundleKey {
         String USER = "user";
     }

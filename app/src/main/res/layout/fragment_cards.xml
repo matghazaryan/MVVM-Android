@@ -31,7 +31,7 @@
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewCardList="@{viewModel.cardList}"
             app:listener="@{viewModel.itemClickListener}"
-            app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
+            app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
 
         <include
             layout="@layout/empty_layout"

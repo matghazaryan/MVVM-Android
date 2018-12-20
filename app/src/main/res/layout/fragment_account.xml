@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:setFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
+        app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
         tools:context=".fragments.account.view.AccountFragment">
 
         <LinearLayout
