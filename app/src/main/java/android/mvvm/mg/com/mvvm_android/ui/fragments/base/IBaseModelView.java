@@ -22,9 +22,6 @@ public interface IBaseModelView extends IMVVMConstants {
     default void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
     }
 
-    default void initEmptyView() {
-    }
-
     <T> LiveData<T> getAction(final Action action);
 
     <T> void doAction(final Action action, final T t);

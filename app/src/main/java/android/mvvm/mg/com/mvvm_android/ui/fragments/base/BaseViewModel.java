@@ -8,8 +8,8 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
+import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +29,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
 
-
-    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
-
-    }
 
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
@@ -110,5 +106,13 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     void noInternetConnection() {
         doAction(Action.SHOW_NO_INTERNET, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
+    }
+
+    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
+
+    }
+
+    protected void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults, final Object... receivers) {
+        DMEasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, receivers);
     }
 }

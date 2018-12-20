@@ -41,4 +41,9 @@ public interface IMVVMConstants {
         SHOW_NO_INTERNET,
         SHOW_TOAST
     }
+
+    interface PermissionRequestCode {
+        int LOCATION = 1000;
+        int STORAGE = 1001;
+    }
 }
