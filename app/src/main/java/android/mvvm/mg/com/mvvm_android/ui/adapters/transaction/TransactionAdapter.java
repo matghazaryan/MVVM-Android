@@ -6,7 +6,7 @@ import android.mvvm.mg.com.mvvm_android.core.models.transaction.Transaction;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionGroup;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionInnerItemBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionItemBinding;
-import android.mvvm.mg.com.mvvm_android.ui.adapters.base.BaseAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseAdapter;
 import android.support.annotation.NonNull;
 import android.view.View;
 

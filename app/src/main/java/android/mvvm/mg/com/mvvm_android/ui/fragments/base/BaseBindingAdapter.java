@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.core.bindingAdapter;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

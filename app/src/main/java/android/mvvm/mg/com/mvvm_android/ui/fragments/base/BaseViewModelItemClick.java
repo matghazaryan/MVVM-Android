@@ -6,10 +6,10 @@ import android.support.annotation.NonNull;
 
 public abstract class BaseViewModelItemClick<O, Empty> extends BaseViewModelEmptyView<Empty> implements IBaseOnItemClickListener<O> {
 
-    public final ObservableField<IBaseOnItemClickListener<O>> itemClickListener = new ObservableField<>();
+    public final ObservableField<IBaseOnItemClickListener<O>> baseOnItemClickListener = new ObservableField<>();
 
     protected BaseViewModelItemClick(final @NonNull Application application) {
         super(application);
-        itemClickListener.set(this);
+        baseOnItemClickListener.set(this);
     }
 }

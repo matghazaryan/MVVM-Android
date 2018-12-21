@@ -9,6 +9,7 @@ import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.transaction.TransactionAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseBindingAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseEmptyViewListener;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnItemClickListener;
 import android.support.v7.widget.DefaultItemAnimator;

@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.ui.adapters.card;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.databinding.CardItemBinding;
-import android.mvvm.mg.com.mvvm_android.ui.adapters.base.BaseAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnItemClickListener;
 import android.support.annotation.NonNull;
 import android.view.View;

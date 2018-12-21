@@ -30,7 +30,7 @@
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewCardList="@{viewModel.cardList}"
-            app:listener="@{viewModel.itemClickListener}"
+            app:listener="@{viewModel.baseOnItemClickListener}"
             app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
 
         <include
