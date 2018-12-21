@@ -5,13 +5,13 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLanguageBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.LanguageLayoutBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.LanguageViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLanguageBinding> {
+public class LanguageFragment extends MVVMBaseFragment<LanguageViewModel, FragmentLanguageBinding> {
 
     private final List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
 

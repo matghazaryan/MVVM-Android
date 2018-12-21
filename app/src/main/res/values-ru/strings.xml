@@ -30,9 +30,11 @@
     <string name="cards_valid">Действительный:</string>
     <string name="cards_default">Карта по умолчанию</string>
     <string name="cards_secondary">Вторичная карта</string>
+    <string name="card_on_empty_click">На карточке пустой клик</string>
 
-    <!-- PaymentHistory -->
+    <!-- Transaction -->
     <string name="transactions_title">История платежей</string>
+    <string name="transactions_on_empty_click">На транзакции пустой клик</string>
 
     <!-- Settings -->
     <string name="settings_title">Настройки</string>

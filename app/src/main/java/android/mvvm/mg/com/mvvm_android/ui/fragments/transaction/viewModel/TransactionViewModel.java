@@ -2,11 +2,11 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModelEmptyView;
 import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModelEmptyView;
 import android.support.annotation.NonNull;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
@@ -32,6 +32,6 @@ public class TransactionViewModel extends BaseViewModelEmptyView<Empty> {
 
     @Override
     public Empty getEmptyObject() {
-        return new Empty("Transaction empty view");
+        return new Empty("Transaction baseEmpty view");
     }
 }

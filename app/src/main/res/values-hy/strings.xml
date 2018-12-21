@@ -30,9 +30,11 @@
     <string name="cards_valid">Վավեր:</string>
     <string name="cards_default">Հիմնական քարտ</string>
     <string name="cards_secondary">Երկրորդային քարտ</string>
+    <string name="card_on_empty_click">Գործարքների վրա դատարկ սեղմեք</string>
 
-    <!-- PaymentHistory -->
+    <!-- Transaction -->
     <string name="transactions_title">Վճարումների պատմություն</string>
+    <string name="transactions_on_empty_click">Գործարքների վրա դատարկ սեղմեք</string>
 
     <!-- Settings -->
     <string name="settings_title">Կարգավորումներ</string>

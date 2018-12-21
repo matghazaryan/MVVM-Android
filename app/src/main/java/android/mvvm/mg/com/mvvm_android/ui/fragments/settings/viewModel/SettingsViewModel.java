@@ -5,12 +5,12 @@ import android.app.Application;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMFileUtils;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -71,7 +71,7 @@ public class SettingsViewModel extends BaseViewModel {
                 if (path != null) {
                     displayNewImage(path);
                 } else {
-                    doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_file_not_found));
+                    doAction(Action.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_file_not_found));
                 }
             }
         }

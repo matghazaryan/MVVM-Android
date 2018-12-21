@@ -3,17 +3,19 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.account.view;
 import android.Manifest;
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseOnPermissionSuccessListener;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragmentPermission;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnPermissionSuccessListener;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBasePermissionFragment;
 import android.view.View;
-import androidx.navigation.Navigation;
+
 import org.json.JSONObject;
 
-public class AccountFragment extends BaseFragmentPermission<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
+import androidx.navigation.Navigation;
+
+public class AccountFragment extends MVVMBasePermissionFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
 
     @Override
     protected int getLayoutRes() {

@@ -2,25 +2,28 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.splash.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
-import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSplashBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.splash.viewModel.SplashViewModel;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+
+import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+
+import org.json.JSONObject;
+
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import org.json.JSONObject;
 
-public class SplashFragment extends BaseFragment<SplashViewModel, FragmentSplashBinding> {
+public class SplashFragment extends MVVMBaseFragment<SplashViewModel, FragmentSplashBinding> {
 
     private DMBiometricManager<User> mBiometricManager;
 

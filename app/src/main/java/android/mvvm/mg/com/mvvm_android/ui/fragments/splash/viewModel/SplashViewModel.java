@@ -2,12 +2,12 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.splash.viewModel;
 
 import android.app.Application;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -29,7 +29,7 @@ public class SplashViewModel extends BaseViewModel {
             DataRepository.preference().saveConfigs(jsonObject.toString());
             navigateToNextPage();
         } else {
-            doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
+            doAction(Action.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
     }
 
@@ -50,7 +50,7 @@ public class SplashViewModel extends BaseViewModel {
             DataRepository.preference().saveToken(user.getToken());
             new Handler().postDelayed(() -> doAction(Action.OPEN_ACCOUNT_FRAGMENT, user), IMVVMConstants.Delay.SPLASH);
         } else {
-            doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
+            doAction(Action.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
     }
 

@@ -1,24 +1,27 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.R;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.SparseArray;
 
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
 
-    private final Map<Action, MutableLiveData<Object>> baseMutableLiveDataHashMap = new HashMap<>();
+    protected final BaseApplicationConfigs mApplicationConfigs;
+
+    private final SparseArray<MutableLiveData<Object>> baseMutableLiveDataSparseArray = new SparseArray<>();
 
     private final Map<String, ObservableField<String>> baseUITextFieldsTags = new HashMap<>();
 
@@ -31,9 +34,9 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isBaseRootVisibleDelay = new ObservableField<>(false);
 
-
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
+        mApplicationConfigs = ((BaseApplication) Objects.requireNonNull(application)).getApplicationConfigs();
         new Handler().postDelayed(() -> isBaseRootVisibleDelay.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
     }
 
@@ -55,23 +58,23 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> LiveData<T> getAction(final Action action) {
-        final LiveData<Object> data = baseMutableLiveDataHashMap.get(action);
+    public <T> LiveData<T> getAction(final int action) {
+        final LiveData<Object> data = baseMutableLiveDataSparseArray.get(action);
         if (data == null) {
-            baseMutableLiveDataHashMap.put(action, new MutableLiveData<>());
+            baseMutableLiveDataSparseArray.put(action, new MutableLiveData<>());
         }
 
-        return (LiveData<T>) baseMutableLiveDataHashMap.get(action);
+        return (LiveData<T>) baseMutableLiveDataSparseArray.get(action);
     }
 
     @Override
-    public <T> void doAction(final Action action, final T t) {
-        MutableLiveData<Object> data = baseMutableLiveDataHashMap.get(action);
+    public <T> void doAction(final int action, final T t) {
+        MutableLiveData<Object> data = baseMutableLiveDataSparseArray.get(action);
         if (data == null) {
-            baseMutableLiveDataHashMap.put(action, new MutableLiveData<>());
+            baseMutableLiveDataSparseArray.put(action, new MutableLiveData<>());
         }
 
-        data = baseMutableLiveDataHashMap.get(action);
+        data = baseMutableLiveDataSparseArray.get(action);
         if (data != null) {
             data.setValue(t);
         }
@@ -85,12 +88,12 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
                 if (errors != null && errors.size() > 0) {
                     showInvalidData(baseUITextFieldsTags, error.getErrors());
                 } else if (error.getMessage() != null) {
-                    doAction(Action.OPEN_ERROR_DIALOG, error.getMessage());
+                    doAction(BaseAction.SHOW_ERROR_DIALOG, error.getMessage());
                 } else {
-                    doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
+                    doAction(BaseAction.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(mApplicationConfigs.getGeneralErrorMessage()));
                 }
             } else {
-                doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
+                doAction(BaseAction.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(mApplicationConfigs.getGeneralErrorMessage()));
             }
         }
     }
@@ -107,7 +110,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void noInternetConnection() {
-        doAction(Action.SHOW_NO_INTERNET, getApplication().getApplicationContext().getString(R.string.dialog_no_internet_connection));
+        new Handler().postDelayed(() -> doAction(BaseAction.SHOW_NO_INTERNET_DIALOG, getApplication().getApplicationContext().getString(mApplicationConfigs.getNoInternetMessage())), AnimDuration.ROOT_VISIBLE_DELAY);
     }
 
     void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {

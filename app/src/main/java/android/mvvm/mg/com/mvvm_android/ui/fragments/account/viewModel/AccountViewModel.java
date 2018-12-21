@@ -2,12 +2,12 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
-import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.view.AccountFragmentArgs;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 

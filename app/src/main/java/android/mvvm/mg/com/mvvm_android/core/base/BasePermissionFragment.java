@@ -1,13 +1,14 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
-import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class BaseFragmentPermission<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> implements DMEasyPermissions.PermissionCallbacks {
+import dmutils.com.dmutils.permission.DMEasyPermissions;
+
+public abstract class BasePermissionFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> implements DMEasyPermissions.PermissionCallbacks {
 
     private IBaseOnPermissionSuccessListener mListener;
 

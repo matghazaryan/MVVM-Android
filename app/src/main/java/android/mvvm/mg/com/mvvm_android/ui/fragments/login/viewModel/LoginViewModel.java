@@ -4,12 +4,12 @@ import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IRequestKeys;
-import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMValidator;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -85,7 +85,7 @@ public class LoginViewModel extends BaseViewModel {
                 doAction(Action.OPEN_ACCOUNT_FRAGMENT, user);
             }
         } else {
-            doAction(Action.OPEN_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
+            doAction(Action.SHOW_ERROR_DIALOG, getApplication().getApplicationContext().getString(R.string.error_general_error));
         }
     }
 }

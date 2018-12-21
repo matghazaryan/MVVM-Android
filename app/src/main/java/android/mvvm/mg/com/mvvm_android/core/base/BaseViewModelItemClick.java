@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.app.Application;
 import android.databinding.ObservableField;

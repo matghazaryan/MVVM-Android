@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="android.mvvm.mg.com.mvvm_android.core.utils.MVVMSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.base.BaseSafeUnbox" />
 
         <variable
             name="handler"
@@ -34,16 +34,16 @@
             android:paddingBottom="@dimen/activity_small_margin"
             app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}"
             app:initRecycleViewTransactionList="@{viewModel.transactionData}"
-            app:listener="@{viewModel.emptyViewListener}"
+            app:listener="@{viewModel.baseEmptyViewListener}"
             tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
 
         <include
             layout="@layout/empty_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:empty="@{viewModel.empty}"
+            app:empty="@{viewModel.baseEmpty}"
             app:handler="@{handler}"
-            app:isVisible="@{safeUnbox(viewModel.isEmptyViewVisible)}" />
+            app:isVisible="@{safeUnbox(viewModel.isBaseEmptyViewVisible)}" />
 
         <include
             layout="@layout/progress_dialog"

@@ -1,7 +1,7 @@
 package android.mvvm.mg.com.mvvm_android.core.models.error;
 
 
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseError;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseError;
 
 import java.util.HashMap;
 

@@ -2,19 +2,22 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.settings.view;
 
 import android.content.Intent;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
 import android.view.View;
-import androidx.navigation.Navigation;
+
 import com.dm.camera.activities.DMCameraActivity;
 import com.dm.camera.constants.IDMCameraConstants;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
+
 import org.json.JSONObject;
 
-public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
+import androidx.navigation.Navigation;
+
+public class SettingsFragment extends MVVMBaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
     @Override
     protected int getLayoutRes() {

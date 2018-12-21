@@ -1,17 +1,16 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
-import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,15 @@ import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
 
-public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseMethod, IMVVMConstants {
+public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseFragment, IBaseConstants {
 
     protected BaseActivity mActivity;
 
     protected ViewModel mViewModel;
 
     protected Binding mBinding;
+
+    protected BaseApplicationConfigs mApplicationConfigs;
 
     protected BaseFragment() {
     }
@@ -42,6 +43,9 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         super.onAttach(context);
 
         mActivity = (BaseActivity) context;
+        mApplicationConfigs = ((BaseApplication) Objects.requireNonNull(getActivity()).getApplication()).getApplicationConfigs();
+
+        Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
     }
 
     @Override
@@ -87,8 +91,8 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
     }
 
     private void baseSubscribes() {
-        mViewModel.<String>getAction(Action.OPEN_ERROR_DIALOG).observe(getViewLifecycleOwner(), s -> MVVMDialog.showErrorDialog(mActivity, s));
-        mViewModel.<String>getAction(Action.SHOW_NO_INTERNET).observe(getViewLifecycleOwner(), s -> MVVMDialog.showNoInternetDialog(mActivity));
+        mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showErrorDialog(mActivity, s));
+        mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showNoInternetDialog(mActivity));
     }
 
     protected void setTitle(final String title) {

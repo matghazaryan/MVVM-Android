@@ -3,15 +3,15 @@ package android.mvvm.mg.com.mvvm_android.core.bindingAdapter;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseBindingAdapter;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseEmptyViewListener;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseOnItemClickListener;
 import android.mvvm.mg.com.mvvm_android.core.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
 import android.mvvm.mg.com.mvvm_android.ui.adapters.transaction.TransactionAdapter;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseBindingAdapter;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseEmptyViewListener;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseOnItemClickListener;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,10 +63,10 @@ public class MVVMBindingAdapter extends BaseBindingAdapter {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
-            listener.onVisible(cardList == null || cardList.size() == 0);
+            listener.onEmptyVisible(cardList == null || cardList.size() == 0);
         } else {
             ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
-            listener.onVisible(cardList == null || cardList.size() == 0);
+            listener.onEmptyVisible(cardList == null || cardList.size() == 0);
         }
     }
 
@@ -80,12 +80,12 @@ public class MVVMBindingAdapter extends BaseBindingAdapter {
             if (recyclerView.getAdapter() == null) {
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(new TransactionAdapter(transactionData.getTransactionList()));
-                listener.onVisible(transactionData.getTransactionList() == null || transactionData.getTransactionList().size() == 0);
+                listener.onEmptyVisible(transactionData.getTransactionList() == null || transactionData.getTransactionList().size() == 0);
             } else {
                 ((TransactionAdapter) recyclerView.getAdapter()).addList(transactionData.getTransactionList());
             }
         } else {
-            listener.onVisible(true);
+            listener.onEmptyVisible(true);
         }
     }
 

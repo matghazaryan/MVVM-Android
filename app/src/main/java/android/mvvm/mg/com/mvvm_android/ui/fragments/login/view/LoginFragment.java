@@ -2,23 +2,24 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.login.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.handler.ILoginHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.viewModel.LoginViewModel;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
+
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
 
-public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
+public class LoginFragment extends MVVMBaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
 
     private DMBiometricManager<User> mBiometricManager;
 

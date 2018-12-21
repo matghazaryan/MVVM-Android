@@ -1,9 +1,9 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 
-public interface IBaseMethod {
+public interface IBaseFragment {
 
     default void initialize() {
     }

@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
@@ -22,9 +22,9 @@ public interface IBaseModelView extends IBaseConstants, IMVVMConstants {
     default void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
     }
 
-    <T> LiveData<T> getAction(final Action action);
+    <T> LiveData<T> getAction(final int action);
 
-    <T> void doAction(final Action action, final T t);
+    <T> void doAction(final int action, final T t);
 
     default void setEnableEmptyView(final boolean enableEmptyView) {
     }

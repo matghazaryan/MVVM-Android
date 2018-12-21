@@ -1,28 +1,28 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
-public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implements IBaseEmptyViewListener, IBaseEmptyMethods<Empty> {
+public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implements IBaseEmptyViewListener, IBaseEmpty<Empty> {
 
-    public final ObservableField<IBaseEmptyViewListener> emptyViewListener = new ObservableField<>();
-    public final ObservableField<Boolean> isEmptyViewVisible = new ObservableField<>(false);
-    public final ObservableField<Empty> empty = new ObservableField<>();
+    public final ObservableField<IBaseEmptyViewListener> baseEmptyViewListener = new ObservableField<>();
+    public final ObservableField<Boolean> isBaseEmptyViewVisible = new ObservableField<>(false);
+    public final ObservableField<Empty> baseEmpty = new ObservableField<>();
 
     private boolean isEnableEmptyView = true;
     private boolean isEnableEmptyFromNetwork = true;
 
     protected BaseViewModelEmptyView(final @NonNull Application application) {
         super(application);
-        emptyViewListener.set(this);
-        empty.set(getEmptyObject());
+        baseEmptyViewListener.set(this);
+        baseEmpty.set(getEmptyObject());
     }
 
     @Override
-    public void onVisible(final boolean isVisible) {
+    public void onEmptyVisible(final boolean isEmptyVisible) {
         if (isEnableEmptyFromNetwork && isEnableEmptyView) {
-            isEmptyViewVisible.set(isVisible);
+            isBaseEmptyViewVisible.set(isEmptyVisible);
         }
     }
 

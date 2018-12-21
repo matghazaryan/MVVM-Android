@@ -30,9 +30,11 @@
     <string name="cards_valid">Valid:</string>
     <string name="cards_default">Default card</string>
     <string name="cards_secondary">Secondary card</string>
+    <string name="card_on_empty_click">On card empty click</string>
 
     <!-- Transactions -->
     <string name="transactions_title">Transactions</string>
+    <string name="transactions_on_empty_click">On transactions empty click</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -52,8 +54,6 @@
     <string name="biometric_sub_title">Subtitle</string>
     <string name="biometric_description">Description</string>
     <string name="biometric_cancel">Cancle</string>
-
-    <string name="on_empty_click">On empty click</string>
 
     <string name="key1" translatable="false">barev</string>
 

@@ -1,8 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel;
 
 import android.app.Application;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModel;
 import android.support.annotation.NonNull;
 
 public class LanguageViewModel extends BaseViewModel {

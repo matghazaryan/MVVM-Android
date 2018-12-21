@@ -1,6 +1,6 @@
-package android.mvvm.mg.com.mvvm_android.core.utils;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
-public class MVVMSafeUnbox {
+public abstract class BaseSafeUnbox {
 
     public static int safeUnbox(final Integer boxed) {
         return boxed == null ? 0 : boxed;

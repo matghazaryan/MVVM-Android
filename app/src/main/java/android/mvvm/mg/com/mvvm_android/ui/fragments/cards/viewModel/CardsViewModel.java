@@ -3,11 +3,11 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModelItemClick;
 import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseViewModelItemClick;
 import android.support.annotation.NonNull;
 
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
@@ -51,6 +51,6 @@ public class CardsViewModel extends BaseViewModelItemClick<Card, Empty> {
 
     @Override
     public Empty getEmptyObject() {
-        return new Empty("Card empty");
+        return new Empty("Card baseEmpty");
     }
 }

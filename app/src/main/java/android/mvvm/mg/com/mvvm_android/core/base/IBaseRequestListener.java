@@ -1,8 +1,9 @@
-package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import com.dm.dmnetworking.api_client.base.model.error.ErrorResponse;
 import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
 import com.dm.dmnetworking.api_client.base.model.success.SuccessResponse;
+
 import org.json.JSONObject;
 
 import java.io.File;

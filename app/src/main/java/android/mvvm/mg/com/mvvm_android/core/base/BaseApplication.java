@@ -1,11 +1,13 @@
-package android.mvvm.mg.com.mvvm_android;
+package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.app.Application;
+
 import dmutils.com.dmutils.general.DMMemory;
 import dmutils.com.dmutils.pref.DMPrefsCacheManager;
 
+public abstract class BaseApplication extends Application {
 
-public class MVVMApplication extends Application {
+    public abstract BaseApplicationConfigs getApplicationConfigs();
 
     @Override
     public void onCreate() {
