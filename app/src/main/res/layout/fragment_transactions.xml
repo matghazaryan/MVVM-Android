@@ -32,9 +32,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
+            app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}"
             app:initRecycleViewTransactionList="@{viewModel.transactionData}"
             app:listener="@{viewModel.emptyViewListener}"
-            app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}"
             tools:context=".fragments.paymentHistory.view.TransactionsFragment" />
 
         <include
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
+            app:isVisible="@{safeUnbox(viewModel.isBaseProgressDialogVisible)}" />
 
     </RelativeLayout>
 

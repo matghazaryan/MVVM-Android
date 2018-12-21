@@ -23,7 +23,7 @@
         android:background="@color/white"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleDelay)}"
+        app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleDelay)}"
         tools:context=".fragments.settings.view.SettingsFragment">
 
         <RelativeLayout
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}"
+                app:isVisible="@{safeUnbox(viewModel.isBaseProgressDialogVisible)}"
                 app:progress="@{safeUnbox(viewModel.progress)}" />
 
         </RelativeLayout>

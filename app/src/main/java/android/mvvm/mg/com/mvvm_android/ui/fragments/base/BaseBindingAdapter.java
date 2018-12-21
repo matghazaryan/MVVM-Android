@@ -7,7 +7,7 @@ import android.databinding.BindingAdapter;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 
-public class BaseBindingAdapter {
+public abstract class BaseBindingAdapter {
 
     @BindingAdapter("baseVisibleView")
     public static void baseVisibleView(final View view, final boolean isVisible) {

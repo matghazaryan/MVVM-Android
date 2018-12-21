@@ -1,7 +1,7 @@
 package android.mvvm.mg.com.mvvm_android.ui.activities.main;
 
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.ui.activities.base.BaseActivity;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.base.BaseActivity;
 import android.os.Bundle;
 
 public class MainActivity extends BaseActivity {

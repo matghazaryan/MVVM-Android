@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import java.util.Map;
 
-public interface IBaseModelView extends IMVVMConstants {
+public interface IBaseModelView extends IBaseConstants, IMVVMConstants {
 
     default void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
     }

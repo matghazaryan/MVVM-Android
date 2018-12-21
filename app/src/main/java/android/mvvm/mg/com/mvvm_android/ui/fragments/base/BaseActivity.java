@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.ui.activities.base;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.base;
 
 import android.annotation.SuppressLint;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
@@ -10,7 +10,7 @@ import android.util.Log;
 import dmutils.com.dmutils.general.DMMemory;
 
 @SuppressLint("Registered")
-public class BaseActivity extends AppCompatActivity implements IMVVMConstants {
+public abstract class BaseActivity extends AppCompatActivity implements IMVVMConstants {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

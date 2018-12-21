@@ -31,7 +31,7 @@
             android:paddingBottom="@dimen/activity_small_margin"
             app:initRecycleViewCardList="@{viewModel.cardList}"
             app:listener="@{viewModel.baseOnItemClickListener}"
-            app:baseFadAnim="@{safeUnbox(viewModel.isRootVisibleAfterLoading)}" />
+            app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}" />
 
         <include
             layout="@layout/empty_layout"
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" />
+            app:isVisible="@{safeUnbox(viewModel.isBaseProgressDialogVisible)}" />
 
     </RelativeLayout>
 

@@ -8,68 +8,70 @@ import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
-import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import dmutils.com.dmutils.permission.DMEasyPermissions;
+
 public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
 
-    private final Map<Action, MutableLiveData<Object>> mutableLiveDataHashMap = new HashMap<>();
+    private final Map<Action, MutableLiveData<Object>> baseMutableLiveDataHashMap = new HashMap<>();
 
-    private final Map<String, ObservableField<String>> uiTextFieldsTags = new HashMap<>();
+    private final Map<String, ObservableField<String>> baseUITextFieldsTags = new HashMap<>();
 
-    //For show/hide progress on start/end request (include progress_dialog.xml and add app:isVisible="@{safeUnbox(viewModel.isProgressDialogVisible)}" )
-    public final ObservableField<Boolean> isProgressDialogVisible = new ObservableField<>();
+    //For show/hide progress on start/end request (include progress_dialog.xml and add app:isVisible="@{safeUnbox(viewModel.isBaseProgressDialogVisible)}" )
+    public final ObservableField<Boolean> isBaseProgressDialogVisible = new ObservableField<>();
 
     //For gone at first and visible with fade animation after request completed
-    public final ObservableField<Boolean> isRootVisibleAfterLoading = new ObservableField<>(false);
+    public final ObservableField<Boolean> isBaseRootVisibleAfterLoading = new ObservableField<>(false);
 
     //For gone at first and visible with delay with fade animation after opened page
-    public final ObservableField<Boolean> isRootVisibleDelay = new ObservableField<>(false);
+    public final ObservableField<Boolean> isBaseRootVisibleDelay = new ObservableField<>(false);
 
 
     protected BaseViewModel(final @NonNull Application application) {
         super(application);
-        new Handler().postDelayed(() -> isRootVisibleDelay.set(true), 280);
+        new Handler().postDelayed(() -> isBaseRootVisibleDelay.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
     }
 
     @Override
     public void initialize() {
-        initUiTextFieldsTags(uiTextFieldsTags);
+        initUiTextFieldsTags(baseUITextFieldsTags);
     }
 
     void showProgress() {
         setEnableEmptyViewFromNetwork(false);
-        isProgressDialogVisible.set(true);
+        isBaseProgressDialogVisible.set(true);
     }
 
     void hideProgress() {
-        new Handler().postDelayed(() -> isProgressDialogVisible.set(false), 250);
-        new Handler().postDelayed(() -> isRootVisibleAfterLoading.set(true), 280);
+        new Handler().postDelayed(() -> isBaseProgressDialogVisible.set(false), AnimDuration.PROGRESS_DIALOG_VISIBLE_DELAY);
+        new Handler().postDelayed(() -> isBaseRootVisibleAfterLoading.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
         setEnableEmptyViewFromNetwork(true);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> LiveData<T> getAction(final Action action) {
-        final LiveData<Object> data = mutableLiveDataHashMap.get(action);
+        final LiveData<Object> data = baseMutableLiveDataHashMap.get(action);
         if (data == null) {
-            mutableLiveDataHashMap.put(action, new MutableLiveData<>());
+            baseMutableLiveDataHashMap.put(action, new MutableLiveData<>());
         }
 
-        return (LiveData<T>) mutableLiveDataHashMap.get(action);
+        return (LiveData<T>) baseMutableLiveDataHashMap.get(action);
     }
 
     @Override
     public <T> void doAction(final Action action, final T t) {
-        MutableLiveData<Object> data = mutableLiveDataHashMap.get(action);
+        MutableLiveData<Object> data = baseMutableLiveDataHashMap.get(action);
         if (data == null) {
-            mutableLiveDataHashMap.put(action, new MutableLiveData<>());
+            baseMutableLiveDataHashMap.put(action, new MutableLiveData<>());
         }
 
-        data = mutableLiveDataHashMap.get(action);
+        data = baseMutableLiveDataHashMap.get(action);
         if (data != null) {
             data.setValue(t);
         }
@@ -81,7 +83,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
             if (error != null) {
                 final HashMap<String, String> errors = error.getErrors();
                 if (errors != null && errors.size() > 0) {
-                    showInvalidData(uiTextFieldsTags, error.getErrors());
+                    showInvalidData(baseUITextFieldsTags, error.getErrors());
                 } else if (error.getMessage() != null) {
                     doAction(Action.OPEN_ERROR_DIALOG, error.getMessage());
                 } else {
@@ -112,7 +114,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
 
     }
 
-    protected void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults, final Object... receivers) {
+    void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults, final Object... receivers) {
         DMEasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, receivers);
     }
 }
