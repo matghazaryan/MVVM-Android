@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.ui.adapters.transaction;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;

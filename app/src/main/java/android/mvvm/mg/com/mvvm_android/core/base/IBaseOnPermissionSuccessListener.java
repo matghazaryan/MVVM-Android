@@ -2,6 +2,9 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 
 import java.util.List;
 
+/**
+ * IBaseOnPermissionSuccessListener is the interface for handle permission request
+ */
 public interface IBaseOnPermissionSuccessListener {
 
     default void onPermissionsGranted() {

@@ -10,14 +10,33 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+/**
+ * BaseAdapter abstract class for make easy and fast work with adapter
+ *
+ * @param <T>       is object which use in the current adapter
+ * @param <Binding> binding is auto generated class on adapter view (item.xml)
+ */
 public abstract class BaseAdapter<T, Binding extends ViewDataBinding> extends RecyclerView.Adapter<BaseAdapter.BaseViewHolder<Binding>> {
 
     protected List<T> tList;
     protected LayoutInflater inflater;
     protected IBaseOnItemClickListener<T> listener;
 
+    /**
+     * Give layout resource id at adapter view (item.xml)
+     *
+     * @return Layout resource id
+     */
     protected abstract int getItemLayout();
 
+    /**
+     * This function for set object to binding and set view for on click
+     *
+     * @param holder   view holder
+     * @param position item position
+     * @param t        object get by position
+     * @return View which must have click, if you don't want for item has click return null
+     */
     protected abstract View onBaseBindViewHolder(final @NonNull BaseViewHolder<Binding> holder, final int position, final T t);
 
     public BaseAdapter(final List<T> tList) {

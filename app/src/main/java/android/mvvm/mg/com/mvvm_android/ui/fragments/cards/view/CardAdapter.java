@@ -1,4 +1,4 @@
-package android.mvvm.mg.com.mvvm_android.ui.adapters.card;
+package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view;
 
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.BaseAdapter;

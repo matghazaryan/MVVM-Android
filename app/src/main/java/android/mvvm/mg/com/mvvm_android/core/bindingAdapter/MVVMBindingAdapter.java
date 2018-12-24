@@ -10,15 +10,14 @@ import android.mvvm.mg.com.mvvm_android.core.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
-import android.mvvm.mg.com.mvvm_android.ui.adapters.card.CardAdapter;
-import android.mvvm.mg.com.mvvm_android.ui.adapters.transaction.TransactionAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view.CardAdapter;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view.TransactionAdapter;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rengwuxian.materialedittext.MaterialEditText;
 

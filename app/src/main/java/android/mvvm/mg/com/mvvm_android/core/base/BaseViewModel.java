@@ -15,6 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * BaseViewModel is the abstract class where declared functions which must have each ViewModel for make work more easy and fast
+ * contains functions for initialize, showProgress, hideProgress show error dialog , show no internet dialog , keep actions MutableLiveData (baseMutableLiveDataSparseArray) for call
+ * functions in the fragment
+ * show/hide content after request with delay and when navigate in pages
+ */
 public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
 
     protected final BaseApplicationConfigs mApplicationConfigs;
@@ -54,6 +61,15 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         setEnableEmptyViewFromNetwork(true);
     }
 
+    /**
+     * getAction function for subscribe in the fragment and to wait call at doAction function
+     * work on pair with doAction function
+     *
+     * @param action It is constant action with which int keep MutableLiveData in the baseMutableLiveDataSparseArray, and
+     *               with this int call doAction function
+     * @param <T>    Object type which you want to send
+     * @return LiveData for subscribe in fragment
+     */
     @SuppressWarnings("unchecked")
     @Override
     public <T> LiveData<T> getAction(final int action) {
@@ -65,6 +81,13 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         return (LiveData<T>) baseMutableLiveDataSparseArray.get(action);
     }
 
+    /**
+     * doAction is the function for call functions in the fragment or activity
+     *
+     * @param action It is constant action
+     * @param t      Object which we want to send to fragment or activity
+     * @param <T>    Object type which we want to send to fragment or activity
+     */
     @Override
     public <T> void doAction(final int action, final T t) {
         MutableLiveData<Object> data = baseMutableLiveDataSparseArray.get(action);
@@ -78,6 +101,12 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
+    /**
+     * handleError is function for handle error from network request and show message
+     *
+     * @param errorE         Error object from json pars
+     * @param <ErrorRequest> Error object type
+     */
     <ErrorRequest extends IBaseError> void handleErrors(final ErrorE<ErrorRequest> errorE) {
         if (errorE != null) {
             final ErrorRequest error = errorE.getE();
@@ -96,6 +125,12 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
+    /**
+     * Show error when error json like key->value, with mapUiFields set values by key
+     *
+     * @param mapUiFields map string(key) and observableField(value), error field in json and error filed in xml
+     * @param errorMap    parsed error map in json
+     */
     private static void showInvalidData(final Map<String, ObservableField<String>> mapUiFields, final Map<String, String> errorMap) {
         if (mapUiFields != null && errorMap != null) {
             for (final Map.Entry<String, String> entry : errorMap.entrySet()) {
@@ -107,10 +142,18 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
         }
     }
 
+    /**
+     * Call action in BaseFragment for show no internet dialog
+     */
     void noInternetConnection() {
         new Handler().postDelayed(() -> doAction(BaseAction.SHOW_NO_INTERNET_DIALOG, getApplication().getApplicationContext().getString(mApplicationConfigs.getNoInternetMessage())), AnimDuration.ROOT_VISIBLE_DELAY);
     }
 
+    /**
+     * Disable editing status for display empty view during network request
+     *
+     * @param enableEmptyView status
+     */
     void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
 
     }

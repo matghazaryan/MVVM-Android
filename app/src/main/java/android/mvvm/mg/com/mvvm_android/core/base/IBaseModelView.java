@@ -8,6 +8,9 @@ import android.os.Bundle;
 
 import java.util.Map;
 
+/**
+ * IBaseModelView interface which has few function for use in child classes
+ */
 public interface IBaseModelView extends IBaseConstants, IMVVMConstants {
 
     default void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {

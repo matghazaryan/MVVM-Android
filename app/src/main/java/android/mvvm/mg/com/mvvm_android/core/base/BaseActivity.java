@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import dmutils.com.dmutils.general.DMMemory;
 
+/**
+ * BaseActivity has few functions for work with action bar, set title , show/hide and display current class name
+ */
 @SuppressLint("Registered")
 public abstract class BaseActivity extends AppCompatActivity {
 

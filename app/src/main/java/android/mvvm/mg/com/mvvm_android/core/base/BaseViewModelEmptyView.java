@@ -4,6 +4,11 @@ import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+/**
+ * BaseViewModelEmptyView is abstract class for show empty view , prepare and set empty object for show in view
+ *
+ * @param <Empty> Empty is object type for send data and show in the empty view, use in the recycler view
+ */
 public abstract class BaseViewModelEmptyView<Empty> extends BaseViewModel implements IBaseEmptyViewListener, IBaseEmpty<Empty> {
 
     public final ObservableField<IBaseEmptyViewListener> baseEmptyViewListener = new ObservableField<>();

@@ -7,6 +7,12 @@ import android.databinding.BindingAdapter;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 
+/**
+ * BaseBindingAdapter is abstract class which has few functions for us in the xml files
+ * show/hide
+ * set checked status
+ * make fade animation show/hide
+ */
 public abstract class BaseBindingAdapter {
 
     @BindingAdapter("baseVisibleView")
