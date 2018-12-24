@@ -2,12 +2,17 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 import java.util.Arrays;
 import java.util.List;
 
-import dmutils.com.dmutils.permission.DMEasyPermissions;
-
+/**
+ * BasePermissionFragment is the abstract class which make easy work with permissions
+ *
+ * @param <ViewModel> ViewModel extends BaseViewModel , this is main viewModel for fragment
+ * @param <Binding>   this is auto generated class for binding view and use in the viewModel
+ */
 public abstract class BasePermissionFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> implements DMEasyPermissions.PermissionCallbacks {
 
     private IBaseOnPermissionSuccessListener mListener;
@@ -18,6 +23,13 @@ public abstract class BasePermissionFragment<ViewModel extends BaseViewModel, Bi
         mViewModel.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
+    /**
+     * Function for easy request permission(s)
+     *
+     * @param listener    interface for handle permission request result
+     * @param requestCode Request code for permission(s)
+     * @param perms       permission(s)
+     */
     protected void accessToPermission(final IBaseOnPermissionSuccessListener listener, final int requestCode, final String... perms) {
         mListener = listener;
         if (DMEasyPermissions.hasPermissions(getContext(), perms)) {

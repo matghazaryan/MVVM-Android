@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,11 +15,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
 
+
+/**
+ * BaseFragment is the abstract class where declared functions which must have each fragment for make work more easy and fast
+ * contains functions for initialize ,initialize in viewModel, subscribers, initActionBar
+ * <p>
+ * initActionBar();
+ * initialize();
+ * mViewModel.initialize();
+ * mViewModel.initialize(getArguments());
+ * subscribers(getViewLifecycleOwner());
+ *
+ * @param <ViewModel> ViewModel extends BaseViewModel , this is main viewModel for fragment
+ * @param <Binding>   this is auto generated class for binding view and use in the viewModel
+ */
 public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseFragment, IBaseConstants {
 
     protected BaseActivity mActivity;
@@ -32,10 +46,27 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
     protected BaseFragment() {
     }
 
+    /**
+     * Give layout resource id at fragment which extends BaseFragment
+     *
+     * @return Layout resource id
+     */
     protected abstract int getLayoutRes();
 
+    /**
+     * Give viewModel class for current fragment which extends BaseFragment
+     *
+     * @return ViewModel class for current fragment, like Object.class
+     */
     protected abstract Class<ViewModel> getViewModelClass();
 
+    /**
+     * Functions where we must set viewModel to binding and if necessary set handler for click and other things what we need to
+     * setup before fragment showing
+     *
+     * @param binding   Binding view for current fragment
+     * @param viewModel ViewModel for current fragment
+     */
     protected abstract void setBinding(final Binding binding, final ViewModel viewModel);
 
     @Override
@@ -45,7 +76,9 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         mActivity = (BaseActivity) context;
         mApplicationConfigs = ((BaseApplication) Objects.requireNonNull(getActivity()).getApplication()).getApplicationConfigs();
 
-        Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+        if (BuildConfig.DEBUG) {
+            Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+        }
     }
 
     @Override
@@ -90,6 +123,9 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         }
     }
 
+    /**
+     * Base subscribes for show error dialog and no internet dialog
+     */
     private void baseSubscribes() {
         mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showErrorDialog(mActivity, s));
         mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showNoInternetDialog(mActivity));
@@ -117,6 +153,14 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
         }
     }
 
+    /**
+     * Function for handle liveDataBug make easy to use network handling
+     *
+     * @param liveDataBug    this is bag which contain live data which give us way to subscribe and get parsed object
+     * @param listener       interface for get result which we need, success response , error response object, error object, json atc
+     * @param <O>            Parse object which build from success json parse
+     * @param <ErrorRequest> Error object which build form error json parse
+     */
     protected <O, ErrorRequest extends IBaseError> void handleRequestFor(final DMLiveDataBag<O, ErrorRequest> liveDataBug, final IBaseRequestListener<O> listener) {
         mViewModel.showProgress();
 

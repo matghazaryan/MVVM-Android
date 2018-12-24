@@ -1,11 +1,11 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.annotation.SuppressLint;
+import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import dmutils.com.dmutils.general.DMMemory;
 
 @SuppressLint("Registered")
@@ -21,7 +21,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final BaseApplicationConfigs applicationConfigs = ((BaseApplication) getApplication()).getApplicationConfigs();
-        Log.d(applicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+
+        if (BuildConfig.DEBUG) {
+            Log.d(applicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+        }
     }
 
     protected void hideActionBar() {

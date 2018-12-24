@@ -2,22 +2,22 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMEndlessRecyclerViewScrollListener;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentTransactionsBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
-public class TransactionsFragment extends MVVMBaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
+public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -47,7 +47,7 @@ public class TransactionsFragment extends MVVMBaseFragment<TransactionViewModel,
 
     @Override
     public void subscribers(final LifecycleOwner owner) {
-        subscribeToTransactionLoad(mViewModel.apiTransactions(DefaultValue.FIRST_PAGE));
+        subscribeToTransactionLoad(mViewModel.apiTransactions(IMVVMConstants.DefaultValue.FIRST_PAGE));
     }
 
     private void setupLoadMore() {

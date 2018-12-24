@@ -13,5 +13,4 @@ public abstract class BaseApplicationConfigs implements IBaseConstants {
     public abstract int getNoInternetMessage();
 
     public abstract String getTag();
-
 }

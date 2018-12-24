@@ -8,14 +8,12 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
-
 import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
+import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import dmutils.com.dmutils.permission.DMEasyPermissions;
 
 public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
 

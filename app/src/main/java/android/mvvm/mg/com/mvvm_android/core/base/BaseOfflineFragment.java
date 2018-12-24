@@ -1,10 +1,16 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
-
 import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 import java.util.Objects;
+
+/**
+ * This class for handle request and do not get no internet connection message(dialog) when not connected to the network
+ *
+ * @param <ViewModel> ViewModel extends BaseViewModel , this is main viewModel for fragment
+ * @param <Binding>   this is auto generated class for binding view and use in the viewModel
+ */
 
 public abstract class BaseOfflineFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> {
 

@@ -2,18 +2,19 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseOfflineFragment;
 import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseOfflineFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class CardsFragment extends MVVMBaseOfflineFragment<CardsViewModel, FragmentCardsBinding> implements IEmptyViewHandler {
+public class CardsFragment extends BaseOfflineFragment<CardsViewModel, FragmentCardsBinding> implements IEmptyViewHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -38,7 +39,7 @@ public class CardsFragment extends MVVMBaseOfflineFragment<CardsViewModel, Fragm
 
     @Override
     public void subscribers(final LifecycleOwner owner) {
-        mViewModel.<String>getAction(Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
+        mViewModel.<String>getAction(IMVVMConstants.Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
         mViewModel.dbCards().observe(owner, cardList -> mViewModel.setRecycleViewData(cardList));
         handleRequestFor(mViewModel.apiCards(), new IBaseRequestListener<Card>() {
             @Override

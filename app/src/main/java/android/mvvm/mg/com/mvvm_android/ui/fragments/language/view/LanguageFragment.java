@@ -2,16 +2,17 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.language.view;
 
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLanguageBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.LanguageLayoutBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.LanguageViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageFragment extends MVVMBaseFragment<LanguageViewModel, FragmentLanguageBinding> {
+public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLanguageBinding> {
 
     private final List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
 
@@ -41,9 +42,9 @@ public class LanguageFragment extends MVVMBaseFragment<LanguageViewModel, Fragme
     }
 
     private void initLanguageViews() {
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_armenian), Language.HY));
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_english), Language.EN));
-        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_russian), Language.RU));
+        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_armenian), IMVVMConstants.Language.HY));
+        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_english), IMVVMConstants.Language.EN));
+        mLanguageLayoutBindingList.add(createLanguageView(getString(R.string.language_russian), IMVVMConstants.Language.RU));
     }
 
     private LanguageLayoutBinding createLanguageView(final String name, final String code) {

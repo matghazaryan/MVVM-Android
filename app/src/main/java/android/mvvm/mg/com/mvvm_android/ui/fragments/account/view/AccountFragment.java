@@ -3,19 +3,18 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.account.view;
 import android.Manifest;
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BasePermissionFragment;
 import android.mvvm.mg.com.mvvm_android.core.base.IBaseOnPermissionSuccessListener;
 import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBasePermissionFragment;
 import android.view.View;
-
+import androidx.navigation.Navigation;
 import org.json.JSONObject;
 
-import androidx.navigation.Navigation;
-
-public class AccountFragment extends MVVMBasePermissionFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
+public class AccountFragment extends BasePermissionFragment<AccountViewModel, FragmentAccountBinding> implements IAccountHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -40,7 +39,7 @@ public class AccountFragment extends MVVMBasePermissionFragment<AccountViewModel
 
     @Override
     public void subscribers(final LifecycleOwner owner) {
-        mViewModel.getAction(Action.OPEN_LOGIN_FRAGMENT).observe(owner, o -> openLoginPage());
+        mViewModel.getAction(IMVVMConstants.Action.OPEN_LOGIN_FRAGMENT).observe(owner, o -> openLoginPage());
     }
 
     @Override
@@ -55,8 +54,7 @@ public class AccountFragment extends MVVMBasePermissionFragment<AccountViewModel
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_paymentHistoryFragment);
             }
-        }, PermissionRequestCode.STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
-
+        }, IMVVMConstants.PermissionRequestCode.STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -66,7 +64,7 @@ public class AccountFragment extends MVVMBasePermissionFragment<AccountViewModel
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_fileUploadFragment);
             }
-        }, PermissionRequestCode.LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE);
+        }, IMVVMConstants.PermissionRequestCode.LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     private void openLoginPage() {

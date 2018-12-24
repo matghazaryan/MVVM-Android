@@ -2,24 +2,24 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.login.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
 import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.base.MVVMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.handler.ILoginHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.viewModel.LoginViewModel;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
-
 import androidx.navigation.Navigation;
 import biometric.dm.com.dmbiometric.constants.IBIOConstants;
 import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
 import biometric.dm.com.dmbiometric.main.DMBiometricManager;
 
-public class LoginFragment extends MVVMBaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
+public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
 
     private DMBiometricManager<User> mBiometricManager;
 
@@ -64,8 +64,8 @@ public class LoginFragment extends MVVMBaseFragment<LoginViewModel, FragmentLogi
 
     @Override
     public void subscribers(final LifecycleOwner owner) {
-        mViewModel.<User>getAction(Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
-        mViewModel.<User>getAction(Action.OPEN_BIOMETRIC).observe(owner, this::showBiometric);
+        mViewModel.<User>getAction(IMVVMConstants.Action.OPEN_ACCOUNT_FRAGMENT).observe(owner, this::openAccount);
+        mViewModel.<User>getAction(IMVVMConstants.Action.OPEN_BIOMETRIC).observe(owner, this::showBiometric);
     }
 
     private void openAccount(final User user) {
@@ -76,7 +76,7 @@ public class LoginFragment extends MVVMBaseFragment<LoginViewModel, FragmentLogi
 //        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(action);           //send data (without custom object)
 
         final Bundle bundle = new Bundle();
-        bundle.putParcelable(BundleKey.USER, user);
+        bundle.putParcelable(IMVVMConstants.BundleKey.USER, user);
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment, bundle); //Send custom object
     }
 
