@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
-import dmutils.com.dmutils.permission.DMEasyPermissions;
+import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  * @param <ViewModel> ViewModel extends BaseViewModel , this is main viewModel for fragment
  * @param <Binding>   this is auto generated class for binding view and use in the viewModel
  */
-public abstract class BasePermissionFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> implements DMEasyPermissions.PermissionCallbacks {
+public abstract class DMBasePermissionFragment<ViewModel extends DMBaseViewModel, Binding extends ViewDataBinding> extends DMBaseFragment<ViewModel, Binding> implements DMUtilEasyPermissions.PermissionCallbacks {
 
-    private IBaseOnPermissionSuccessListener mListener;
+    private DMBaseIOnPermissionSuccessListener mListener;
 
     @Override
     public void onRequestPermissionsResult(final int requestCode, final @NonNull String[] permissions, final @NonNull int[] grantResults) {
@@ -30,14 +30,14 @@ public abstract class BasePermissionFragment<ViewModel extends BaseViewModel, Bi
      * @param requestCode Request code for permission(s)
      * @param perms       permission(s)
      */
-    protected void accessToPermission(final IBaseOnPermissionSuccessListener listener, final int requestCode, final String... perms) {
+    protected void accessToPermission(final DMBaseIOnPermissionSuccessListener listener, final int requestCode, final String... perms) {
         mListener = listener;
-        if (DMEasyPermissions.hasPermissions(getContext(), perms)) {
+        if (DMUtilEasyPermissions.hasPermissions(getContext(), perms)) {
             listener.onPermissionsGranted();
             listener.onPermissionsGranted(requestCode, perms[0]);
             listener.onPermissionsGranted(requestCode, Arrays.asList(perms));
         } else {
-            DMEasyPermissions.requestPermissions(this, null, requestCode, false, perms);
+            DMUtilEasyPermissions.requestPermissions(this, null, requestCode, false, perms);
         }
     }
 

@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.login.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
@@ -15,13 +15,14 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import androidx.navigation.Navigation;
-import biometric.dm.com.dmbiometric.constants.IBIOConstants;
-import biometric.dm.com.dmbiometric.listeners.IDMBiometricListener;
-import biometric.dm.com.dmbiometric.main.DMBiometricManager;
+import biometric.dm.com.dmbiometric.DMBIOIConstants;
+import biometric.dm.com.dmbiometric.DMBIOIListener;
+import biometric.dm.com.dmbiometric.DMBIOManager;
 
-public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
 
-    private DMBiometricManager<User> mBiometricManager;
+public class LoginFragment extends DMBaseFragment<LoginViewModel, FragmentLoginBinding> implements ILoginHandler {
+
+    private DMBIOManager<User> mBiometricManager;
 
     @Override
     protected int getLayoutRes() {
@@ -54,7 +55,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
 
     @Override
     public void onClickLogin(final View view) {
-        handleRequestFor(mViewModel.apiLogin(), new IBaseRequestListener<User>() {
+        handleRequestFor(mViewModel.apiLogin(), new DMBaseIRequestListener<User>() {
             @Override
             public void onSuccess(final User user) {
                 mViewModel.onSuccessLogin(user);
@@ -82,14 +83,14 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showBiometric(final User user) {
-        mBiometricManager = MVVMDialog.showBiometricForEncrypt(mActivity, user, new IDMBiometricListener<User>() {
+        mBiometricManager = MVVMDialog.showBiometricForEncrypt(mActivity, user, new DMBIOIListener<User>() {
             @Override
             public void onSuccessEncrypted() {
                 openAccount(user);
             }
 
             @Override
-            public void onFailed(final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
+            public void onFailed(final DMBIOIConstants.FailedType type, final int helpCode, final CharSequence helpString) {
                 mViewModel.handleBiometricErrors(user, type, helpCode, helpString);
             }
         });

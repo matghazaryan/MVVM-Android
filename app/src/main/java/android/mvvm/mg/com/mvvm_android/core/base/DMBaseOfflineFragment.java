@@ -1,7 +1,7 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.Objects;
 
@@ -12,10 +12,10 @@ import java.util.Objects;
  * @param <Binding>   this is auto generated class for binding view and use in the viewModel
  */
 
-public abstract class BaseOfflineFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends BaseFragment<ViewModel, Binding> {
+public abstract class DMBaseOfflineFragment<ViewModel extends DMBaseViewModel, Binding extends ViewDataBinding> extends DMBaseFragment<ViewModel, Binding> {
 
     @Override
-    protected <O, ErrorRequest extends IBaseError> void handleRequestFor(DMLiveDataBag<O, ErrorRequest> liveDataBug, IBaseRequestListener<O> listener) {
+    protected <O, ErrorRequest extends DMBaseIError> void handleRequestFor(DMNetworkLiveDataBag<O, ErrorRequest> liveDataBug, DMBaseIRequestListener<O> listener) {
         mViewModel.showProgress();
 
         liveDataBug.getSuccessT().observe(getViewLifecycleOwner(), oSuccessT -> {

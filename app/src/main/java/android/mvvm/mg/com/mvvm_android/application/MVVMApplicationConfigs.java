@@ -2,11 +2,11 @@ package android.mvvm.mg.com.mvvm_android.application;
 
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseApplicationConfigs;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseApplicationConfigs;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 
-public class MVVMApplicationConfigs extends BaseApplicationConfigs {
+public class MVVMApplicationConfigs extends DMBaseApplicationConfigs {
 
     @Override
     public void showErrorDialog(final Context context, final String message) {

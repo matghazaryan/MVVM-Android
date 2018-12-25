@@ -1,8 +1,9 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
-import com.dm.dmnetworking.api_client.base.model.error.ErrorResponse;
-import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
-import com.dm.dmnetworking.api_client.base.model.success.SuccessResponse;
+
+import com.dm.dmnetworking.model.error.ErrorResponse;
+import com.dm.dmnetworking.model.progress.FileProgress;
+import com.dm.dmnetworking.model.success.SuccessResponse;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @param <O> Object type which will parse from response json
  */
-public interface IBaseRequestListener<O> {
+public interface DMBaseIRequestListener<O> {
 
     default void onSuccess(final O o) {
     }

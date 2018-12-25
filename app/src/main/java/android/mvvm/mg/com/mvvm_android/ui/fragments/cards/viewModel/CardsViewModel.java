@@ -3,18 +3,17 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModelItemClick;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseViewModelItemClick;
 import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.support.annotation.NonNull;
-
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.List;
 
-public class CardsViewModel extends BaseViewModelItemClick<Card, Empty> {
+public class CardsViewModel extends DMBaseViewModelItemClick<Card, Empty> {
 
     public final ObservableField<List<Card>> cardList = new ObservableField<>();
 
@@ -26,7 +25,7 @@ public class CardsViewModel extends BaseViewModelItemClick<Card, Empty> {
         return DataRepository.database().getCardList(getApplication().getApplicationContext());
     }
 
-    public DMLiveDataBag<Card, RequestError> apiCards() {
+    public DMNetworkLiveDataBag<Card, RequestError> apiCards() {
         return DataRepository.api().getCardListFromNetwork(getApplication().getApplicationContext());
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * IBaseOnPermissionSuccessListener is the interface for handle permission request
  */
-public interface IBaseOnPermissionSuccessListener {
+public interface DMBaseIOnPermissionSuccessListener {
 
     default void onPermissionsGranted() {
 

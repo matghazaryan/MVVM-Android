@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.Objects;
 
@@ -33,17 +33,17 @@ import java.util.Objects;
  * @param <ViewModel> ViewModel extends BaseViewModel , this is main viewModel for fragment
  * @param <Binding>   this is auto generated class for binding view and use in the viewModel
  */
-public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding extends ViewDataBinding> extends Fragment implements IBaseFragment, IBaseConstants {
+public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding extends ViewDataBinding> extends Fragment implements DMBaseIFragment, DMBaseIConstants {
 
-    protected BaseActivity mActivity;
+    protected DMBaseActivity mActivity;
 
     protected ViewModel mViewModel;
 
     protected Binding mBinding;
 
-    protected BaseApplicationConfigs mApplicationConfigs;
+    protected DMBaseApplicationConfigs mApplicationConfigs;
 
-    protected BaseFragment() {
+    protected DMBaseFragment() {
     }
 
     /**
@@ -73,8 +73,8 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
     public void onAttach(final Context context) {
         super.onAttach(context);
 
-        mActivity = (BaseActivity) context;
-        mApplicationConfigs = ((BaseApplication) Objects.requireNonNull(getActivity()).getApplication()).getApplicationConfigs();
+        mActivity = (DMBaseActivity) context;
+        mApplicationConfigs = ((DMBaseApplication) Objects.requireNonNull(getActivity()).getApplication()).getApplicationConfigs();
 
         if (BuildConfig.DEBUG) {
             Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
@@ -161,7 +161,7 @@ public abstract class BaseFragment<ViewModel extends BaseViewModel, Binding exte
      * @param <O>            Parse object which build from success json parse
      * @param <ErrorRequest> Error object which build form error json parse
      */
-    protected <O, ErrorRequest extends IBaseError> void handleRequestFor(final DMLiveDataBag<O, ErrorRequest> liveDataBug, final IBaseRequestListener<O> listener) {
+    protected <O, ErrorRequest extends DMBaseIError> void handleRequestFor(final DMNetworkLiveDataBag<O, ErrorRequest> liveDataBug, final DMBaseIRequestListener<O> listener) {
         mViewModel.showProgress();
 
         liveDataBug.getSuccessT().observe(getViewLifecycleOwner(), oSuccessT -> {

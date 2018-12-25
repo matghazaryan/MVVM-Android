@@ -5,7 +5,7 @@ package android.mvvm.mg.com.mvvm_android.core.base;
  *
  * @param <T> Object type which will return, when click on item view
  */
-public interface IBaseOnItemClickListener<T> extends IBaseEmptyViewListener {
+public interface DMBaseIOnItemClickListener<T> extends DmBaseIEmptyViewListener {
 
     void onItemClick(final T t);
 }

@@ -4,16 +4,15 @@ import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.core.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
-import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.api.MVVMNetworking;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
-
-import com.dm.dmnetworking.api_client.base.DMBaseRequestConfig;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import com.dm.dmnetworking.parser.DMParserConfigs;
+import com.dm.dmnetworking.DMNetworkBaseRequestConfig;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
+import com.dm.dmnetworking.DMNetworkParserConfigs;
 
 import java.io.File;
 import java.util.HashMap;
@@ -35,73 +34,73 @@ public final class Api implements IAPIHelper {
     }
 
     @Override
-    public DMLiveDataBag<Configs, RequestError> getConfigs(final Context context) {
-        final DMBaseRequestConfig<Configs, RequestError> config = new DMBaseRequestConfig<Configs, RequestError>(context)
+    public DMNetworkLiveDataBag<Configs, RequestError> getConfigs(final Context context) {
+        final DMNetworkBaseRequestConfig<Configs, RequestError> config = new DMNetworkBaseRequestConfig<Configs, RequestError>(context)
                 .setUrl(IUrls.Method.CONFIGS)
-                .setParserConfigs(new DMParserConfigs<>(Configs.class, "data"))
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setParserConfigs(new DMNetworkParserConfigs<>(Configs.class, "data"))
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }
 
     @Override
-    public DMLiveDataBag<User, RequestError> login(final Context context, final User user) {
+    public DMNetworkLiveDataBag<User, RequestError> login(final Context context, final User user) {
         final Map<String, Object> params = new HashMap<>();
         params.put(IRequestKeys.EMAIL, user.getEmail());
         params.put(IRequestKeys.PASSWORD, user.getPassword());
 
-        final DMBaseRequestConfig<User, RequestError> config = new DMBaseRequestConfig<User, RequestError>(context)
+        final DMNetworkBaseRequestConfig<User, RequestError> config = new DMNetworkBaseRequestConfig<User, RequestError>(context)
                 .setUrl(IUrls.Method.LOGIN)
                 .setParams(params)
-                .setParserConfigs(new DMParserConfigs<>(User.class, "data"))
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setParserConfigs(new DMNetworkParserConfigs<>(User.class, "data"))
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }
 
     @Override
-    public DMLiveDataBag<String, RequestError> logout(final Context context) {
-        final DMBaseRequestConfig<String, RequestError> config = new DMBaseRequestConfig<String, RequestError>(context)
+    public DMNetworkLiveDataBag<String, RequestError> logout(final Context context) {
+        final DMNetworkBaseRequestConfig<String, RequestError> config = new DMNetworkBaseRequestConfig<String, RequestError>(context)
                 .setUrl(IUrls.Method.LOGOUT)
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }
 
     @Override
-    public DMLiveDataBag<Card, RequestError> getCardListFromNetwork(final Context context) {
-        final DMBaseRequestConfig<Card, RequestError> config = new DMBaseRequestConfig<Card, RequestError>(context)
+    public DMNetworkLiveDataBag<Card, RequestError> getCardListFromNetwork(final Context context) {
+        final DMNetworkBaseRequestConfig<Card, RequestError> config = new DMNetworkBaseRequestConfig<Card, RequestError>(context)
                 .setUrl(IUrls.Method.CARDS)
-                .setParserConfigs(new DMParserConfigs<>(Card.class, "data", "cards_list"))
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setParserConfigs(new DMNetworkParserConfigs<>(Card.class, "data", "cards_list"))
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }
 
     @Override
-    public DMLiveDataBag<String, RequestError> sendImage(final Context context, final String path) {
+    public DMNetworkLiveDataBag<String, RequestError> sendImage(final Context context, final String path) {
         final Map<String, Object> params = new HashMap<>();
         params.put(IRequestKeys.IMAGE, new File(path));
 
-        final DMBaseRequestConfig<String, RequestError> config = new DMBaseRequestConfig<String, RequestError>(context)
+        final DMNetworkBaseRequestConfig<String, RequestError> config = new DMNetworkBaseRequestConfig<String, RequestError>(context)
                 .setUrl(IUrls.Method.SAVE_IMAGE)
                 .setParams(params)
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }
 
     @Override
-    public DMLiveDataBag<TransactionData, RequestError> getTransactionList(final Context context, final int page) {
+    public DMNetworkLiveDataBag<TransactionData, RequestError> getTransactionList(final Context context, final int page) {
 
         final Map<String, Object> params = new HashMap<>();
         params.put(IRequestKeys.PAGE, page);
 
-        final DMBaseRequestConfig<TransactionData, RequestError> config = new DMBaseRequestConfig<TransactionData, RequestError>(context)
+        final DMNetworkBaseRequestConfig<TransactionData, RequestError> config = new DMNetworkBaseRequestConfig<TransactionData, RequestError>(context)
                 .setUrl(MVVMUtils.getTransactionUrl(page))
                 .setParams(params)
-                .setParserConfigs(new DMParserConfigs<>(TransactionData.class, "data"))
-                .setErrorParserConfigs(new DMParserConfigs<>(RequestError.class));
+                .setParserConfigs(new DMNetworkParserConfigs<>(TransactionData.class, "data"))
+                .setErrorParserConfigs(new DMNetworkParserConfigs<>(RequestError.class));
 
         return MVVMNetworking.getInstance().request(config);
     }

@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
@@ -13,14 +13,13 @@ import android.mvvm.mg.com.mvvm_android.core.utils.MVVMFileUtils;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
 import com.dm.camera.constants.IDMCameraConstants;
 import com.dm.camera.models.CapturePhoto;
 import com.dm.camera.models.MediaData;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
+import com.dm.dmnetworking.model.progress.FileProgress;
 
-public class SettingsViewModel extends BaseViewModel {
+public class SettingsViewModel extends DMBaseViewModel {
 
     private String newPath;
 
@@ -77,7 +76,7 @@ public class SettingsViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<String, RequestError> uploadImage() {
+    public DMNetworkLiveDataBag<String, RequestError> uploadImage() {
         return DataRepository.api().sendImage(getApplication().getApplicationContext(), newPath);
     }
 

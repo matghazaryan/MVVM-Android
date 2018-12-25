@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * IBaseModelView interface which has few function for use in child classes
  */
-public interface IBaseModelView extends IBaseConstants, IMVVMConstants {
+interface DMBaseIModelView extends DMBaseIConstants, IMVVMConstants {
 
     default void initUiTextFieldsTags(final Map<String, ObservableField<String>> uiTextFieldsTags) {
     }

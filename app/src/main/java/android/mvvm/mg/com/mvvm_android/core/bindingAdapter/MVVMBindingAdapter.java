@@ -3,9 +3,9 @@ package android.mvvm.mg.com.mvvm_android.core.bindingAdapter;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseBindingAdapter;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseEmptyViewListener;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseOnItemClickListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseBindingAdapter;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnItemClickListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DmBaseIEmptyViewListener;
 import android.mvvm.mg.com.mvvm_android.core.glide.GlideApp;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
@@ -24,7 +24,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MVVMBindingAdapter extends BaseBindingAdapter {
+public class MVVMBindingAdapter extends DMBaseBindingAdapter {
 
     @BindingAdapter("setImageUrl")
     public static void setImageUrl(final ImageView imageView, final String path) {
@@ -56,7 +56,7 @@ public class MVVMBindingAdapter extends BaseBindingAdapter {
     }
 
     @BindingAdapter(value = {"initRecycleViewCardList", "listener"})
-    public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList, final IBaseOnItemClickListener<Card> listener) {
+    public static void initRecycleViewCardList(final RecyclerView recyclerView, final List<Card> cardList, final DMBaseIOnItemClickListener<Card> listener) {
         final Context context = recyclerView.getContext();
         if (recyclerView.getAdapter() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -70,7 +70,7 @@ public class MVVMBindingAdapter extends BaseBindingAdapter {
     }
 
     @BindingAdapter(value = {"initRecycleViewTransactionList", "listener"})
-    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData, final IBaseEmptyViewListener listener) {
+    public static void initRecycleViewTransactionList(final RecyclerView recyclerView, final TransactionData transactionData, final DmBaseIEmptyViewListener listener) {
         if (transactionData != null) {
             if (transactionData.getNextPage() == 0) {
                 recyclerView.clearOnScrollListeners();

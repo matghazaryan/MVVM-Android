@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.language.view;
 
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLanguageBinding;
@@ -12,7 +12,7 @@ import android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.Language
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageFragment extends BaseFragment<LanguageViewModel, FragmentLanguageBinding> {
+public class LanguageFragment extends DMBaseFragment<LanguageViewModel, FragmentLanguageBinding> {
 
     private final List<LanguageLayoutBinding> mLanguageLayoutBindingList = new ArrayList<>();
 

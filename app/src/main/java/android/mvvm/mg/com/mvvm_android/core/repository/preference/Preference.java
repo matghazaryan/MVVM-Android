@@ -2,9 +2,7 @@ package android.mvvm.mg.com.mvvm_android.core.repository.preference;
 
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
 import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.preference.MVVMPrefUtils;
-
-import com.dm.dmnetworking.parser.DMJsonParser;
-
+import com.dm.dmnetworking.DMNetworkJsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +28,7 @@ public final class Preference implements IPreferenceHelper {
 
     @Override
     public Configs getConfigs() throws JSONException {
-        return DMJsonParser.parseObject(new JSONObject(MVVMPrefUtils.getConfigsJson()), Configs.class, "data");
+        return DMNetworkJsonParser.parseObject(new JSONObject(MVVMPrefUtils.getConfigsJson()), Configs.class, "data");
     }
 
     @Override

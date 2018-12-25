@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 /**
  * BaseSafeUnbox abstract class which has few functions for safe convert object type to simple types
  */
-public abstract class BaseSafeUnbox {
+public abstract class DMBaseSafeUnbox {
 
     public static int safeUnbox(final Integer boxed) {
         return boxed == null ? 0 : boxed;

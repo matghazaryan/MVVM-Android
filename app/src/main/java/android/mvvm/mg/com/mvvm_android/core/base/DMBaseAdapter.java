@@ -16,11 +16,11 @@ import java.util.List;
  * @param <T>       is object which use in the current adapter
  * @param <Binding> binding is auto generated class on adapter view (item.xml)
  */
-public abstract class BaseAdapter<T, Binding extends ViewDataBinding> extends RecyclerView.Adapter<BaseAdapter.BaseViewHolder<Binding>> {
+public abstract class DMBaseAdapter<T, Binding extends ViewDataBinding> extends RecyclerView.Adapter<DMBaseAdapter.BaseViewHolder<Binding>> {
 
     protected List<T> tList;
     protected LayoutInflater inflater;
-    protected IBaseOnItemClickListener<T> listener;
+    protected DMBaseIOnItemClickListener<T> listener;
 
     /**
      * Give layout resource id at adapter view (item.xml)
@@ -39,11 +39,11 @@ public abstract class BaseAdapter<T, Binding extends ViewDataBinding> extends Re
      */
     protected abstract View onBaseBindViewHolder(final @NonNull BaseViewHolder<Binding> holder, final int position, final T t);
 
-    public BaseAdapter(final List<T> tList) {
+    public DMBaseAdapter(final List<T> tList) {
         this.tList = tList;
     }
 
-    public BaseAdapter(final List<T> tList, final IBaseOnItemClickListener<T> listener) {
+    public DMBaseAdapter(final List<T> tList, final DMBaseIOnItemClickListener<T> listener) {
         this.tList = tList;
         this.listener = listener;
     }

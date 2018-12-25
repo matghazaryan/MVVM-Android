@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="android.mvvm.mg.com.mvvm_android.core.base.BaseSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.base.DMBaseSafeUnbox" />
 
         <variable
             name="isVisible"

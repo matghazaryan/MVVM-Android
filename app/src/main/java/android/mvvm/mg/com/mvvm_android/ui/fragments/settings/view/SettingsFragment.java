@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.settings.view;
 
 import android.content.Intent;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsHandler;
@@ -12,10 +12,10 @@ import android.view.View;
 import androidx.navigation.Navigation;
 import com.dm.camera.activities.DMCameraActivity;
 import com.dm.camera.constants.IDMCameraConstants;
-import com.dm.dmnetworking.api_client.base.model.progress.FileProgress;
+import com.dm.dmnetworking.model.progress.FileProgress;
 import org.json.JSONObject;
 
-public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
+public class SettingsFragment extends DMBaseFragment<SettingsViewModel, FragmentSettingsBinding> implements ISettingsHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -62,7 +62,7 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel, FragmentSe
     }
 
     private void subscribeOnFileUpload() {
-        handleRequestFor(mViewModel.uploadImage(), new IBaseRequestListener<String>() {
+        handleRequestFor(mViewModel.uploadImage(), new DMBaseIRequestListener<String>() {
             @Override
             public void onSuccessJsonObject(final JSONObject jsonObject) {
                 mViewModel.updateImagePath();

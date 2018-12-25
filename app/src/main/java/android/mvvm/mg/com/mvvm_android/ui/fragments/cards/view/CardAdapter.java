@@ -1,8 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.view;
 
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseAdapter;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseOnItemClickListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseAdapter;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnItemClickListener;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.databinding.CardItemBinding;
 import android.support.annotation.NonNull;
@@ -10,9 +10,9 @@ import android.view.View;
 
 import java.util.List;
 
-public class CardAdapter extends BaseAdapter<Card, CardItemBinding> {
+public class CardAdapter extends DMBaseAdapter<Card, CardItemBinding> {
 
-    public CardAdapter(final List<Card> cardList, final IBaseOnItemClickListener<Card> listener) {
+    public CardAdapter(final List<Card> cardList, final DMBaseIOnItemClickListener<Card> listener) {
         super(cardList, listener);
     }
 

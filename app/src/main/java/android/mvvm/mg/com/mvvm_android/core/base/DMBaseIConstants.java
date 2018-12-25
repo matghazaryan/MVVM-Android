@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
-public interface IBaseConstants {
+public interface DMBaseIConstants {
 
     interface AnimDuration {
         int ROOT_VISIBLE_DELAY = 280;

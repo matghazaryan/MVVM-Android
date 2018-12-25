@@ -2,24 +2,24 @@ package android.mvvm.mg.com.mvvm_android.core.repository.api;
 
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
-import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
-import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
+import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
+import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
 
 public interface IAPIHelper {
 
-    DMLiveDataBag<Configs, RequestError> getConfigs(Context context);
+    DMNetworkLiveDataBag<Configs, RequestError> getConfigs(Context context);
 
-    DMLiveDataBag<User, RequestError> login(Context context, User user);
+    DMNetworkLiveDataBag<User, RequestError> login(Context context, User user);
 
-    DMLiveDataBag<String, RequestError> logout(final Context context);
+    DMNetworkLiveDataBag<String, RequestError> logout(final Context context);
 
-    DMLiveDataBag<Card, RequestError> getCardListFromNetwork(Context context);
+    DMNetworkLiveDataBag<Card, RequestError> getCardListFromNetwork(Context context);
 
-    DMLiveDataBag<String, RequestError> sendImage(Context context, String path);
+    DMNetworkLiveDataBag<String, RequestError> sendImage(Context context, String path);
 
-    DMLiveDataBag<TransactionData, RequestError> getTransactionList(final Context context, final int page);
+    DMNetworkLiveDataBag<TransactionData, RequestError> getTransactionList(final Context context, final int page);
 }

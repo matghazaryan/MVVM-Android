@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.splash.viewModel;
 
 import android.app.Application;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.models.Configs;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
@@ -11,14 +11,11 @@ import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
-
+import biometric.dm.com.dmbiometric.DMBIOIConstants;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 import org.json.JSONObject;
 
-import biometric.dm.com.dmbiometric.constants.IBIOConstants;
-
-public class SplashViewModel extends BaseViewModel {
+public class SplashViewModel extends DMBaseViewModel {
 
     public SplashViewModel(final @NonNull Application application) {
         super(application);
@@ -33,7 +30,7 @@ public class SplashViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<Configs, RequestError> apiConfigs() {
+    public DMNetworkLiveDataBag<Configs, RequestError> apiConfigs() {
         return DataRepository.api().getConfigs(getApplication().getApplicationContext());
     }
 
@@ -54,11 +51,11 @@ public class SplashViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<User, RequestError> apiLogin(final User user) {
+    public DMNetworkLiveDataBag<User, RequestError> apiLogin(final User user) {
         return DataRepository.api().login(getApplication().getApplicationContext(), user);
     }
 
-    public void handleBiometricErrors(final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
+    public void handleBiometricErrors(final DMBIOIConstants.FailedType type, final int helpCode, final CharSequence helpString) {
         switch (type) {
             case AUTHENTICATION_FAILED:
                 break;

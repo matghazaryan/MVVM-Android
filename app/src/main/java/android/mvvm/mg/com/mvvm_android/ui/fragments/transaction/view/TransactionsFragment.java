@@ -2,8 +2,8 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseFragment;
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseRequestListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
@@ -15,9 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
-public class TransactionsFragment extends BaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
+public class TransactionsFragment extends DMBaseFragment<TransactionViewModel, FragmentTransactionsBinding> implements IEmptyViewHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -61,8 +61,8 @@ public class TransactionsFragment extends BaseFragment<TransactionViewModel, Fra
         });
     }
 
-    private void subscribeToTransactionLoad(final DMLiveDataBag<TransactionData, RequestError> apiTransactionLiveDataBag) {
-        handleRequestFor(apiTransactionLiveDataBag, new IBaseRequestListener<TransactionData>() {
+    private void subscribeToTransactionLoad(final DMNetworkLiveDataBag<TransactionData, RequestError> apiTransactionLiveDataBag) {
+        handleRequestFor(apiTransactionLiveDataBag, new DMBaseIRequestListener<TransactionData>() {
             @Override
             public void onSuccess(final TransactionData transactionData) {
                 mViewModel.onLoad(transactionData);

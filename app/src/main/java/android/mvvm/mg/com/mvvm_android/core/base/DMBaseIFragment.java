@@ -6,7 +6,7 @@ import android.mvvm.mg.com.mvvm_android.R;
 /**
  * IBaseFragment interface which has few function for use in child classes
  */
-public interface IBaseFragment {
+interface DMBaseIFragment {
 
     default void initialize() {
     }

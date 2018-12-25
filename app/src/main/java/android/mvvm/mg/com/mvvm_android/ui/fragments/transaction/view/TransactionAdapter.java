@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 
 import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseAdapter;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseAdapter;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.Transaction;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionGroup;
 import android.mvvm.mg.com.mvvm_android.databinding.TransactionInnerItemBinding;
@@ -12,7 +12,7 @@ import android.view.View;
 
 import java.util.List;
 
-public class TransactionAdapter extends BaseAdapter<TransactionGroup, TransactionItemBinding> {
+public class TransactionAdapter extends DMBaseAdapter<TransactionGroup, TransactionItemBinding> {
 
     public TransactionAdapter(final List<TransactionGroup> transactionGroups) {
         super(transactionGroups);

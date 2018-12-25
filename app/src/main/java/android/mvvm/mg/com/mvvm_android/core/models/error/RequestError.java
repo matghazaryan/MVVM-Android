@@ -1,11 +1,11 @@
 package android.mvvm.mg.com.mvvm_android.core.models.error;
 
 
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseError;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIError;
 
 import java.util.HashMap;
 
-public class RequestError implements IBaseError {
+public class RequestError implements DMBaseIError {
 
     private String status;
     private String message;

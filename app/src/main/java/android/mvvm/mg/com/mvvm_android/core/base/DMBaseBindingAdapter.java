@@ -13,7 +13,7 @@ import android.view.View;
  * set checked status
  * make fade animation show/hide
  */
-public abstract class BaseBindingAdapter {
+public abstract class DMBaseBindingAdapter {
 
     @BindingAdapter("baseVisibleView")
     public static void baseVisibleView(final View view, final boolean isVisible) {

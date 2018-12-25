@@ -1,8 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.core.constants;
 
-import android.mvvm.mg.com.mvvm_android.core.base.IBaseConstants;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIConstants;
 
-public interface IMVVMConstants extends IBaseConstants {
+public interface IMVVMConstants extends DMBaseIConstants {
 
     String TAG = "MVVM";
 

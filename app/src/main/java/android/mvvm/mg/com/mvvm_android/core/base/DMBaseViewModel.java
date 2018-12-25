@@ -8,8 +8,8 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
-import com.dm.dmnetworking.api_client.base.model.error.ErrorE;
-import dmutils.com.dmutils.permission.DMEasyPermissions;
+import com.dm.dmnetworking.model.error.ErrorE;
+import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +22,9 @@ import java.util.Objects;
  * functions in the fragment
  * show/hide content after request with delay and when navigate in pages
  */
-public abstract class BaseViewModel extends AndroidViewModel implements IBaseModelView {
+public abstract class DMBaseViewModel extends AndroidViewModel implements DMBaseIModelView {
 
-    protected final BaseApplicationConfigs mApplicationConfigs;
+    protected final DMBaseApplicationConfigs mApplicationConfigs;
 
     private final SparseArray<MutableLiveData<Object>> baseMutableLiveDataSparseArray = new SparseArray<>();
 
@@ -39,9 +39,9 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isBaseRootVisibleDelay = new ObservableField<>(false);
 
-    protected BaseViewModel(final @NonNull Application application) {
+    protected DMBaseViewModel(final @NonNull Application application) {
         super(application);
-        mApplicationConfigs = ((BaseApplication) Objects.requireNonNull(application)).getApplicationConfigs();
+        mApplicationConfigs = ((DMBaseApplication) Objects.requireNonNull(application)).getApplicationConfigs();
         new Handler().postDelayed(() -> isBaseRootVisibleDelay.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
     }
 
@@ -107,7 +107,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
      * @param errorE         Error object from json pars
      * @param <ErrorRequest> Error object type
      */
-    <ErrorRequest extends IBaseError> void handleErrors(final ErrorE<ErrorRequest> errorE) {
+    <ErrorRequest extends DMBaseIError> void handleErrors(final ErrorE<ErrorRequest> errorE) {
         if (errorE != null) {
             final ErrorRequest error = errorE.getE();
             if (error != null) {
@@ -159,6 +159,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseMod
     }
 
     void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults, final Object... receivers) {
-        DMEasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, receivers);
+        DMUtilEasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, receivers);
     }
 }

@@ -12,11 +12,11 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import dmutils.com.dmutils.general.DMDimensionConverter;
+import dmutils.com.dmutils.general.DMUtilDimensionConverter;
 
 import java.util.Locale;
 
-public class MVVMUtils {
+public final class MVVMUtils {
 
     public static LayerDrawable changeDrawableColor(final Context context, final String startColor, final String endColor) {
 
@@ -25,19 +25,19 @@ public class MVVMUtils {
         final GradientDrawable gd = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{Color.parseColor(startColor), Color.parseColor(endColor)});
-        gd.setCornerRadius(DMDimensionConverter.dpToPixel(corner, context));
+        gd.setCornerRadius(DMUtilDimensionConverter.dpToPixel(corner, context));
 
         final GradientDrawable bd = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{ContextCompat.getColor(context, R.color.black_30), ContextCompat.getColor(context, R.color.black_30)});
-        bd.setCornerRadius(DMDimensionConverter.dpToPixel(corner, context));
+        bd.setCornerRadius(DMUtilDimensionConverter.dpToPixel(corner, context));
 
         final Drawable[] layers = {bd, gd};
         final LayerDrawable layerDrawable = new LayerDrawable(layers);
 
 
         layerDrawable.setLayerInset(0, 0, 0, 0, 0);
-        layerDrawable.setLayerInset(1, (int) DMDimensionConverter.dpToPixel(0, context), 0, (int) DMDimensionConverter.dpToPixel(1, context), (int) DMDimensionConverter.dpToPixel(2, context));
+        layerDrawable.setLayerInset(1, (int) DMUtilDimensionConverter.dpToPixel(0, context), 0, (int) DMUtilDimensionConverter.dpToPixel(1, context), (int) DMUtilDimensionConverter.dpToPixel(2, context));
 
         return layerDrawable;
     }

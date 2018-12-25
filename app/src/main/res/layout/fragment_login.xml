@@ -6,7 +6,7 @@
 
         <import type="android.view.View" />
 
-        <import type="android.mvvm.mg.com.mvvm_android.core.base.BaseSafeUnbox" />
+        <import type="android.mvvm.mg.com.mvvm_android.core.base.DMBaseSafeUnbox" />
 
         <variable
             name="viewModel"

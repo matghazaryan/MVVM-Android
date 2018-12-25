@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.mvvm.mg.com.mvvm_android.R;
-import android.mvvm.mg.com.mvvm_android.core.base.BaseViewModel;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseViewModel;
 import android.mvvm.mg.com.mvvm_android.core.constants.IRequestKeys;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
@@ -13,14 +13,12 @@ import android.mvvm.mg.com.mvvm_android.core.utils.MVVMValidator;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-
-import com.dm.dmnetworking.api_client.base.DMLiveDataBag;
+import biometric.dm.com.dmbiometric.DMBIOIConstants;
+import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.Map;
 
-import biometric.dm.com.dmbiometric.constants.IBIOConstants;
-
-public class LoginViewModel extends BaseViewModel {
+public class LoginViewModel extends DMBaseViewModel {
 
     public final MutableLiveData<String> email = new MutableLiveData<>();
     public final MutableLiveData<String> password = new MutableLiveData<>();
@@ -60,7 +58,7 @@ public class LoginViewModel extends BaseViewModel {
         checkValidation();
     }
 
-    public void handleBiometricErrors(final User user, final IBIOConstants.FailedType type, final int helpCode, final CharSequence helpString) {
+    public void handleBiometricErrors(final User user, final DMBIOIConstants.FailedType type, final int helpCode, final CharSequence helpString) {
         switch (type) {
             case AUTHENTICATION_FAILED:
                 break;
@@ -69,7 +67,7 @@ public class LoginViewModel extends BaseViewModel {
         }
     }
 
-    public DMLiveDataBag<User, RequestError> apiLogin() {
+    public DMNetworkLiveDataBag<User, RequestError> apiLogin() {
         final Boolean isChecked = isCheckedRemember.get();
         DataRepository.preference().setRemember(isChecked != null ? isChecked : false);
         return DataRepository.api().login(getApplication().getApplicationContext(), new User(email.getValue(), password.getValue()));
