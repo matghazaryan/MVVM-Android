@@ -63,11 +63,10 @@ public final class MVVMBindingAdapter extends DMBaseBindingAdapter {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(new CardAdapter(cardList != null ? cardList : new ArrayList<>(), listener));
-            listener.onEmptyVisible(cardList == null || cardList.size() == 0);
         } else {
             ((CardAdapter) recyclerView.getAdapter()).replaceList(cardList);
-            listener.onEmptyVisible(cardList == null || cardList.size() == 0);
         }
+        listener.onEmptyVisible(cardList == null || cardList.size() == 0);
     }
 
     @BindingAdapter(value = {"initRecycleViewTransactionList", "listener"})

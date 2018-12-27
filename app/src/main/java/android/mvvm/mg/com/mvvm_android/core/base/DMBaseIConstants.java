@@ -5,6 +5,7 @@ public interface DMBaseIConstants {
     interface AnimDuration {
         int ROOT_VISIBLE_DELAY = 280;
         int PROGRESS_DIALOG_VISIBLE_DELAY = 250;
+        int ALPHA = 300;
     }
 
     interface BaseAction {

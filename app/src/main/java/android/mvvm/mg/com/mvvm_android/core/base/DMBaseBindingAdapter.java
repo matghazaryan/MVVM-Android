@@ -39,12 +39,12 @@ public abstract class DMBaseBindingAdapter {
             if (isVisible) {
                 view.setVisibility(View.VISIBLE);
                 final ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                anim.setDuration(300);
+                anim.setDuration(DMBaseIConstants.AnimDuration.ALPHA);
                 anim.start();
             } else {
                 view.animate()
                         .alpha(0.0f)
-                        .setDuration(300)
+                        .setDuration(DMBaseIConstants.AnimDuration.ALPHA)
                         .setListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationEnd(Animator animation) {
