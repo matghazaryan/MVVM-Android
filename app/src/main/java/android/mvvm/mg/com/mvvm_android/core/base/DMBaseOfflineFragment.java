@@ -1,6 +1,7 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.databinding.ViewDataBinding;
+
 import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.Objects;
@@ -54,8 +55,6 @@ public abstract class DMBaseOfflineFragment<ViewModel extends DMBaseViewModel, B
             mViewModel.hideProgress();
             mViewModel.handleErrors(error);
         });
-        liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> {
-            mViewModel.hideProgress();
-        });
+        liveDataBug.getNoInternetConnection().observe(getViewLifecycleOwner(), s -> mViewModel.hideProgress());
     }
 }

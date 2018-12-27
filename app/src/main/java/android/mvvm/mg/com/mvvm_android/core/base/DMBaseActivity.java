@@ -2,7 +2,6 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.annotation.SuppressLint;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,11 +11,6 @@ import android.util.Log;
  */
 @SuppressLint("Registered")
 public abstract class DMBaseActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected void onResume() {

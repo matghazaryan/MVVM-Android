@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.core.models.transaction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Transaction {
+public final class Transaction {
 
     @JsonProperty("label")
     private String label;

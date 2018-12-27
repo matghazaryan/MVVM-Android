@@ -1,17 +1,18 @@
 package android.mvvm.mg.com.mvvm_android.core.dialog;
 
-import alertdialog.dm.com.dmalertdialog.DMDialogBaseConfigs;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+
+import alertdialog.dm.com.dmalertdialog.DMDialogBaseConfigs;
 import biometric.dm.com.dmbiometric.DMBIOConfigs;
 import biometric.dm.com.dmbiometric.DMBIOIConstants;
 import biometric.dm.com.dmbiometric.DMBIOIListener;
 import biometric.dm.com.dmbiometric.DMBIOManager;
 
-public class MVVMDialog {
+public final class MVVMDialog {
 
     public static void showErrorDialog(final Context context, final String message) {
         new MVVMAlertDialog().showErrorDialog(new DMDialogBaseConfigs<>(context).setContent(message));

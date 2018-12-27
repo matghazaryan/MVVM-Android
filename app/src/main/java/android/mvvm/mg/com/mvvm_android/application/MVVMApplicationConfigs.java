@@ -8,6 +8,22 @@ import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 
 public class MVVMApplicationConfigs extends DMBaseApplicationConfigs {
 
+    private static MVVMApplicationConfigs instance;
+
+    private MVVMApplicationConfigs() {
+    }
+
+    public static MVVMApplicationConfigs getInstance() {
+        if (instance == null) {
+            synchronized (MVVMApplicationConfigs.class) {
+                if (instance == null) {
+                    instance = new MVVMApplicationConfigs();
+                }
+            }
+        }
+        return instance;
+    }
+
     @Override
     public void showErrorDialog(final Context context, final String message) {
         MVVMDialog.showErrorDialog(context, message);

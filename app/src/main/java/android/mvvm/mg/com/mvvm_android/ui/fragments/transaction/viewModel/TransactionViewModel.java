@@ -8,12 +8,12 @@ import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
 import android.mvvm.mg.com.mvvm_android.core.models.transaction.TransactionData;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
 import android.support.annotation.NonNull;
+
 import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 public class TransactionViewModel extends DMBaseViewModelEmptyView<Empty> {
 
     public final ObservableField<TransactionData> transactionData = new ObservableField<>();
-
 
     public TransactionViewModel(final @NonNull Application application) {
         super(application);

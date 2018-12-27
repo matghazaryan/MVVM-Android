@@ -1,8 +1,8 @@
 package android.mvvm.mg.com.mvvm_android.core.models.empty;
 
-public class Empty {
+public final class Empty {
 
-    public String message;
+    private final String message;
 
     public Empty(final String message) {
         this.message = message;

@@ -3,7 +3,7 @@ package android.mvvm.mg.com.mvvm_android.core.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
+public final class User implements Parcelable {
 
     private String email;
     private String password;

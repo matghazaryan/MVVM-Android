@@ -5,7 +5,7 @@ import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIError;
 
 import java.util.HashMap;
 
-public class RequestError implements DMBaseIError {
+public final class RequestError implements DMBaseIError {
 
     private String status;
     private String message;

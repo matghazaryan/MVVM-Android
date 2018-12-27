@@ -40,7 +40,7 @@ public class CardsFragment extends DMBaseOfflineFragment<CardsViewModel, Fragmen
     @Override
     public void subscribers(final LifecycleOwner owner) {
         mViewModel.<String>getAction(IMVVMConstants.Action.SHOW_TOAST).observe(owner, text -> Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show());
-        mViewModel.dbCards().observe(owner, cardList -> mViewModel.setRecycleViewData(cardList));
+        mViewModel.dbCards().observe(owner, cardList -> mViewModel.setBaseList(cardList));
         handleRequestFor(mViewModel.apiCards(), new DMBaseIRequestListener<Card>() {
             @Override
             public void onSuccessList(final List<Card> cardList) {

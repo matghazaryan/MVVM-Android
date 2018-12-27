@@ -4,6 +4,8 @@ import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 /**
  * BaseViewModelItemClick is the abstract class for handle click in the BaseAdapter
  *
@@ -14,8 +16,19 @@ public abstract class DMBaseViewModelItemClick<O, Empty> extends DMBaseViewModel
 
     public final ObservableField<DMBaseIOnItemClickListener<O>> baseOnItemClickListener = new ObservableField<>();
 
+    public final ObservableField<List<O>> baseList = new ObservableField<>();
+
     protected DMBaseViewModelItemClick(final @NonNull Application application) {
         super(application);
         baseOnItemClickListener.set(this);
+    }
+
+    /**
+     * Base function for set list in the fragment
+     *
+     * @param oList list which need to send to the RecycleView, must be binding witch baseList
+     */
+    public void setBaseList(final List<O> oList) {
+        this.baseList.set(oList);
     }
 }

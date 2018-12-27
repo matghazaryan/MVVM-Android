@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MVVMFileUtils {
+public final class MVVMFileUtils {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static String onSavePicture(final byte[] data) {

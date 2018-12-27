@@ -8,12 +8,14 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
+
 import com.dm.dmnetworking.model.error.ErrorE;
-import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 
 /**
@@ -152,9 +154,9 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
     /**
      * Disable editing status for display empty view during network request
      *
-     * @param enableEmptyView status
+     * @param setEnableEmptyViewFromNetwork status
      */
-    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
+    void setEnableEmptyViewFromNetwork(final boolean setEnableEmptyViewFromNetwork) {
 
     }
 

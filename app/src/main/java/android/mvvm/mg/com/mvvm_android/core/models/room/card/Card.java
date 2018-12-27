@@ -6,7 +6,7 @@ import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.databa
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Card extends MVVMRoomBase {
+public final class Card extends MVVMRoomBase {
 
     @JsonProperty("card_type")
     private String cardType;

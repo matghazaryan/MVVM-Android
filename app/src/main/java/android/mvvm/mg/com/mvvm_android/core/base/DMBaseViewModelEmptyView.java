@@ -37,7 +37,7 @@ public abstract class DMBaseViewModelEmptyView<Empty> extends DMBaseViewModel im
     }
 
     @Override
-    void setEnableEmptyViewFromNetwork(final boolean enableEmptyView) {
-        isEnableEmptyFromNetwork = enableEmptyView;
+    void setEnableEmptyViewFromNetwork(final boolean isEnableEmptyFromNetwork) {
+        this.isEnableEmptyFromNetwork = isEnableEmptyFromNetwork;
     }
 }

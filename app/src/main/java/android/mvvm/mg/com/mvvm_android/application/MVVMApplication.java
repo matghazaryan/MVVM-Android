@@ -8,6 +8,6 @@ public class MVVMApplication extends DMBaseApplication {
 
     @Override
     public DMBaseApplicationConfigs getApplicationConfigs() {
-        return new MVVMApplicationConfigs();
+        return MVVMApplicationConfigs.getInstance();
     }
 }

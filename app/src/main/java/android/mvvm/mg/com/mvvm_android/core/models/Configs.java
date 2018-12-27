@@ -2,7 +2,7 @@ package android.mvvm.mg.com.mvvm_android.core.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Configs {
+public final class Configs {
 
     @JsonProperty("call_center")
     private String callCenter;

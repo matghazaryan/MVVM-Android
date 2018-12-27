@@ -18,13 +18,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MVVMBindingAdapter extends DMBaseBindingAdapter {
+public final class MVVMBindingAdapter extends DMBaseBindingAdapter {
 
     @BindingAdapter("setImageUrl")
     public static void setImageUrl(final ImageView imageView, final String path) {

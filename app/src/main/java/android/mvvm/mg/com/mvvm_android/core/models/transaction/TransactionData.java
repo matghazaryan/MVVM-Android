@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class TransactionData {
+public final class TransactionData {
 
     @JsonProperty("transactions")
     private List<TransactionGroup> transactionGroupList;

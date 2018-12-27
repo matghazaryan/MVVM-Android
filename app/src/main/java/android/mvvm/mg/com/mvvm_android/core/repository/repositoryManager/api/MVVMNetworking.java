@@ -1,6 +1,5 @@
 package android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.api;
 
-import alertdialog.dm.com.dmalertdialog.DMDialogBaseConfigs;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.mvvm.mg.com.mvvm_android.R;
@@ -8,11 +7,15 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMAlertDialog;
 import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.preference.MVVMPrefUtils;
+
 import com.dm.dmnetworking.DMNetworkBaseRequest;
 import com.dm.dmnetworking.DMNetworkBaseTokenHandler;
 import com.dm.dmnetworking.DMNetworkIStatusHandleListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import alertdialog.dm.com.dmalertdialog.DMDialogBaseConfigs;
 
 
 public final class MVVMNetworking extends DMNetworkBaseRequest {
@@ -26,9 +29,12 @@ public final class MVVMNetworking extends DMNetworkBaseRequest {
 
     public static MVVMNetworking getInstance() {
         if (ourInstance == null) {
-            ourInstance = new MVVMNetworking();
+            synchronized (MVVMNetworking.class) {
+                if (ourInstance == null) {
+                    ourInstance = new MVVMNetworking();
+                }
+            }
         }
-
         return ourInstance;
     }
 

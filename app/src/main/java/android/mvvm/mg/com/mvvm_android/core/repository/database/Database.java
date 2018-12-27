@@ -26,16 +26,16 @@ public final class Database implements IDBHelper {
 
     @Override
     public LiveData<List<Card>> getCardList(final Context context) {
-        return CardHelper.getAllCard(context);
+        return CardHelper.getInstance(context).getAllCard();
     }
 
     @Override
     public void insertCardList(final Context context, final List<Card> cardList, final IOnInsertAllListener listener) {
-        CardHelper.insertCardList(context, cardList, listener);
+        CardHelper.getInstance(context).insertCardList(cardList, listener);
     }
 
     @Override
     public void clearCardTable(final Context context, final IOnClearTableListener listener) {
-        CardHelper.clearTable(context, listener);
+        CardHelper.getInstance(context).clearTable(listener);
     }
 }

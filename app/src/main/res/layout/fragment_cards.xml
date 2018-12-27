@@ -29,9 +29,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_small_margin"
-            app:initRecycleViewCardList="@{viewModel.cardList}"
-            app:listener="@{viewModel.baseOnItemClickListener}"
-            app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}" />
+            app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}"
+            app:initRecycleViewCardList="@{viewModel.baseList}"
+            app:listener="@{viewModel.baseOnItemClickListener}" />
 
         <include
             layout="@layout/empty_layout"
