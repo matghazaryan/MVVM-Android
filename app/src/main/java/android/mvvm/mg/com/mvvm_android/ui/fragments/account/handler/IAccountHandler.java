@@ -6,7 +6,7 @@ public interface IAccountHandler {
 
     void onCardsClick(View view);
 
-    void onPaymentHistoryClick(View view);
+    void onTransactionClick(View view);
 
     void onSettingsClick(View view);
 

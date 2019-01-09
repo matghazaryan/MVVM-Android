@@ -4,12 +4,17 @@ import android.Manifest;
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnPermissionSuccessListener;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnSharedDataListener;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBasePermissionFragment;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
+import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel;
+import android.util.Log;
 import android.view.View;
 import androidx.navigation.Navigation;
 import org.json.JSONObject;
@@ -38,8 +43,16 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
     }
 
     @Override
+    public void initialize() {
+        getSharedData(IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, (DMBaseIOnSharedDataListener<User>) user -> mViewModel.initUser(user));
+
+        getSharedData(IMVVMConstants.SendCode.CARD_TO_ACCOUNT, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
+    }
+
+    @Override
     public void subscribers(final LifecycleOwner owner) {
         mViewModel.getAction(IMVVMConstants.Action.OPEN_LOGIN_FRAGMENT).observe(owner, o -> openLoginPage());
+
     }
 
     @Override
@@ -48,11 +61,12 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
     }
 
     @Override
-    public void onPaymentHistoryClick(final View view) {
+    public void onTransactionClick(final View view) {
         accessToPermission(new DMBaseIOnPermissionSuccessListener() {
             @Override
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_paymentHistoryFragment);
+                sendSharedData(TransactionViewModel.class, IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, "Message receive");
             }
         }, IMVVMConstants.PermissionRequestCode.STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
@@ -63,6 +77,7 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
             @Override
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_fileUploadFragment);
+                sendSharedData(SettingsViewModel.class, IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, "Message receive");
             }
         }, IMVVMConstants.PermissionRequestCode.LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
     }

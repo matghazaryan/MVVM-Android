@@ -12,11 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -42,6 +45,10 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
     protected Binding mBinding;
 
     protected DMBaseApplicationConfigs mApplicationConfigs;
+
+    private List<Integer> mActionsForClearOnDestroyViewList = new ArrayList<>();
+
+    private final SparseArray<Object> mSharedDataSparseArray = new SparseArray<>();
 
     protected DMBaseFragment() {
     }
@@ -95,13 +102,14 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
         mViewModel.initialize();
         mViewModel.initialize(getArguments());
         subscribers(getViewLifecycleOwner());
+        actionsForClearOnDestroyView(mActionsForClearOnDestroyViewList);
     }
 
     @Nullable
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false, DataBindingUtil.getDefaultComponent());
-        mViewModel = ViewModelProviders.of(this).get(getViewModelClass());
+        mViewModel = ViewModelProviders.of(mActivity).get(getViewModelClass());
 
         setBinding(mBinding, mViewModel);
 
@@ -112,6 +120,12 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
     public void onResume() {
         super.onResume();
         baseSubscribes();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        clearActions();
     }
 
     private void initActionBar() {
@@ -150,6 +164,41 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
         final ActionBar actionBar = mActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.show();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <SharedData> void sendSharedData(final Class viewModelClass, final int sendCode, final SharedData data) {
+        ((DMBaseViewModel) ViewModelProviders.of(mActivity).get(viewModelClass)).sendSharedData(sendCode, data);
+    }
+
+    protected <SharedData> void getSharedData(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
+        mViewModel.<SharedData>getSharedData(sendCode).observe(getViewLifecycleOwner(), data -> {
+
+            final Object sharedData = mSharedDataSparseArray.get(sendCode);
+
+            if (sharedData == null || data == null || sharedData.hashCode() != data.hashCode()) {
+                mSharedDataSparseArray.put(sendCode, data);
+                listener.onData(data);
+            }
+        });
+    }
+
+    /**
+     * To get any data each time when subscribing on liveData when data is available or exist
+     */
+    protected <SharedData> void getSharedDataAlways(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
+        mViewModel.<SharedData>getSharedData(sendCode).observe(getViewLifecycleOwner(), data -> {
+            mSharedDataSparseArray.put(sendCode, data);
+            listener.onData(data);
+        });
+    }
+
+    private void clearActions() {
+        if (mActionsForClearOnDestroyViewList != null) {
+            for (final Integer action : mActionsForClearOnDestroyViewList) {
+                mViewModel.clearAction(action);
+            }
         }
     }
 

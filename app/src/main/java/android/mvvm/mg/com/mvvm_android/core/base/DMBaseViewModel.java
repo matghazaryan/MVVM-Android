@@ -8,14 +8,12 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
-
 import com.dm.dmnetworking.model.error.ErrorE;
+import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 
 /**
@@ -40,6 +38,8 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
 
     //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isBaseRootVisibleDelay = new ObservableField<>(false);
+
+    private final SparseArray<MutableLiveData<Object>> sharedDataSparseArray = new SparseArray<>();
 
     protected DMBaseViewModel(final @NonNull Application application) {
         super(application);
@@ -104,6 +104,15 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
     }
 
     /**
+     * Clear action in the baseMutableLiveDataSparseArray
+     *
+     * @param action It is constant action
+     */
+    public void clearAction(final int action) {
+        baseMutableLiveDataSparseArray.remove(action);
+    }
+
+    /**
      * handleError is function for handle error from network request and show message
      *
      * @param errorE         Error object from json pars
@@ -162,5 +171,27 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
 
     void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults, final Object... receivers) {
         DMUtilEasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, receivers);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <Data> LiveData<Data> getSharedData(final int sendCode) {
+        final LiveData<Object> data = sharedDataSparseArray.get(sendCode);
+        if (data == null) {
+            sharedDataSparseArray.put(sendCode, new MutableLiveData<>());
+        }
+
+        return (LiveData<Data>) sharedDataSparseArray.get(sendCode);
+    }
+
+    public <Data> void sendSharedData(final int sendCode, final Data data) {
+        MutableLiveData<Object> mutableLiveData = sharedDataSparseArray.get(sendCode);
+        if (mutableLiveData == null) {
+            sharedDataSparseArray.put(sendCode, new MutableLiveData<>());
+        }
+
+        mutableLiveData = sharedDataSparseArray.get(sendCode);
+        if (mutableLiveData != null) {
+            mutableLiveData.setValue(data);
+        }
     }
 }

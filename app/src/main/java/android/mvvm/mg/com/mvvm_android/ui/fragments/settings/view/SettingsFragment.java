@@ -3,11 +3,13 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.settings.view;
 import android.content.Intent;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnSharedDataListener;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentSettingsBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.handler.ISettingsHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
+import android.util.Log;
 import android.view.View;
 import androidx.navigation.Navigation;
 import com.dm.camera.activities.DMCameraActivity;
@@ -31,6 +33,12 @@ public class SettingsFragment extends DMBaseFragment<SettingsViewModel, Fragment
     protected void setBinding(final FragmentSettingsBinding binding, final SettingsViewModel viewModel) {
         binding.setViewModel(viewModel);
         binding.setHandler(this);
+    }
+
+    @Override
+    public void initialize() {
+        //Receive data from AccountViewModel
+        getSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
     }
 
     @Override

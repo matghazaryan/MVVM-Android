@@ -48,4 +48,11 @@ public interface IMVVMConstants extends DMBaseIConstants {
         int LOCATION = 1000;
         int STORAGE = 1001;
     }
+
+    interface SendCode {
+        int LOGIN_TO_ACCOUNT = 1000;
+        int CARD_TO_ACCOUNT = 1001;
+        int ACCOUNT_TO_TRANSACTION = 1002;
+        int ACCOUNT_TO_SETTINGS = 1003;
+    }
 }

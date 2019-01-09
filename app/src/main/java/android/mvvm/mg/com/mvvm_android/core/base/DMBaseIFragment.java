@@ -3,6 +3,8 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 
+import java.util.List;
+
 /**
  * IBaseFragment interface which has few function for use in child classes
  */
@@ -12,6 +14,10 @@ interface DMBaseIFragment {
     }
 
     default void subscribers(final LifecycleOwner owner) {
+    }
+
+    default void actionsForClearOnDestroyView(final List<Integer> actions) {
+
     }
 
     default int getTitleRes() {

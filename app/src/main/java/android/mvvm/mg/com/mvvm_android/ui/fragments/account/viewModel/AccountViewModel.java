@@ -31,16 +31,17 @@ public class AccountViewModel extends DMBaseViewModel {
     private void initData(final Bundle bundle) {
         if (bundle != null) {
             final User user = bundle.getParcelable(IMVVMConstants.BundleKey.USER);
-            final String text;
             if (user != null) {
-                text = user.getEmail();
-            } else {
+                initUser(user);
+            }else {
                 final AccountFragmentArgs args = AccountFragmentArgs.fromBundle(bundle);
-                text = args.getName();
+                this.email.set(args.getName());
             }
-
-            this.email.set(text);
         }
+    }
+
+    public void initUser(final User user){
+        this.email.set(user.getEmail());
     }
 
     private void showProfilePhoto() {

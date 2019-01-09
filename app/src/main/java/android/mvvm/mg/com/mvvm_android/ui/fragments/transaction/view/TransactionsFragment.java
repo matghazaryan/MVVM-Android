@@ -3,6 +3,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.view;
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
+import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIOnSharedDataListener;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseIRequestListener;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
@@ -13,6 +14,7 @@ import android.mvvm.mg.com.mvvm_android.databinding.FragmentTransactionsBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.dm.dmnetworking.DMNetworkLiveDataBag;
@@ -48,6 +50,9 @@ public class TransactionsFragment extends DMBaseFragment<TransactionViewModel, F
     @Override
     public void subscribers(final LifecycleOwner owner) {
         subscribeToTransactionLoad(mViewModel.apiTransactions(IMVVMConstants.DefaultValue.FIRST_PAGE));
+
+        //Receive data from AccountViewModel
+        getSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
     }
 
     private void setupLoadMore() {

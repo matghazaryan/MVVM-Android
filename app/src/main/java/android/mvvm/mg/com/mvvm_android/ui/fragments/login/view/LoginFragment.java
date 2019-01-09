@@ -8,10 +8,10 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
+import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.handler.ILoginHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.viewModel.LoginViewModel;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import androidx.navigation.Navigation;
@@ -76,9 +76,12 @@ public class LoginFragment extends DMBaseFragment<LoginViewModel, FragmentLoginB
 //        action.setName("Henri");
 //        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(action);           //send data (without custom object)
 
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(IMVVMConstants.BundleKey.USER, user);
-        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment, bundle); //Send custom object
+//        final Bundle bundle = new Bundle();
+//        bundle.putParcelable(IMVVMConstants.BundleKey.USER, user);
+//        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment, bundle); //Send custom object
+
+        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment);
+        sendSharedData(AccountViewModel.class, IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, user);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
