@@ -102,6 +102,6 @@ public abstract class MVVMEndlessRecyclerViewScrollListener extends RecyclerView
     }
 
     // Defines the process for actually loading more data based on page
-    public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
+    protected abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
 
 }

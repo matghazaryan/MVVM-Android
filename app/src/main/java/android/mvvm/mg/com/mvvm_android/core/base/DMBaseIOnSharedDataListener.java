@@ -1,6 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
-public interface DMBaseIOnSharedDataListener<Data> {
+public interface DMBaseIOnSharedDataListener<SharedData> {
 
-    void onData(Data data);
+    void onDataTransferred(SharedData data);
 }

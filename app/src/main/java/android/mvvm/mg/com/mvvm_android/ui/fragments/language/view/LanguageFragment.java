@@ -8,6 +8,7 @@ import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLanguageBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.LanguageLayoutBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.LanguageViewModel;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class LanguageFragment extends DMBaseFragment<LanguageViewModel, Fragment
     @Override
     protected void setBinding(final FragmentLanguageBinding binding, final LanguageViewModel viewModel) {
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    public FragmentActivity getActivityForViewModel() {
+        return mActivity;
     }
 
     @Override

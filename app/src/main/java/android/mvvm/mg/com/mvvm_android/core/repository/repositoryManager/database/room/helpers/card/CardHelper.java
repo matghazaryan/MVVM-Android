@@ -4,11 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.CardDao;
-import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.IOnClearTableListener;
-import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.IOnDeleteListener;
-import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.IOnInsertAllListener;
-import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.IOnInsertListener;
-import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.IOnUpdateListener;
+import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.helpers.*;
 import android.mvvm.mg.com.mvvm_android.core.repository.repositoryManager.database.room.main.MVVMDatabase;
 
 import java.util.List;
@@ -18,7 +14,7 @@ public final class CardHelper {
 
     private static CardHelper instance;
 
-    private CardDao cardDao;
+    private final CardDao cardDao;
 
     private CardHelper(final Context context) {
         cardDao = MVVMDatabase.getInstance(context).getDB().cardDao();

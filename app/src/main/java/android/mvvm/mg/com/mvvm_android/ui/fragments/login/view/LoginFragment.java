@@ -8,7 +8,6 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.dialog.MVVMDialog;
 import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLoginBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.handler.ILoginHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.login.viewModel.LoginViewModel;
 import android.os.Build;
@@ -70,18 +69,21 @@ public class LoginFragment extends DMBaseFragment<LoginViewModel, FragmentLoginB
     }
 
     private void openAccount(final User user) {
-        //2 way for send data
+        //3 way for send data
 
+        // 1 way
 //        final LoginFragmentDirections.ActionLoginFragmentToAccountFragment action = LoginFragmentDirections.actionLoginFragmentToAccountFragment();
 //        action.setName("Henri");
 //        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(action);           //send data (without custom object)
 
+        // 2 way
 //        final Bundle bundle = new Bundle();
 //        bundle.putParcelable(IMVVMConstants.BundleKey.USER, user);
 //        Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment, bundle); //Send custom object
 
+        // 3 way
         Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_accountFragment);
-        sendSharedData(AccountViewModel.class, IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, user);
+        sendSharedData(IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, user);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

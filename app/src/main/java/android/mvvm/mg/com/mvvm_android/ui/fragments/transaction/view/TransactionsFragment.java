@@ -52,7 +52,7 @@ public class TransactionsFragment extends DMBaseFragment<TransactionViewModel, F
         subscribeToTransactionLoad(mViewModel.apiTransactions(IMVVMConstants.DefaultValue.FIRST_PAGE));
 
         //Receive data from AccountViewModel
-        getSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
+        getSharedDataOnActiveScreen(IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
     }
 
     private void setupLoadMore() {

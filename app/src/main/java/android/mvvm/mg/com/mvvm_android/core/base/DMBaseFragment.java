@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +42,14 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
 
     protected ViewModel mViewModel;
 
+    private DMBaseISharedViewModel mSharedViewModel;
+
     protected Binding mBinding;
 
     protected DMBaseApplicationConfigs mApplicationConfigs;
 
-    private List<Integer> mActionsForClearOnDestroyViewList = new ArrayList<>();
+    private final List<Integer> mActionsForClearOnDestroyViewList = new ArrayList<>();
 
-    private final SparseArray<Object> mSharedDataSparseArray = new SparseArray<>();
 
     protected DMBaseFragment() {
     }
@@ -109,7 +110,14 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
     @Override
     public View onCreateView(final @NonNull LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false, DataBindingUtil.getDefaultComponent());
-        mViewModel = ViewModelProviders.of(mActivity).get(getViewModelClass());
+        mSharedViewModel = ViewModelProviders.of(mActivity).get(DMBaseSharedViewModel.class);
+
+        final FragmentActivity activity = getActivityForViewModel();
+        if (activity != null) {
+            mViewModel = ViewModelProviders.of(activity).get(getViewModelClass());
+        } else {
+            mViewModel = ViewModelProviders.of(this).get(getViewModelClass());
+        }
 
         setBinding(mBinding, mViewModel);
 
@@ -167,33 +175,54 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
         }
     }
 
-    @SuppressWarnings("unchecked")
-    protected <SharedData> void sendSharedData(final Class viewModelClass, final int sendCode, final SharedData data) {
-        ((DMBaseViewModel) ViewModelProviders.of(mActivity).get(viewModelClass)).sendSharedData(sendCode, data);
-    }
-
-    protected <SharedData> void getSharedData(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
-        mViewModel.<SharedData>getSharedData(sendCode).observe(getViewLifecycleOwner(), data -> {
-
-            final Object sharedData = mSharedDataSparseArray.get(sendCode);
-
-            if (sharedData == null || data == null || sharedData.hashCode() != data.hashCode()) {
-                mSharedDataSparseArray.put(sendCode, data);
-                listener.onData(data);
-            }
-        });
+    /**
+     * To put data by key sendCode in the MutableLiveData in mSharedViewModel
+     *
+     * @param sendCode     sendCode like key for save MutableLiveData in sparseArray
+     * @param data         it is data for put in the MutableLiveData
+     * @param <SharedData> it is data type which put in the MutableLiveData
+     */
+    protected <SharedData> void sendSharedData(final int sendCode, final SharedData data) {
+        mSharedViewModel.sendSharedData(sendCode, data);
     }
 
     /**
-     * To get any data each time when subscribing on liveData when data is available or exist
+     * To get any data each time when subscribing on MutableLiveData and screen become active and data is available or exist
+     *
+     * @param sendCode     sendCode like key for save MutableLiveData in sparseArray
+     * @param listener     listener for to get data from MutableLiveData
+     * @param <SharedData> it is data type which put in the MutableLiveData
      */
-    protected <SharedData> void getSharedDataAlways(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
-        mViewModel.<SharedData>getSharedData(sendCode).observe(getViewLifecycleOwner(), data -> {
-            mSharedDataSparseArray.put(sendCode, data);
-            listener.onData(data);
-        });
+    protected <SharedData> void getSharedDataOnActiveScreen(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
+        mSharedViewModel.getSharedData(getViewLifecycleOwner(), sendCode, listener);
     }
 
+    /**
+     * To get any data each time when subscribing on liveData when fragment become active and data is available or exist
+     *
+     * @param sendCode     sendCode like key for save MutableLiveData in sparseArray
+     * @param listener     listener for to get data from MutableLiveData
+     * @param <SharedData> it is data type which put in the MutableLiveData
+     */
+    protected <SharedData> void getSharedDataOnActiveScreenAlways(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
+        mSharedViewModel.getSharedDataAlways(getViewLifecycleOwner(), sendCode, listener);
+    }
+
+    /**
+     * To get any data each time when subscribing on MutableLiveData , but when change data it work immediately and data is available or exist
+     *
+     * @param sendCode     sendCode like key for save MutableLiveData in sparseArray
+     * @param listener     listener for to get data from MutableLiveData
+     * @param <SharedData> it is data type which put in the MutableLiveData
+     */
+    protected <SharedData> void getSharedDataImmediately(final int sendCode, final DMBaseIOnSharedDataListener<SharedData> listener) {
+        mSharedViewModel.getSharedData(mActivity, sendCode, listener);
+    }
+
+    /**
+     * This function use when main viewModel owner is activity , it clear action(s) , for next navigation on the fragment
+     * not call(s) actions (getAction, doAction)which declared(subscribe) on fragment
+     */
     private void clearActions() {
         if (mActionsForClearOnDestroyViewList != null) {
             for (final Integer action : mActionsForClearOnDestroyViewList) {

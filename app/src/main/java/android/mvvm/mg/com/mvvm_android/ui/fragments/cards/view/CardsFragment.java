@@ -8,7 +8,6 @@ import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.listeners.IEmptyViewHandler;
 import android.mvvm.mg.com.mvvm_android.core.models.room.card.Card;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentCardsBinding;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel.CardsViewModel;
 import android.view.View;
 import android.widget.Toast;
@@ -41,7 +40,7 @@ public class CardsFragment extends DMBaseOfflineFragment<CardsViewModel, Fragmen
     @Override
     public void subscribers(final LifecycleOwner owner) {
         mViewModel.<String>getAction(IMVVMConstants.Action.SHOW_TOAST).observe(owner, text -> {
-            sendSharedData(AccountViewModel.class, IMVVMConstants.SendCode.CARD_TO_ACCOUNT, text);
+            sendSharedData(IMVVMConstants.SendCode.CARD_TO_ACCOUNT, text);
             Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
         });
         mViewModel.dbCards().observe(owner, cardList -> mViewModel.setBaseList(cardList));
@@ -58,8 +57,8 @@ public class CardsFragment extends DMBaseOfflineFragment<CardsViewModel, Fragmen
         Toast.makeText(getContext(), getString(R.string.card_on_empty_click), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void actionsForClearOnDestroyView(final List<Integer> actions) {
-        actions.add(IMVVMConstants.Action.SHOW_TOAST);
-    }
+//    @Override
+//    public void actionsForClearOnDestroyView(final List<Integer> actions) {
+//        actions.add(IMVVMConstants.Action.SHOW_TOAST);
+//    }
 }

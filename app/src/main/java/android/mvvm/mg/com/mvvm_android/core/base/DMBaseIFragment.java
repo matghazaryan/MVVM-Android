@@ -2,6 +2,7 @@ package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.mvvm.mg.com.mvvm_android.R;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.List;
 
@@ -30,5 +31,9 @@ interface DMBaseIFragment {
 
     default boolean isShowActionBar() {
         return true;
+    }
+
+    default FragmentActivity getActivityForViewModel() {
+        return null;
     }
 }

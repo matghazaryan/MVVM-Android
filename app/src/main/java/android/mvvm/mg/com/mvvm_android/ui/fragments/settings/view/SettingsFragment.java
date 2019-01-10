@@ -38,7 +38,7 @@ public class SettingsFragment extends DMBaseFragment<SettingsViewModel, Fragment
     @Override
     public void initialize() {
         //Receive data from AccountViewModel
-        getSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
+        getSharedDataOnActiveScreen(IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
     }
 
     @Override

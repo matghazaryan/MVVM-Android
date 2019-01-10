@@ -12,8 +12,6 @@ import android.mvvm.mg.com.mvvm_android.core.models.User;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentAccountBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.handler.IAccountHandler;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.account.viewModel.AccountViewModel;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.settings.viewModel.SettingsViewModel;
-import android.mvvm.mg.com.mvvm_android.ui.fragments.transaction.viewModel.TransactionViewModel;
 import android.util.Log;
 import android.view.View;
 import androidx.navigation.Navigation;
@@ -44,9 +42,8 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
 
     @Override
     public void initialize() {
-        getSharedData(IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, (DMBaseIOnSharedDataListener<User>) user -> mViewModel.initUser(user));
-
-        getSharedData(IMVVMConstants.SendCode.CARD_TO_ACCOUNT, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
+        getSharedDataOnActiveScreenAlways(IMVVMConstants.SendCode.LOGIN_TO_ACCOUNT, (DMBaseIOnSharedDataListener<User>) user -> mViewModel.initUser(user));
+        getSharedDataImmediately(IMVVMConstants.SendCode.CARD_TO_ACCOUNT, (DMBaseIOnSharedDataListener<String>) s -> Log.d("myLogs", s));
     }
 
     @Override
@@ -66,7 +63,7 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
             @Override
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_paymentHistoryFragment);
-                sendSharedData(TransactionViewModel.class, IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, "Message receive");
+                sendSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_TRANSACTION, "Message receive transaction");
             }
         }, IMVVMConstants.PermissionRequestCode.STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
@@ -77,7 +74,7 @@ public class AccountFragment extends DMBasePermissionFragment<AccountViewModel, 
             @Override
             public void onPermissionsGranted() {
                 Navigation.findNavController(mActivity, R.id.nav_host_fragment).navigate(R.id.action_accountFragment_to_fileUploadFragment);
-                sendSharedData(SettingsViewModel.class, IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, "Message receive");
+                sendSharedData(IMVVMConstants.SendCode.ACCOUNT_TO_SETTINGS, "Message receive settings");
             }
         }, IMVVMConstants.PermissionRequestCode.LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
     }

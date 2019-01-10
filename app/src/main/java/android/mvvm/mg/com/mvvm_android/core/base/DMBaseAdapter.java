@@ -39,11 +39,11 @@ public abstract class DMBaseAdapter<T, Binding extends ViewDataBinding> extends 
      */
     protected abstract View onBaseBindViewHolder(final @NonNull BaseViewHolder<Binding> holder, final int position, final T t);
 
-    public DMBaseAdapter(final List<T> tList) {
+    protected DMBaseAdapter(final List<T> tList) {
         this.tList = tList;
     }
 
-    public DMBaseAdapter(final List<T> tList, final DMBaseIOnItemClickListener<T> listener) {
+    protected DMBaseAdapter(final List<T> tList, final DMBaseIOnItemClickListener<T> listener) {
         this.tList = tList;
         this.listener = listener;
     }
