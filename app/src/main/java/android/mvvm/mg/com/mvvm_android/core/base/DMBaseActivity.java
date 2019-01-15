@@ -1,7 +1,10 @@
 package android.mvvm.mg.com.mvvm_android.core.base;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
+import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
+import android.mvvm.mg.com.mvvm_android.core.utils.DMLanguageContextWrapper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -55,5 +58,10 @@ public abstract class DMBaseActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(final Context newBase) {
+        super.attachBaseContext(DMLanguageContextWrapper.wrap(newBase, DataRepository.preference().getLanguageCode()));
     }
 }

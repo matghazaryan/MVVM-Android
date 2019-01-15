@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseFragment;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
-import android.mvvm.mg.com.mvvm_android.core.utils.MVVMUtils;
 import android.mvvm.mg.com.mvvm_android.databinding.FragmentLanguageBinding;
 import android.mvvm.mg.com.mvvm_android.databinding.LanguageLayoutBinding;
 import android.mvvm.mg.com.mvvm_android.ui.fragments.language.viewModel.LanguageViewModel;
@@ -70,7 +69,6 @@ public class LanguageFragment extends DMBaseFragment<LanguageViewModel, Fragment
         }
         layoutBinding.setIsVisible(true);
         mViewModel.saveLanguageCode(code);
-        MVVMUtils.updateLanguage(mActivity, code);
-        setTitle(R.string.language_title);
+        mActivity.recreate();
     }
 }

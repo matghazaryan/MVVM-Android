@@ -1,8 +1,6 @@
 package android.mvvm.mg.com.mvvm_android.core.utils;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -11,10 +9,8 @@ import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.constants.IMVVMConstants;
 import android.mvvm.mg.com.mvvm_android.core.constants.IUrls;
 import android.support.v4.content.ContextCompat;
-import android.util.DisplayMetrics;
-import dmutils.com.dmutils.general.DMUtilDimensionConverter;
 
-import java.util.Locale;
+import dmutils.com.dmutils.general.DMUtilDimensionConverter;
 
 public final class MVVMUtils {
 
@@ -59,14 +55,6 @@ public final class MVVMUtils {
         }
 
         return url;
-    }
-
-    public static void updateLanguage(final Context context, final String code) {
-        final Resources res = context.getResources();
-        final DisplayMetrics dm = res.getDisplayMetrics();
-        final Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(code);
-        res.updateConfiguration(conf, dm);
     }
 
     public static String getLanguageName(final Context context, final String code) {
