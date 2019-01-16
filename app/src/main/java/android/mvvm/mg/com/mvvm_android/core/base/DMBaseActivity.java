@@ -4,10 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.mvvm.mg.com.mvvm_android.BuildConfig;
 import android.mvvm.mg.com.mvvm_android.core.repository.DataRepository;
-import android.mvvm.mg.com.mvvm_android.core.utils.DMLanguageContextWrapper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import dmutils.com.dmutils.language.DMLanguageContextWrapper;
 
 /**
  * BaseActivity has few functions for work with action bar, set title , show/hide and display current class name

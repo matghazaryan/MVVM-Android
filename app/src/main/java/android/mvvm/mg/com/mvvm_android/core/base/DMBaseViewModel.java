@@ -8,12 +8,14 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
+
 import com.dm.dmnetworking.model.error.ErrorE;
-import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import dmutils.com.dmutils.permission.DMUtilEasyPermissions;
 
 
 /**
@@ -43,11 +45,7 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
         super(application);
         mApplicationConfigs = ((DMBaseApplication) Objects.requireNonNull(application)).getApplicationConfigs();
         new Handler().postDelayed(() -> isBaseRootVisibleDelay.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
-    }
-
-    @Override
-    public void initialize() {
-        initUiTextFieldsTags(baseUITextFieldsTags);
+        new Handler().postDelayed(() -> initUiTextFieldsTags(baseUITextFieldsTags), AnimDuration.UI_FIELDS_INIT_DELAY);
     }
 
     void showProgress() {
