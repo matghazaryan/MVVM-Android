@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dm.dmnetworking.DMNetworkLiveDataBag;
 
 import java.util.ArrayList;
@@ -149,8 +150,16 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
      * Base subscribes for show error dialog and no internet dialog
      */
     private void baseSubscribes() {
-        mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showErrorDialog(mActivity, s));
-        mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), s -> mApplicationConfigs.showNoInternetDialog(mActivity));
+        mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), this::showError);
+        mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), this::showNoInternet);
+    }
+
+    protected void showError(final String s) {
+        mApplicationConfigs.showErrorDialog(mActivity, s);
+    }
+
+    protected void showNoInternet(final String s) {
+        mApplicationConfigs.showNoInternetDialog(mActivity);
     }
 
     protected void setTitle(final String title) {
