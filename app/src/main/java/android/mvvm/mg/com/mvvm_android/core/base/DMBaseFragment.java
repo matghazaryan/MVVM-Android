@@ -43,7 +43,7 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
 
     protected ViewModel mViewModel;
 
-    private DMBaseISharedViewModel mSharedViewModel;
+    protected DMBaseISharedViewModel mSharedViewModel;
 
     protected Binding mBinding;
 
@@ -86,7 +86,7 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
         mApplicationConfigs = ((DMBaseApplication) Objects.requireNonNull(getActivity()).getApplication()).getApplicationConfigs();
 
         if (BuildConfig.DEBUG) {
-            Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+            Log.d(mApplicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> Page is " + this.getClass().getSimpleName());
         }
     }
 
@@ -149,7 +149,7 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
     /**
      * Base subscribes for show error dialog and no internet dialog
      */
-    private void baseSubscribes() {
+    protected void baseSubscribes() {
         mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), this::showError);
         mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), this::showNoInternet);
     }
@@ -233,10 +233,8 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
      * not call(s) actions (getAction, doAction)which declared(subscribe) on fragment
      */
     private void clearActions() {
-        if (mActionsForClearOnDestroyViewList != null) {
-            for (final Integer action : mActionsForClearOnDestroyViewList) {
-                mViewModel.clearAction(action);
-            }
+        for (final Integer action : mActionsForClearOnDestroyViewList) {
+            mViewModel.clearAction(action);
         }
     }
 

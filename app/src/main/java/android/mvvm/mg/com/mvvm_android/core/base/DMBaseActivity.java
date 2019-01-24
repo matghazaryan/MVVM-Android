@@ -22,7 +22,7 @@ public abstract class DMBaseActivity extends AppCompatActivity {
         final DMBaseApplicationConfigs applicationConfigs = ((DMBaseApplication) getApplication()).getApplicationConfigs();
 
         if (BuildConfig.DEBUG) {
-            Log.d(applicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> " + this.getClass().getSimpleName());
+            Log.d(applicationConfigs.getTag(), "-----------------------------------------------------------------------------------------------------> Page is " + this.getClass().getSimpleName());
         }
     }
 
