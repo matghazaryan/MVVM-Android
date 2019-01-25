@@ -108,4 +108,40 @@ public final class MVVMNetworking extends DMNetworkBaseRequest {
             }
         };
     }
+
+    @Override
+    public boolean isEnableFakeJson() {
+        return false;
+    }
+
+    @Override
+    public void onSuccessOrFailureResponseForDebug(final String url, final JSONObject jsonObject, final ResponseType responseType) {
+
+    }
+
+    @Override
+    public String getFakeJsonFilePath(final String url) {
+        switch (url) {
+            case IUrls.Method.CONFIGS:
+                return "configs/configs.json";
+            case IUrls.Method.LOGIN:
+                return "auth/login.json";
+            case IUrls.Method.LOGOUT:
+                return "auth/logout.json";
+            case IUrls.Method.CARDS:
+                return "cards/cards.json";
+            case IUrls.Method.SAVE_IMAGE:
+                return "saveImage/save_image.json";
+            case IUrls.Method.TRANSACTION:
+                return "transactions/transaction.json";
+            case IUrls.Method.TRANSACTION_1:
+                return "transactions/transaction_1.json";
+            case IUrls.Method.TRANSACTION_2:
+                return "transactions/transaction_2.json";
+            case IUrls.Method.TRANSACTION_3:
+                return "transactions/transaction_3.json";
+            default:
+                return null;
+        }
+    }
 }

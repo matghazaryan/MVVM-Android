@@ -1,0 +1,292 @@
+{
+  "status": "OK",
+  "data": {
+    "card_number": "4355053922097748",
+    "transactions": [
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:46",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase Completion",
+            "label": "Description"
+          },
+          {
+            "value": "20.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:46",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "credit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Pre-authorisation",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:46",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Pre-authorisation",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:46",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "credit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Return or Refund",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:46",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase Completion",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:45",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "credit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Return or Refund",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "30.08.2018, 13:45",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase",
+            "label": "Description"
+          },
+          {
+            "value": "10.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "29.08.2018, 16:20",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase",
+            "label": "Description"
+          },
+          {
+            "value": "69.42",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "29.08.2018, 16:20",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase",
+            "label": "Description"
+          },
+          {
+            "value": "20.38",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      },
+      {
+        "transaction_details": [
+          {
+            "value": "29.08.2018, 14:01",
+            "label": "Authorization date"
+          },
+          {
+            "value": "WATCH WORLD, Arca",
+            "label": "Merchant name"
+          },
+          {
+            "value": "debit",
+            "label": "Operation direction"
+          },
+          {
+            "value": "Epos Purchase",
+            "label": "Description"
+          },
+          {
+            "value": "5.01",
+            "label": "Amount"
+          },
+          {
+            "value": "֏",
+            "label": "Currency"
+          }
+        ]
+      }
+    ],
+    "next_page": 3,
+    "per_page": 10,
+    "total_pages": 30,
+    "current_page": 2
+  }
+}

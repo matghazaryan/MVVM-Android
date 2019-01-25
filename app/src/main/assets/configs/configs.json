@@ -1,0 +1,241 @@
+{
+  "status": "OK",
+  "data": {
+    "call_center": "+374 30 121212",
+    "login_time": 15,
+    "notification_time": 60,
+    "amount_min_value": 500,
+    "card_min_value": 15,
+    "card_max_value": 16,
+    "autopayment_count": 3,
+    "review_count": 0,
+    "autologin_symbols_count": 6,
+    "payx_url": "http://payx.am/pos_api/add_transfer",
+    "ios_url": "https://itunes.apple.com/us/app/ab-classic/id343200656?mt=8&uo=4",
+    "android_url": "https://play.google.com/store/apps/details?id=arca.am.arca",
+    "two_auth_url": "https://test-arca.helix.am/en/profile/",
+    "terms_condition_url": "https://test-arca.helix.am/en/terms-and-conditions",
+    "amount_format": "#,##0.00",
+    "currency_format": "#,##0.00 ¤",
+    "amd_sign": "֏",
+    "schedule_types": [
+      {
+        "id": 1,
+        "type": "Weekly",
+        "placeholder": "Select day of week",
+        "values": [
+          {
+            "label": "Monday",
+            "value": -1
+          },
+          {
+            "label": "Tuesday",
+            "value": -2
+          },
+          {
+            "label": "Wednesday",
+            "value": -3
+          },
+          {
+            "label": "Thursday",
+            "value": -4
+          },
+          {
+            "label": "Friday",
+            "value": -5
+          },
+          {
+            "label": "Saturday",
+            "value": -6
+          },
+          {
+            "label": "Sunday",
+            "value": -7
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "Monthly",
+        "placeholder": "Select day of month",
+        "values": [
+          {
+            "label": 1,
+            "value": 1
+          },
+          {
+            "label": 2,
+            "value": 2
+          },
+          {
+            "label": 3,
+            "value": 3
+          },
+          {
+            "label": 4,
+            "value": 4
+          },
+          {
+            "label": 5,
+            "value": 5
+          },
+          {
+            "label": 6,
+            "value": 6
+          },
+          {
+            "label": 7,
+            "value": 7
+          },
+          {
+            "label": 8,
+            "value": 8
+          },
+          {
+            "label": 9,
+            "value": 9
+          },
+          {
+            "label": 10,
+            "value": 10
+          },
+          {
+            "label": 11,
+            "value": 11
+          },
+          {
+            "label": 12,
+            "value": 12
+          },
+          {
+            "label": 13,
+            "value": 13
+          },
+          {
+            "label": 14,
+            "value": 14
+          },
+          {
+            "label": 15,
+            "value": 15
+          },
+          {
+            "label": 16,
+            "value": 16
+          },
+          {
+            "label": 17,
+            "value": 17
+          },
+          {
+            "label": 18,
+            "value": 18
+          },
+          {
+            "label": 19,
+            "value": 19
+          },
+          {
+            "label": 20,
+            "value": 20
+          },
+          {
+            "label": 21,
+            "value": 21
+          },
+          {
+            "label": 22,
+            "value": 22
+          },
+          {
+            "label": 23,
+            "value": 23
+          },
+          {
+            "label": 24,
+            "value": 24
+          },
+          {
+            "label": 25,
+            "value": 25
+          },
+          {
+            "label": 26,
+            "value": 26
+          },
+          {
+            "label": 27,
+            "value": 27
+          },
+          {
+            "label": 28,
+            "value": 28
+          },
+          {
+            "label": "Last day of month",
+            "value": 99
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "type": "Yearly",
+        "placeholder": "Select day of year",
+        "values": null
+      }
+    ],
+    "schedule_status": [
+      {
+        "label": "Active",
+        "status": "active",
+        "color": "#62cb93"
+      },
+      {
+        "label": "Deactivated",
+        "status": "deactivated",
+        "color": "#81888a"
+      },
+      {
+        "label": "Expired",
+        "status": "expired",
+        "color": "#eb4c60"
+      },
+      {
+        "label": "Not active yet",
+        "status": "not_active_yet",
+        "color": "#f2997a"
+      }
+    ],
+    "last_payment_status": [
+      {
+        "label": "Pending",
+        "status": "pending",
+        "color": "#f2997a"
+      },
+      {
+        "label": "Paid",
+        "status": "paid",
+        "color": "#62cb93"
+      },
+      {
+        "label": "Never",
+        "status": "never",
+        "color": "#f2997a"
+      }
+    ],
+    "pre_notify_days": [
+      {
+        "label": 1,
+        "value": 1
+      },
+      {
+        "label": 2,
+        "value": 2
+      },
+      {
+        "label": 3,
+        "value": 3
+      }
+    ]
+  }
+}

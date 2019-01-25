@@ -1,0 +1,8 @@
+{
+  "status": "OK",
+  "data": {
+    "email": "MyMail@gmail.com",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGVzdC1hdXRoLmhlbGl4IiwiYXVkIjoiaHR0cHM6XC9cL3Rlc3QtYXV0aC5oZWxpeCIsImlhdCI6MTU0MjE4MTk2NCwibmJmIjoxNTQyMTgxOTY0LCJleHAiOjE1NDM0Nzc5NjQsImlkIjoiYW5pQGhlbGl4LmFtIiwic2Vzc2lvbl9pZCI6IkY0NDE4MkZDLTc0QjMtNDVDRi05MkU3LTc4RUMwRkJGQjBBQiJ9.Y-MU0Wg7X9go8elm6WzcIISf-OtPyDb94SVRBRr5lbk",
+    "twoStepEnabled": false
+  }
+}
