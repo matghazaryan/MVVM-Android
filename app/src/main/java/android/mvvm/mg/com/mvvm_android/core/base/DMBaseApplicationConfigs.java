@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * BaseApplicationConfigs us in the application , for get and use this functions in fragments, viewModels and activities
  */
-public abstract class DMBaseApplicationConfigs implements DMBaseIConstants {
+public abstract class DMBaseApplicationConfigs implements DMBaseIApplicationMethods {
 
     /**
      * Show error dialog for current project

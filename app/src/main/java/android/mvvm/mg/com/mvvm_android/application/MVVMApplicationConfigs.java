@@ -48,4 +48,14 @@ public class MVVMApplicationConfigs extends DMBaseApplicationConfigs {
     public String getTag() {
         return IMVVMConstants.TAG;
     }
+
+    @Override
+    public int[] getSwipeRefreshColors() {
+        return new int[]{R.color.colorPrimaryDark};
+    }
+
+    @Override
+    public SwipeType isSwipeDefaultWorkLikeLoader() {
+        return SwipeType.SWIPE_FOR_REFRESH;
+    }
 }

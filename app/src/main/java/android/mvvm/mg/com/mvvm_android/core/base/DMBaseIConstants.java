@@ -13,5 +13,12 @@ public interface DMBaseIConstants {
         int SHOW_ERROR_DIALOG = 1000;
         int SHOW_NO_INTERNET_DIALOG = 1001;
         int SHOW_TOAST = 1002;
+        int ON_SWIPE_REFRESH = 1003;
+    }
+
+    enum SwipeType {
+        LOADER,
+        SWIPE_FOR_REFRESH,
+        FROM_CONFIG
     }
 }

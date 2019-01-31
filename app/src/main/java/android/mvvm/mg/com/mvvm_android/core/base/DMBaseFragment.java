@@ -146,12 +146,21 @@ public abstract class DMBaseFragment<ViewModel extends DMBaseViewModel, Binding 
         }
     }
 
+    protected void showSwipeProgress() {
+        mViewModel.showSwipeProgress();
+    }
+
+    protected void hideSwipeProgress() {
+        mViewModel.hideSwipeProgress();
+    }
+
     /**
      * Base subscribes for show error dialog and no internet dialog
      */
     protected void baseSubscribes() {
         mViewModel.<String>getAction(BaseAction.SHOW_ERROR_DIALOG).observe(getViewLifecycleOwner(), this::showError);
         mViewModel.<String>getAction(BaseAction.SHOW_NO_INTERNET_DIALOG).observe(getViewLifecycleOwner(), this::showNoInternet);
+        mViewModel.<String>getAction(BaseAction.ON_SWIPE_REFRESH).observe(getViewLifecycleOwner(), s -> onSwipeRefreshListener());
     }
 
     protected void showError(final String s) {

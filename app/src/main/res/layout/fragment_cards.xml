@@ -19,35 +19,38 @@
 
     </data>
 
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.cards.view.CardsFragment">
+        app:baseOnSwipeRefreshListener="@{viewModel.baseOnSwipeRefreshListener}"
+        app:baseRefreshColor="@{viewModel.baseRefreshColor}"
+        app:isBaseOnlyLoader="@{safeUnbox(viewModel.isBaseOnlyLoader)}"
+        app:isBaseSwipeRefreshing="@{safeUnbox(viewModel.isBaseSwipeRefreshing)}">
 
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/activity_small_margin"
-            app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}"
-            app:initRecycleViewCardList="@{viewModel.baseList}"
-            app:listener="@{viewModel.baseOnItemClickListener}" />
+            tools:context=".fragments.cards.view.CardsFragment">
 
-        <include
-            layout="@layout/empty_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:empty="@{viewModel.baseEmpty}"
-            app:handler="@{handler}"
-            app:isVisible="@{safeUnbox(viewModel.isBaseEmptyViewVisible)}" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/activity_small_margin"
+                app:baseFadAnim="@{safeUnbox(viewModel.isBaseRootVisibleAfterLoading)}"
+                app:initRecycleViewCardList="@{viewModel.baseList}"
+                app:listener="@{viewModel.baseOnItemClickListener}" />
 
-        <include
-            layout="@layout/progress_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            app:isVisible="@{safeUnbox(viewModel.isBaseProgressDialogVisible)}" />
+            <include
+                layout="@layout/empty_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:empty="@{viewModel.baseEmpty}"
+                app:handler="@{handler}"
+                app:isVisible="@{safeUnbox(viewModel.isBaseEmptyViewVisible)}" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </layout>

@@ -2,6 +2,7 @@ package android.mvvm.mg.com.mvvm_android.ui.fragments.cards.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.mvvm.mg.com.mvvm_android.R;
 import android.mvvm.mg.com.mvvm_android.core.base.DMBaseViewModelItemClick;
 import android.mvvm.mg.com.mvvm_android.core.models.empty.Empty;
 import android.mvvm.mg.com.mvvm_android.core.models.error.RequestError;
@@ -44,4 +45,19 @@ public class CardsViewModel extends DMBaseViewModelItemClick<Card, Empty> {
     public Empty getEmptyObject() {
         return new Empty("Card baseEmpty");
     }
+
+    @Override
+    public int[] getSwipeRefreshColors() {
+        return new int[]{R.color.colorPrimaryDark};
+    }
+
+//    @Override
+//    public SwipeType isSwipeWorkLikeLoader() {
+//        return SwipeType.SWIPE_FOR_REFRESH;
+//    }
+
+//    @Override
+//    public void onSwipeRefreshListener() {
+//        new Handler().postDelayed(this::hideSwipeProgress, 1000);
+//    }
 }

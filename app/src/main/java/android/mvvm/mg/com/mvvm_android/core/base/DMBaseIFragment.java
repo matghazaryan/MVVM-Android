@@ -36,4 +36,8 @@ interface DMBaseIFragment {
     default FragmentActivity getActivityForViewModel() {
         return null;
     }
+
+    default void onSwipeRefreshListener() {
+
+    }
 }

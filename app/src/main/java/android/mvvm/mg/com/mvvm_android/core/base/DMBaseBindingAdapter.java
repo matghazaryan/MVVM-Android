@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.databinding.BindingAdapter;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 
@@ -53,6 +54,16 @@ public abstract class DMBaseBindingAdapter {
                             }
                         });
             }
+        }
+    }
+
+    @BindingAdapter(value = {"isBaseSwipeRefreshing", "isBaseOnlyLoader", "baseRefreshColor", "baseOnSwipeRefreshListener"})
+    public static void baseOnSwipeRefreshListener(final SwipeRefreshLayout swipeRefreshLayout, final boolean isRefreshing, final boolean isOnlyLoader, final int[] refreshColor, final SwipeRefreshLayout.OnRefreshListener listener) {
+        swipeRefreshLayout.setEnabled(!isOnlyLoader);
+        swipeRefreshLayout.setOnRefreshListener(listener);
+        swipeRefreshLayout.setRefreshing(isRefreshing);
+        if (refreshColor.length != 0) {
+            swipeRefreshLayout.setColorSchemeResources(refreshColor);
         }
     }
 }

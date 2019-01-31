@@ -7,6 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.SparseArray;
 
 import com.dm.dmnetworking.model.error.ErrorE;
@@ -41,22 +42,78 @@ public abstract class DMBaseViewModel extends AndroidViewModel implements DMBase
     //For gone at first and visible with delay with fade animation after opened page
     public final ObservableField<Boolean> isBaseRootVisibleDelay = new ObservableField<>(false);
 
+    //For swipe refresh
+    public final ObservableField<Boolean> isBaseSwipeRefreshing = new ObservableField<>();
+    public final ObservableField<Boolean> isBaseOnlyLoader = new ObservableField<>();
+    public final ObservableField<SwipeRefreshLayout.OnRefreshListener> baseOnSwipeRefreshListener = new ObservableField<>();
+    public final ObservableField<int[]> baseRefreshColor = new ObservableField<>();
+
     protected DMBaseViewModel(final @NonNull Application application) {
         super(application);
         mApplicationConfigs = ((DMBaseApplication) Objects.requireNonNull(application)).getApplicationConfigs();
         new Handler().postDelayed(() -> isBaseRootVisibleDelay.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
         new Handler().postDelayed(() -> initUiTextFieldsTags(baseUITextFieldsTags), AnimDuration.UI_FIELDS_INIT_DELAY);
+
+        //For swipe refresh
+        initializeSwipeToRefresh();
+    }
+
+    private void initializeSwipeToRefresh() {
+        final boolean isSwipeWorkLikeLoader;
+        switch (isSwipeWorkLikeLoader()) {
+            case SWIPE_FOR_REFRESH:
+                isSwipeWorkLikeLoader = false;
+                break;
+            case LOADER:
+                isSwipeWorkLikeLoader = true;
+                break;
+            case FROM_CONFIG:
+                switch (mApplicationConfigs.isSwipeDefaultWorkLikeLoader()) {
+                    case SWIPE_FOR_REFRESH:
+                    case FROM_CONFIG:
+                        isSwipeWorkLikeLoader = false;
+                        break;
+                    case LOADER:
+                        isSwipeWorkLikeLoader = true;
+                        break;
+                    default:
+                        isSwipeWorkLikeLoader = false;
+                }
+                break;
+            default:
+                isSwipeWorkLikeLoader = false;
+        }
+
+        baseRefreshColor.set(getSwipeRefreshColors().length != 0 ? getSwipeRefreshColors() : mApplicationConfigs.getSwipeRefreshColors());
+        isBaseOnlyLoader.set(isSwipeWorkLikeLoader);
+        baseOnSwipeRefreshListener.set(() -> {
+            isBaseSwipeRefreshing.set(true);
+            onSwipeRefreshListener();
+            doAction(BaseAction.ON_SWIPE_REFRESH, null);
+        });
     }
 
     void showProgress() {
         setEnableEmptyViewFromNetwork(false);
         isBaseProgressDialogVisible.set(true);
+        showSwipeProgress();
     }
 
     void hideProgress() {
-        new Handler().postDelayed(() -> isBaseProgressDialogVisible.set(false), AnimDuration.PROGRESS_DIALOG_VISIBLE_DELAY);
+        new Handler().postDelayed(() -> {
+            isBaseProgressDialogVisible.set(false);
+            hideSwipeProgress();
+        }, AnimDuration.PROGRESS_DIALOG_VISIBLE_DELAY);
         new Handler().postDelayed(() -> isBaseRootVisibleAfterLoading.set(true), AnimDuration.ROOT_VISIBLE_DELAY);
         setEnableEmptyViewFromNetwork(true);
+    }
+
+    protected void showSwipeProgress() {
+        isBaseSwipeRefreshing.set(true);
+    }
+
+    protected void hideSwipeProgress() {
+        isBaseSwipeRefreshing.set(false);
     }
 
     /**

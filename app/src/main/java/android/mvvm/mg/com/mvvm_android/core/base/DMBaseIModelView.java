@@ -31,4 +31,16 @@ interface DMBaseIModelView extends DMBaseIConstants, IMVVMConstants {
 
     default void setEnableEmptyView(final boolean enableEmptyView) {
     }
+
+    default int[] getSwipeRefreshColors() {
+        return new int[]{};
+    }
+
+    default void onSwipeRefreshListener() {
+
+    }
+
+    default SwipeType isSwipeWorkLikeLoader() {
+        return SwipeType.FROM_CONFIG;
+    }
 }

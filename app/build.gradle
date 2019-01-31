@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.github.pmbfish40:DMAlertDialog:1.0.2'
     implementation 'com.github.pmbfish40:DMUtils:1.0.2'
     //For biometric
-    implementation 'com.github.pmbfish40:DMBiometric:1.0.2'
+    implementation 'com.github.pmbfish40:DMBiometric:1.0.3'
     //For camera
     implementation 'com.github.pmbfish40:DMCamera:1.0.1'
 

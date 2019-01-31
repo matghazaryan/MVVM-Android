@@ -44,6 +44,20 @@ public class CardsFragment extends DMBaseOfflineFragment<CardsViewModel, Fragmen
             Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
         });
         mViewModel.dbCards().observe(owner, cardList -> mViewModel.setBaseList(cardList));
+        doRequest();
+    }
+
+    @Override
+    public void onEmptyViewClick(final View view) {
+        Toast.makeText(getContext(), getString(R.string.card_on_empty_click), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSwipeRefreshListener() {
+        doRequest();
+    }
+
+    private void doRequest(){
         handleRequestFor(mViewModel.apiCards(), new DMBaseIRequestListener<Card>() {
             @Override
             public void onSuccessList(final List<Card> cardList) {
@@ -52,12 +66,7 @@ public class CardsFragment extends DMBaseOfflineFragment<CardsViewModel, Fragmen
         });
     }
 
-    @Override
-    public void onEmptyViewClick(final View view) {
-        Toast.makeText(getContext(), getString(R.string.card_on_empty_click), Toast.LENGTH_SHORT).show();
-    }
-
-//    @Override
+    //    @Override
 //    public void actionsForClearOnDestroyView(final List<Integer> actions) {
 //        actions.add(IMVVMConstants.Action.SHOW_TOAST);
 //    }
